@@ -19,6 +19,7 @@ pub mod kitty;
 pub mod lazygit;
 pub mod shell;
 pub mod nvim;
+pub mod readline;
 pub mod tmux;
 pub mod wezterm;
 pub mod yazi;
@@ -212,7 +213,7 @@ pub trait Source: Sync {
 
 /// Every source in display order.
 pub fn all() -> Vec<Box<dyn Source>> {
-    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij), Box::new(zsh::Zsh), Box::new(bash::Bash), Box::new(nvim::Nvim), Box::new(yazi::Yazi), Box::new(lazygit::Lazygit), Box::new(fzf::Fzf)]
+    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij), Box::new(zsh::Zsh), Box::new(bash::Bash), Box::new(readline::Readline), Box::new(nvim::Nvim), Box::new(yazi::Yazi), Box::new(lazygit::Lazygit), Box::new(fzf::Fzf)]
 }
 
 /// Installed sources, loaded in parallel, in the order given.

@@ -1,0 +1,18 @@
+# test inputrc
+set editing-mode emacs
+$include ~/extra.inputrc
+"\C-x\C-r": re-read-init-file
+Control-k: kill-whole-line
+$if mode=vi
+"\C-w": nothing-here
+$endif
+$if Bash
+"\C-xq": "bash only"
+$else
+"\C-xs": "not bash"
+$endif
+$if term=xterm
+"\e[1;5D": backward-word
+$endif
+set keymap vi-command
+"gg": beginning-of-history
