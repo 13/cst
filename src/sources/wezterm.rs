@@ -49,11 +49,10 @@ fn default_keys(s: &str) -> Seq {
 fn key_combo(mods: &[&str], key: &str) -> Vec<String> {
     let mut mods: Vec<&str> = mods.to_vec();
     let mut chars = key.chars();
-    if let (Some(c), None) = (chars.next(), chars.next()) {
-        if (c.is_ascii_uppercase() || SHIFTED.contains(c)) && !mods.iter().any(|m| m.eq_ignore_ascii_case("shift")) {
+    if let (Some(c), None) = (chars.next(), chars.next())
+        && (c.is_ascii_uppercase() || SHIFTED.contains(c)) && !mods.iter().any(|m| m.eq_ignore_ascii_case("shift")) {
             mods.push("SHIFT");
         }
-    }
     combo(&mods, key)
 }
 

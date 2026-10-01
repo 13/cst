@@ -53,7 +53,9 @@ impl Source for Tmux {
     fn load(&self, env: &Env) -> Loaded {
         let defaults = parse_defaults(DEFAULTS, &|k| vec![parse_prefixed(k, '-')], &scope_of);
         let mut st = State { changes: vec![], prefix: "C-b".into(), prefix2: None, copy: vec!["copy-mode-vi", "copy-mode"] };
-        let layered = if let Some(list) = env.run("tmux", &["list-keys"]) {
+        // only a running server is asked: list-keys alone would start a throwaway one
+        let running = env.run("tmux", &["list-sessions"]).is_some();
+        let layered = if let Some(list) = running.then(|| env.run("tmux", &["list-keys"])).flatten() {
             let show = |o: &str| env.run("tmux", &["show", "-gv", o]).map(|s| s.trim().to_string()).filter(|s| !s.is_empty() && s != "None");
             if let Some(p) = show("prefix") { st.prefix = p; }
             st.prefix2 = show("prefix2");
@@ -141,11 +143,10 @@ fn describe_cmd(cmd: &[String]) -> String {
         while i < rest.len() && rest[i].starts_with('-') { i += if rest[i] == "-p" || rest[i] == "-c" { 2 } else { 1 }; }
         return describe_cmd(&rest[i.min(rest.len())..]);
     }
-    if name == "send-keys" && rest.first().map(String::as_str) == Some("-X") {
-        if let Some(x) = rest.get(1) {
+    if name == "send-keys" && rest.first().map(String::as_str) == Some("-X")
+        && let Some(x) = rest.get(1) {
             return COPY.iter().find(|(k, _)| k == x).map(|(_, d)| d.to_string()).unwrap_or_else(|| humanize(x));
         }
-    }
     let text = std::iter::once(name.to_string()).chain(rest.iter().cloned()).collect::<Vec<_>>().join(" ");
     describe(ACTIONS, &text).unwrap_or(text)
 }
@@ -281,6 +282,7 @@ mod tests {
     fn running_server_is_the_live_table() {
         let list = std::fs::read_to_string(fixtures().join("list-keys.txt")).unwrap();
         let env = Env::test(&fixtures().join("home"), FakeRunner(HashMap::from([
+            ("tmux list-sessions".into(), "0: 1 windows (created Thu Oct  1 10:00:00 2026)\n".into()),
             ("tmux list-keys".into(), list),
             ("tmux show -gv prefix".into(), "C-b\n".into()),
             ("tmux show -gv prefix2".into(), "None\n".into()),
@@ -298,6 +300,16 @@ mod tests {
         assert!(keys_of(&l, "TMUX · COPY MODE", "Exit copy mode").is_empty());   // emacs table hidden in vi mode
         assert_eq!(keys_of(&l, "TMUX · NO PREFIX", "Send keys"), vec!["Ctrl+L"]);
         assert!(!all_keys(&l).iter().any(|k| k.contains("Mouse")));
+    }
+
+    #[test]
+    fn list_keys_unused_without_a_running_server() {
+        // `tmux list-keys` would start a throwaway server (slow): only ask a running one
+        let list = std::fs::read_to_string(fixtures().join("list-keys.txt")).unwrap();
+        let env = Env::test(&fixtures().join("home"), FakeRunner(HashMap::from([("tmux list-keys".into(), list)])));
+        let l = Tmux.load(&env);
+        assert_eq!(l.origin, Origin::Mixed);   // from ~/.tmux.conf over defaults
+        assert_eq!(keys_of(&l, "TMUX · PREFIX", "Kill session"), vec!["Ctrl+B › X", "Ctrl+A › X"]);
     }
 
     #[test]

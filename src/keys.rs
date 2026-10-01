@@ -43,11 +43,10 @@ pub fn key_name(s: &str, has_mods: bool) -> String {
         return n.to_string();
     }
     // "#10".."#18": X keycodes of the 1..9 row (awesome)
-    if let Some(code) = s.strip_prefix('#').and_then(|c| c.parse::<u32>().ok()) {
-        if (10..=18).contains(&code) {
+    if let Some(code) = s.strip_prefix('#').and_then(|c| c.parse::<u32>().ok())
+        && (10..=18).contains(&code) {
             return (code - 9).to_string();
         }
-    }
     // alacritty "Key0".."Key9"
     if let Some(d) = lower.strip_prefix("key").filter(|d| d.len() == 1 && d.chars().all(|c| c.is_ascii_digit())) {
         return d.to_string();
@@ -92,8 +91,8 @@ pub fn parse_vim(s: &str) -> Seq {
     let mut seq = Vec::new();
     let mut rest = s;
     while let Some(c) = rest.chars().next() {
-        if c == '<' {
-            if let Some(end) = rest.find('>').filter(|&e| e > 1) {
+        if c == '<'
+            && let Some(end) = rest.find('>').filter(|&e| e > 1) {
                 let inner = &rest[1..end];
                 if inner.eq_ignore_ascii_case("leader") {
                     seq.push(vec!["Leader".to_string()]);
@@ -103,7 +102,6 @@ pub fn parse_vim(s: &str) -> Seq {
                 rest = &rest[end + 1..];
                 continue;
             }
-        }
         seq.push(vec![if c == ' ' { "Space".to_string() } else { key_name(&c.to_string(), false) }]);
         rest = &rest[c.len_utf8()..];
     }

@@ -63,7 +63,7 @@ fn row_line(r: &Row, w: usize, plain: bool, lit: bool) -> Line {
 
 fn section_lines(s: &Section, w: usize, plain: bool, q: &str) -> Vec<Line> {
     let lit = |r: &Row| q.is_empty() || row_matches(s, r, q);
-    let any = q.is_empty() || s.rows.iter().any(|r| lit(r));
+    let any = q.is_empty() || s.rows.iter().any(&lit);
     let mut out = vec![vec![(truncate(&s.title, w), if any { Style::Title } else { Style::Muted })]];
     if let Some(n) = &s.note { out.push(vec![(truncate(&format!("⚠ {n}"), w), Style::Muted)]); }
     out.extend(s.rows.iter().map(|r| row_line(r, w, plain, lit(r))));
