@@ -68,6 +68,8 @@ README.md, docs/*.svg       (Task 7)
         assert_eq!(seq_text(&parse_emacs("RET")), "Enter");
         assert_eq!(seq_text(&parse_emacs("M-DEL")), "Alt+Bksp");
         assert_eq!(seq_text(&parse_emacs("C-/")), "Ctrl+/");
+        assert_eq!(seq_text(&parse_emacs("M->")), "Alt+>");
+        assert_eq!(seq_text(&parse_emacs("M-<")), "Alt+<");
     }
 
     #[test]
@@ -121,7 +123,8 @@ and to `sources::tests`:
 /// `<f1>`-style names, `RET` `SPC` `TAB` `ESC` and `DEL` (= backspace).
 pub fn parse_emacs(s: &str) -> Seq {
     s.split_whitespace().map(|step| {
-        let mut c = parse_prefixed(step.trim_start_matches('<').trim_end_matches('>'), '-');
+        let inner = step.strip_prefix('<').and_then(|x| x.strip_suffix('>')).filter(|x| !x.is_empty()).unwrap_or(step);
+        let mut c = parse_prefixed(inner, '-');
         if step.rsplit('-').next().is_some_and(|k| k == "DEL") {
             if let Some(k) = c.last_mut() { *k = "Bksp".into(); }
         }
