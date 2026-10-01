@@ -21,7 +21,7 @@ const NAMES: &[(&str, &str)] = &[
     ("return", "Enter"), ("enter", "Enter"), ("cr", "Enter"), ("space", "Space"),
     ("escape", "Esc"), ("esc", "Esc"), ("left", "←"), ("right", "→"), ("up", "↑"), ("down", "↓"),
     ("leftarrow", "←"), ("rightarrow", "→"), ("uparrow", "↑"), ("downarrow", "↓"),
-    ("tab", "Tab"), ("btab", "⇧Tab"), ("backspace", "Bksp"), ("bs", "Bksp"), ("bspace", "Bksp"),
+    ("tab", "Tab"), ("btab", "⇧Tab"), ("backtab", "⇧Tab"), ("backspace", "Bksp"), ("bs", "Bksp"), ("bspace", "Bksp"),
     ("delete", "Del"), ("del", "Del"), ("dc", "Del"), ("insert", "Ins"), ("ins", "Ins"), ("ic", "Ins"),
     ("home", "Home"), ("end", "End"),
     ("page_up", "PgUp"), ("pageup", "PgUp"), ("page-up", "PgUp"), ("pgup", "PgUp"), ("ppage", "PgUp"), ("prior", "PgUp"),

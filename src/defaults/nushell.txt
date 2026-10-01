@@ -1,0 +1,18 @@
+# fallback when `nu -c` fails: reedline emacs essentials
+Emacs :: ctrl+a :: Move to line start
+Emacs :: ctrl+e :: Move to line end
+Emacs :: ctrl+b :: Move left
+Emacs :: ctrl+f :: Move right
+Emacs :: alt+b :: Move word left
+Emacs :: alt+f :: Move word right
+Emacs :: ctrl+w :: Cut word left
+Emacs :: ctrl+u :: Cut from start
+Emacs :: ctrl+k :: Cut to end
+Emacs :: ctrl+y :: Paste cut buffer
+Emacs :: ctrl+r :: History menu
+Emacs :: ctrl+l :: Clear screen
+Emacs :: ctrl+z :: Undo
+Emacs :: ctrl+o :: Open editor
+Emacs :: tab :: Completion menu
+Emacs :: ctrl+c :: Cancel
+Emacs :: ctrl+d :: Exit

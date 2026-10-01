@@ -1,0 +1,8 @@
+d	emacs	CONTROL	Char('a')	"Edit([MoveToLineStart])"
+d	emacs	CONTROL	Char('r')	"Menu(\"history_menu\")"
+d	emacs	NONE	Tab	"UntilFound([Menu(\"completion_menu\"), MenuNext])"
+d	vi_insert	CONTROL	Char('c')	"CtrlC"
+d	emacs	CONTROL	Char('w')	"Edit([CutWordLeft])"
+u	[emacs, vi_insert]	control	char_t	{send: menu, name: fzf_menu}
+u	emacs	control	char_w	null
+u	emacs	alt	enter	{edit: insertnewline}
