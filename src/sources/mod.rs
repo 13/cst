@@ -16,6 +16,7 @@ mod kdl;
 pub mod fzf;
 pub mod kitty;
 pub mod lazygit;
+pub mod shell;
 pub mod nvim;
 pub mod tmux;
 pub mod wezterm;
