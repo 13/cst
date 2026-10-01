@@ -19,3 +19,5 @@ jobs:
         run: shellcheck install.sh scripts/*.sh
       - name: Installer test
         run: cargo build --release && scripts/test-install.sh
+      - name: Release script test
+        run: scripts/test-release.sh
