@@ -38,16 +38,18 @@ impl Runner for SystemRunner {
             .stdin(Stdio::null()).stdout(Stdio::piped()).stderr(Stdio::null())
             .spawn().ok()?;
         let mut out = child.stdout.take()?;
-        let reader = std::thread::spawn(move || {
+        let (tx, rx) = std::sync::mpsc::channel();
+        std::thread::spawn(move || {
             let mut buf = Vec::new();
             let _ = out.read_to_end(&mut buf);
-            buf
+            let _ = tx.send(buf);
         });
         let start = Instant::now();
         loop {
             match child.try_wait() {
                 Ok(Some(status)) => {
-                    let buf = reader.join().ok()?;
+                    // a background grandchild may hold the pipe open: the deadline covers the read too
+                    let buf = rx.recv_timeout(self.timeout.saturating_sub(start.elapsed())).ok()?;
                     return status.success().then(|| String::from_utf8_lossy(&buf).into_owned());
                 }
                 Ok(None) if start.elapsed() < self.timeout => std::thread::sleep(Duration::from_millis(5)),
@@ -294,6 +296,15 @@ mod tests {
         assert_eq!(r.run("sh", &["-c", "echo hi"]).as_deref(), Some("hi\n"));
         assert_eq!(r.run("false", &[]), None);
         assert_eq!(r.run("/nonexistent/cmd", &[]), None);
+    }
+
+    #[test]
+    fn runner_deadline_covers_a_grandchild_holding_stdout() {
+        // the child exits at once but a background grandchild keeps the pipe open
+        let r = SystemRunner { timeout: Duration::from_millis(300) };
+        let t = Instant::now();
+        let _ = r.run("sh", &["-c", "echo hi; sleep 4 &"]);
+        assert!(t.elapsed() < Duration::from_secs(2), "took {:?}", t.elapsed());
     }
 
     struct Boom;
