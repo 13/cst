@@ -1,0 +1,33 @@
+# tmux built-in bindings; prefix-table keys are written without the prefix
+Prefix :: c :: New window
+Prefix :: % :: Split right
+Prefix :: " :: Split down
+Prefix :: x :: Close pane
+Prefix :: & :: Close window
+Prefix :: d :: Detach
+Prefix :: z :: Zoom pane
+Prefix :: o :: Next pane
+Prefix :: ; :: Last pane
+Prefix :: Left :: Focus left
+Prefix :: Right :: Focus right
+Prefix :: Up :: Focus up
+Prefix :: Down :: Focus down
+Prefix :: n :: Next window
+Prefix :: p :: Previous window
+Prefix :: l :: Last window
+Prefix :: 0 :: Go to window 0–9
+Prefix :: , :: Rename window
+Prefix :: $ :: Rename session
+Prefix :: w :: Choose window
+Prefix :: s :: Choose session
+Prefix :: [ :: Copy mode
+Prefix :: ] :: Paste
+Prefix :: : :: Command prompt
+Prefix :: ? :: List keys
+Prefix :: q :: Show pane numbers
+Prefix :: ! :: Break pane to window
+Prefix :: Space :: Next layout
+Prefix :: { :: Swap pane up
+Prefix :: } :: Swap pane down
+Prefix :: r :: Refresh client
+Prefix :: t :: Clock
