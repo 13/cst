@@ -12,7 +12,8 @@ Usage: cst            pick an app (Enter opens it, Esc goes back)
        cst --help | --version
 
 Keys: type to filter · Backspace · Ctrl+U clear · Tab/Shift+Tab focus app
-      ↑ ↓ PgUp PgDn Home End scroll · Esc clear/quit · Ctrl+C quit
+      ↑ ↓ PgUp PgDn Home End scroll · Esc clear filter, back to the picker, quit
+      Ctrl+C quit
 ";
 
 fn origin_name(o: Origin) -> &'static str {

@@ -27,7 +27,7 @@ awesome WM popup.
 - **One app or all** — pick one from the start screen, `cst tmux`, or Tab through apps inside the sheet.
 - **Looks like your desktop** — colours come from your active awesome theme
   (falls back to Catppuccin); truecolor, 256 colours or `NO_COLOR`.
-- **Fast and small** — one static binary, no runtime dependencies, starts in well under 100 ms.
+- **Fast and small** — one static binary, no runtime dependencies, starts in about 100 ms (most of it your shell's own startup for the zsh/bash sheets).
 - **Never breaks on a bad config** — a broken file shows a ⚠ note and falls back to defaults.
 
 ## Supported apps
@@ -101,14 +101,13 @@ cst --list     # detected apps and where their keys come from
 In the picker: type to filter, arrows or `Tab` to move, `Enter` to open, `Esc` to go back
 from a sheet or to quit.
 
-
 | Key | Action |
 |---|---|
 | type | filter (non-matching rows dim) |
 | `Backspace` / `Ctrl+U` | delete a character / clear the filter |
 | `Tab` / `Shift+Tab` | focus the next / previous app |
 | `↑` `↓` `PgUp` `PgDn` `Home` `End` | scroll |
-| `Esc` | clear the filter, or quit when it's empty |
+| `Esc` | clear the filter; with an empty filter go back to the picker (or quit) |
 | `Ctrl+C` | quit |
 
 ## Theming
@@ -125,7 +124,8 @@ Each app is a *source*: it reads the live config (files, or commands like
 `wezterm show-keys` with a 1 s timeout), turns every notation (`ctrl+shift+t`, `C-a`,
 `<C-w>`, `Ctrl g`) into the same key names, and layers the result over bundled defaults —
 a live binding replaces the default on the same key, an unbind removes it. All sources
-load in parallel; one failing or slow source never blocks the others.
+load in parallel; a failing or slow source (over 1 s) is skipped with a ⚠ note instead of
+blocking the others.
 
 ## Contributing
 
