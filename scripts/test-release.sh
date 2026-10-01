@@ -6,12 +6,13 @@ fail() { echo "FAIL: $*" >&2; exit 1; }
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 git init -q --bare "$work/remote.git"
+git -C "$work/remote.git" config receive.shallowUpdate true   # CI checks out a shallow clone
 git clone -q "$root" "$work/clone"
 cd "$work/clone"
 git checkout -q -B main
 cp "$root/scripts/release.sh" scripts/release.sh
 git add scripts/release.sh
-git -c user.name=t -c user.email=t@t commit -qm "test: current release.sh" || true
+git -c user.name=t -c user.email=t@t commit -qm "test: current release.sh" >/dev/null || true
 git remote set-url origin "$work/remote.git"
 git push -q origin main
 export CST_RELEASE_SKIP_TESTS=1 GIT_AUTHOR_NAME=t GIT_AUTHOR_EMAIL=t@t GIT_COMMITTER_NAME=t GIT_COMMITTER_EMAIL=t@t
@@ -24,6 +25,15 @@ rm dirty.txt
 git checkout -q -b other
 if scripts/release.sh 9.9.9 >/dev/null 2>&1; then fail "non-main branch accepted"; fi
 git checkout -q main
+
+# local main behind origin/main: refuse before changing anything
+git clone -q "$work/remote.git" "$work/other"
+(cd "$work/other" && git checkout -q main && echo x >> README.md && git -c user.name=t -c user.email=t@t commit -qam "remote edit" && git push -q origin main)
+before="$(git rev-parse HEAD)"
+if scripts/release.sh 9.9.9 >/dev/null 2>&1; then fail "out-of-date main accepted"; fi
+[ "$(git rev-parse HEAD)" = "$before" ] || fail "refusal committed"
+git diff --quiet || fail "refusal modified files"
+git pull -q --ff-only origin main
 
 # dry run changes nothing
 head="$(git rev-parse HEAD)"
