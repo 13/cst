@@ -1,5 +1,6 @@
 //! wezterm: `wezterm show-keys` is the effective key table (user config
 //! included), so defaults are only a fallback when the command fails.
+use super::fzf::split_top;
 use super::{describe, humanize, layer, parse_defaults, Env, Loaded, Source};
 use crate::keys::{combo, Seq};
 use crate::model::{Binding, Change};
@@ -56,33 +57,56 @@ fn key_combo(mods: &[&str], key: &str) -> Vec<String> {
     combo(&mods, key)
 }
 
+/// The action that names a `Multiple([...])`: its first one that isn't
+/// housekeeping (`Multiple([ScrollToBottom, CopyMode(Close)])` → `CopyMode(Close)`).
+fn main_action(action: &str) -> String {
+    match action.strip_prefix("Multiple([").and_then(|a| a.strip_suffix("])")) {
+        Some(inner) => split_top(inner, ',').iter().map(|a| main_action(a.trim()))
+            .find(|a| !matches!(a.as_str(), "ScrollToBottom" | "Nop" | ""))
+            .unwrap_or_default(),
+        None => action.to_string(),
+    }
+}
+
+fn describe_action(action: &str) -> String {
+    let action = main_action(action.trim());
+    describe(ACTIONS, &action).unwrap_or_else(|| {
+        // CopyMode(Close) → "Close"; other unknown actions verbatim
+        action.strip_prefix("CopyMode(").and_then(|a| a.strip_suffix(')'))
+            .map(|a| humanize(a.split('(').next().unwrap_or(a)))
+            .unwrap_or_else(|| action.to_string())
+    })
+}
+
 pub fn parse_show_keys(text: &str) -> Vec<Change> {
     let mut table = String::new();
-    let mut out = Vec::new();
+    // per table: plain keys first, shifted-symbol variants after (wezterm
+    // lists `CTRL !` before `SHIFT | CTRL 1`; the first alternative is the one shown)
+    let (mut out, mut plain, mut shifted) = (Vec::new(), Vec::new(), Vec::new());
     for line in text.lines() {
         if !line.starts_with('\t') && !line.trim().is_empty() && !line.starts_with('-') {
+            out.append(&mut plain);
+            out.append(&mut shifted);
             if line.starts_with("Mouse") { break; }
             table = line.strip_prefix("Key Table: ").unwrap_or("").trim().to_string();
             continue;
         }
         let Some((left, action)) = line.split_once("->") else { continue };
+        let left = left.replace("(Physical)", "").replace("(Mapped)", "");
         let tokens: Vec<&str> = left.split_whitespace().collect();
         let Some((key, mods)) = tokens.split_last() else { continue };
         let mods: Vec<&str> = mods.iter().copied().filter(|m| *m != "|").collect();
         let mut seq: Seq = Vec::new();
         if mods.contains(&"LEADER") { seq.push(vec!["Leader".to_string()]); }
         seq.push(key_combo(&mods, key));
-        let action = action.trim();
-        let desc = describe(ACTIONS, action).unwrap_or_else(|| {
-            // CopyMode(Close) → "Close"; other unknown actions verbatim
-            action.strip_prefix("CopyMode(").and_then(|a| a.strip_suffix(')'))
-                .map(|a| humanize(a.split('(').next().unwrap_or(a)))
-                .unwrap_or_else(|| action.to_string())
-        });
+        let desc = describe_action(action);
         if desc.is_empty() { continue; }
         let group = if table.is_empty() { String::new() } else { humanize(&table) };
-        out.push(Change::Bind(Binding { scope: table.clone(), group, seq, desc, id: String::new() }));
+        let b = Change::Bind(Binding { scope: table.clone(), group, seq, desc, id: String::new() });
+        if key.chars().count() == 1 && key.chars().all(|c| SHIFTED.contains(c)) { shifted.push(b) } else { plain.push(b) }
     }
+    out.append(&mut plain);
+    out.append(&mut shifted);
     out
 }
 
@@ -110,11 +134,14 @@ mod tests {
         assert_eq!(keys_of(&l, "WEZTERM", "Next tab"), vec!["Ctrl+Tab"]);
         assert_eq!(keys_of(&l, "WEZTERM", "Previous tab"), vec!["Ctrl+Shift+Tab"]);
         assert_eq!(keys_of(&l, "WEZTERM", "Copy"), vec!["Ctrl+Shift+C"]);           // CTRL C ≡ SHIFT|CTRL C
-        assert_eq!(keys_of(&l, "WEZTERM", "Go to tab"), vec!["Ctrl+Shift+!", "Ctrl+Shift+@"]);
+        // shifted-symbol variants come after plain keys, so the first alternative is readable
+        assert_eq!(keys_of(&l, "WEZTERM", "Go to tab"), vec!["Ctrl+Shift+1", "Ctrl+Shift+!", "Ctrl+Shift+@"]);
+        assert_eq!(keys_of(&l, "WEZTERM", "Quick select"), vec!["Ctrl+Shift+Space"]);   // "(Physical)" stripped
         assert_eq!(keys_of(&l, "WEZTERM", "New tab"), vec!["Super+T", "Leader › c"]);
         assert_eq!(keys_of(&l, "WEZTERM", "Split vertical"), vec!["Ctrl+Alt+Shift+\""]);
         assert_eq!(keys_of(&l, "WEZTERM", "EmitEvent(\"toggle-something\")"), vec!["F11"]);
-        assert_eq!(keys_of(&l, "WEZTERM · COPY MODE", "Close"), vec!["Esc"]);
+        assert_eq!(keys_of(&l, "WEZTERM · COPY MODE", "Close"), vec!["Esc"]);            // Multiple([ScrollToBottom, CopyMode(Close)])
+        assert_eq!(keys_of(&l, "WEZTERM · COPY MODE", "Copy"), vec!["y"]);
         assert!(!l.sections.iter().any(|s| s.title.contains("MOUSE")));
     }
 

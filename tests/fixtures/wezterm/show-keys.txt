@@ -8,6 +8,8 @@ Default key table
 	CTRL                 !                  ->   ActivateTab(0)
 	SHIFT | CTRL         !                  ->   ActivateTab(0)
 	CTRL                 @                  ->   ActivateTab(1)
+	SHIFT | CTRL         1                  ->   ActivateTab(0)
+	SHIFT | CTRL         Space (Physical)   ->   QuickSelect
 	ALT | CTRL           "                  ->   SplitVertical(SpawnCommand domain=CurrentPaneDomain)
 	SUPER                t                  ->   SpawnTab(CurrentPaneDomain)
 	LEADER               c                  ->   SpawnTab(CurrentPaneDomain)
@@ -17,7 +19,8 @@ Default key table
 Key Table: copy_mode
 --------------------
 
-	                     Escape             ->   CopyMode(Close)
+	        Escape       ->   Multiple([ScrollToBottom, CopyMode(Close)])
+	        y            ->   Multiple([CopyTo(ClipboardAndPrimarySelection), Multiple([ScrollToBottom, CopyMode(Close)])])
 	                     v                  ->   CopyMode(SetSelectionMode(Cell))
 
 Mouse
