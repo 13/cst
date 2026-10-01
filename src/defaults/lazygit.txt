@@ -1,0 +1,28 @@
+# group :: keys (lazygit notation) :: description :: id (section.action)
+Universal :: q :: Quit :: universal.quit
+Universal :: <esc> :: Return :: universal.return
+Universal :: ? :: Options menu :: universal.optionMenu
+Universal :: z :: Undo :: universal.undo
+Universal :: <c-z> :: Redo :: universal.redo
+Universal :: P :: Push files :: universal.pushFiles
+Universal :: p :: Pull files :: universal.pullFiles
+Universal :: R :: Refresh :: universal.refresh
+Universal :: / :: Start search :: universal.startSearch
+Universal :: ] :: Next tab :: universal.nextTab
+Universal :: [ :: Prev tab :: universal.prevTab
+Universal :: : :: Execute shell command :: universal.executeShellCommand
+Universal :: e :: Edit :: universal.edit
+Files :: c :: Commit changes :: files.commitChanges
+Files :: <space> :: Toggle staged :: files.toggleStaged
+Files :: a :: Toggle staged all :: files.toggleStagedAll
+Files :: s :: Stash all changes :: files.stashAllChanges
+Files :: d :: Discard :: universal.remove
+Branches :: <space> :: Checkout branch :: branches.checkoutBranchByName
+Branches :: n :: New branch :: universal.new
+Branches :: M :: Merge into current branch :: branches.mergeIntoCurrentBranch
+Branches :: r :: Rebase branch :: branches.rebaseBranch
+Commits :: s :: Squash down :: commits.squashDown
+Commits :: f :: Mark commit as fixup :: commits.markCommitAsFixup
+Commits :: r :: Rename commit :: commits.renameCommit
+Commits :: <c-j> :: Move down commit :: commits.moveDownCommit
+Commits :: <c-k> :: Move up commit :: commits.moveUpCommit

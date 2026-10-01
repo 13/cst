@@ -13,7 +13,9 @@ use std::time::{Duration, Instant};
 pub mod alacritty;
 pub mod awesome;
 mod kdl;
+pub mod fzf;
 pub mod kitty;
+pub mod lazygit;
 pub mod nvim;
 pub mod tmux;
 pub mod wezterm;
@@ -200,7 +202,7 @@ pub trait Source: Sync {
 
 /// Every source in display order.
 pub fn all() -> Vec<Box<dyn Source>> {
-    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij), Box::new(nvim::Nvim), Box::new(yazi::Yazi)]
+    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij), Box::new(nvim::Nvim), Box::new(yazi::Yazi), Box::new(lazygit::Lazygit), Box::new(fzf::Fzf)]
 }
 
 /// Installed sources, loaded in parallel, in the order given.

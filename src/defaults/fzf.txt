@@ -1,0 +1,20 @@
+# fzf notation
+Navigation :: down :: Down
+Navigation :: ctrl-j :: Down
+Navigation :: ctrl-n :: Down
+Navigation :: up :: Up
+Navigation :: ctrl-k :: Up
+Navigation :: ctrl-p :: Up
+Navigation :: page-down :: Page down
+Navigation :: page-up :: Page up
+Selection :: enter :: Accept
+Selection :: tab :: Toggle and down
+Selection :: btab :: Toggle and up
+Selection :: esc :: Abort
+Selection :: ctrl-c :: Abort
+Editing :: ctrl-a :: Beginning of line
+Editing :: ctrl-e :: End of line
+Editing :: ctrl-u :: Unix line discard
+Editing :: ctrl-w :: Unix word rubout
+Editing :: alt-b :: Backward word
+Editing :: alt-f :: Forward word

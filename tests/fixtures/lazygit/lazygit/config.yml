@@ -1,0 +1,12 @@
+gui:
+  theme:
+    activeBorderColor: [blue]
+keybinding:
+  universal:
+    quit: 'Q'          # capital Q to quit
+    nextTab: ']'
+    undo: <disabled>
+  files:
+    commitChanges: "C"
+os:
+  edit: nvim
