@@ -1,6 +1,6 @@
 //! Sections → screen: header, filter line, balanced columns of key-cap rows
 //! (the awesome Mod+i sheet, in cells). Filtering dims, never moves, rows.
-use super::input::State;
+use super::input::{picker_entries, State};
 use super::render::{Frame, Style};
 use crate::keys::Seq;
 use crate::model::{columns, row_matches, section_height, Row, Section};
@@ -84,9 +84,8 @@ pub fn frame(v: &View, st: &State, w: usize, h: usize) -> (Frame, usize) {
     }
     let right = w - 1;
     let focus = st.focus.and_then(|i| v.apps.get(i));
-    let end = f.put(1, 0, "Keyboard shortcuts", Style::Header, right);
     let info = match focus { Some(a) => format!("focus: {a}"), None => format!("{} apps · {}", v.apps.len(), v.theme_name) };
-    if end + 2 + cells(&info) <= right { f.put(right - cells(&info), 0, &info, Style::Muted, right); }
+    header(&mut f, &info);
 
     let q = st.query.to_lowercase();
     let shown: Vec<&Section> = v.sections.iter().filter(|s| focus.is_none_or(|a| s.app == *a)).collect();
@@ -123,6 +122,68 @@ pub fn frame(v: &View, st: &State, w: usize, h: usize) -> (Frame, usize) {
     if scroll > 0 { f.put(right - cells("↑ more"), 2, "↑ more", Style::Muted, w); }
     if scroll < max_scroll { f.put(right - cells("↓ more"), h - 1, "↓ more", Style::Muted, w); }
     (f, max_scroll)
+}
+
+/// Row 0: title left, `info` right-aligned when it fits.
+fn header(f: &mut Frame, info: &str) {
+    let right = f.w - 1;
+    let end = f.put(1, 0, "Keyboard shortcuts", Style::Header, right);
+    if end + 2 + cells(info) <= right { f.put(right - cells(info), 0, info, Style::Muted, right); }
+}
+
+/// One picker entry per app, in the same order as `View.apps`.
+#[derive(Clone, Debug, PartialEq)]
+pub struct Entry { pub name: String, pub origin: String, pub count: usize, pub warn: bool }
+
+const PICK_MIN: usize = 30;
+
+pub fn picker_cols(w: usize) -> usize {
+    ((w.saturating_sub(2) + GAP) / (PICK_MIN + GAP)).clamp(1, 4)
+}
+
+/// The app picker: `All apps` then each app with origin and binding count,
+/// row-major in `picker_cols` columns, scrolled so the selection is visible.
+pub fn picker_frame(v: &View, entries: &[Entry], st: &State, w: usize, h: usize) -> Frame {
+    let mut f = Frame::new(w, h);
+    if w < 20 || h < 5 {
+        f.put(0, 0, "Terminal too small", Style::Muted, w);
+        return f;
+    }
+    let right = w - 1;
+    header(&mut f, &format!("{} apps · {}", v.apps.len(), v.theme_name));
+    let visible = picker_entries(v.apps, &st.pick_query);
+    if st.pick_query.is_empty() {
+        f.put(1, 1, "Choose an app…", Style::Muted, right);
+    } else {
+        let x = f.put(1, 1, &st.pick_query, Style::Text, right);
+        let x = f.put(x, 1, "▏", Style::Text, right);
+        if visible.len() == 1 { f.put(x + 2, 1, "No matches", Style::Muted, right); }
+    }
+    let n = picker_cols(w);
+    let col_w = (w - 2 - GAP * (n - 1)) / n;
+    let (top, body_h) = (3, h - 4);
+    let picked = st.picked.min(visible.len() - 1);
+    let first_row = (picked / n).saturating_sub(body_h - 1);
+    let total: usize = entries.iter().map(|e| e.count).sum();
+    for (k, entry) in visible.iter().enumerate() {
+        let row = k / n;
+        if row < first_row || row - first_row >= body_h { continue; }
+        let (y, x0) = (top + row - first_row, 1 + (k % n) * (col_w + GAP));
+        let (name, info) = match entry {
+            None => ("All apps".to_string(), total.to_string()),
+            Some(i) => match entries.get(*i) {
+                Some(e) => (e.name.clone(), format!("{}  {}{}", e.origin, e.count, if e.warn { " ⚠" } else { "" })),
+                None => (v.apps[*i].to_string(), String::new()),
+            },
+        };
+        let selected = k == picked;
+        let x = f.put(x0, y, if selected { "▸ " } else { "  " }, Style::Title, x0 + col_w);
+        let info_w = cells(&info).min(col_w);
+        let name = truncate(&name, (x0 + col_w).saturating_sub(x + info_w + 1));
+        f.put(x, y, &name, if selected { Style::Title } else { Style::Text }, x0 + col_w);
+        f.put(x0 + col_w - info_w, y, &info, Style::Muted, x0 + col_w);
+    }
+    f
 }
 
 #[cfg(test)]
@@ -279,5 +340,63 @@ mod tests {
         let s = sample();
         let t = frame(&View { plain: true, ..view(&s) }, &State::default(), 120, 40).0.text();
         assert!(t.contains("[Ctrl]+[Shift]+[T]"));
+    }
+
+    fn entries() -> Vec<Entry> {
+        vec![
+            Entry { name: "kitty".into(), origin: "defaults".into(), count: 40, warn: false },
+            Entry { name: "tmux".into(), origin: "mixed".into(), count: 123, warn: true },
+            Entry { name: "nvim".into(), origin: "mixed".into(), count: 81, warn: false },
+        ]
+    }
+
+    fn picker_state() -> State { State { screen: crate::ui::input::Screen::Picker, ..Default::default() } }
+
+    #[test]
+    fn picker_snapshots() {
+        let s = sample();
+        snapshot("picker_120x30.txt", &picker_frame(&view(&s), &entries(), &picker_state(), 120, 30).text());
+        snapshot("picker_60x20.txt", &picker_frame(&view(&s), &entries(), &picker_state(), 60, 20).text());
+    }
+
+    #[test]
+    fn picker_content_and_selection() {
+        let s = sample();
+        let f = picker_frame(&view(&s), &entries(), &picker_state(), 120, 30);
+        let t = f.text();
+        assert!(t.lines().nth(1).unwrap().starts_with(" Choose an app…"));
+        assert!(t.contains("▸ All apps") && t.contains("244"));               // 40 + 123 + 81
+        assert!(t.contains("mixed  123 ⚠") && t.contains("defaults  40"));
+        let (x, y) = find(&f, "All apps").unwrap();
+        assert_eq!(f.rows[y][x].style, Style::Title);
+        let st = State { picked: 2, ..picker_state() };                      // tmux
+        let f = picker_frame(&view(&s), &entries(), &st, 120, 30);
+        assert!(f.text().contains("▸ tmux"));
+        let st = State { pick_query: "zzz".into(), ..picker_state() };
+        let t = picker_frame(&view(&s), &entries(), &st, 120, 30).text();
+        assert!(t.contains("zzz▏  No matches") && t.contains("▸ All apps"));
+    }
+
+    #[test]
+    fn picker_cols_by_width() {
+        assert_eq!((picker_cols(20), picker_cols(64), picker_cols(65), picker_cols(120), picker_cols(500)), (1, 1, 2, 3, 4));
+    }
+
+    #[test]
+    fn picker_too_small() {
+        let s = sample();
+        assert_eq!(picker_frame(&view(&s), &entries(), &picker_state(), 19, 5).text().trim(), "Terminal too small");
+    }
+
+    #[test]
+    fn picker_scrolls_to_selection() {
+        let names: Vec<String> = (0..10).map(|i| format!("app{i}")).collect();
+        let apps: Vec<&str> = names.iter().map(String::as_str).collect();
+        let es: Vec<Entry> = names.iter().map(|n| Entry { name: n.clone(), origin: "live".into(), count: 1, warn: false }).collect();
+        let v = View { sections: &[], apps: &apps, theme_name: "t", plain: false };
+        let st = State { picked: 10, ..picker_state() };                     // last entry: app9
+        let t = picker_frame(&v, &es, &st, 30, 8).text();
+        assert!(t.contains("▸ app9"), "{t}");
+        assert!(!t.contains("All apps"));                                    // scrolled past the top
     }
 }

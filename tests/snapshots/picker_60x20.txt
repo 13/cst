@@ -1,0 +1,19 @@
+ Keyboard shortcuts                     3 apps · catppuccin
+ Choose an app…
+
+ ▸ All apps                                             244
+   kitty                                       defaults  40
+   tmux                                        mixed  123 ⚠
+   nvim                                           mixed  81
+
+
+
+
+
+
+
+
+
+
+
+
