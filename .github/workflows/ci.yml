@@ -15,3 +15,7 @@ jobs:
         run: cargo clippy --all-targets -- -D warnings
       - name: Tests
         run: cargo test
+      - name: Shellcheck
+        run: shellcheck install.sh scripts/*.sh
+      - name: Installer test
+        run: cargo build --release && scripts/test-install.sh
