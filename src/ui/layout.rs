@@ -4,7 +4,7 @@ use super::input::State;
 use super::render::{Frame, Style};
 use crate::keys::Seq;
 use crate::model::{columns, row_matches, section_height, Row, Section};
-use unicode_width::{UnicodeWidthChar, UnicodeWidthStr};
+use unicode_width::UnicodeWidthChar;
 
 pub struct View<'a> { pub sections: &'a [Section], pub apps: &'a [&'a str], pub theme_name: &'a str, pub plain: bool }
 
@@ -13,10 +13,14 @@ const GAP: usize = 3;
 
 type Line = Vec<(String, Style)>;
 
-fn width(l: &Line) -> usize { l.iter().map(|(t, _)| t.width()).sum() }
+/// Cells `Frame::put` will use: the sum of character widths (str::width
+/// treats emoji sequences differently, which would misalign the caps).
+fn cells(s: &str) -> usize { s.chars().map(|c| c.width().unwrap_or(0)).sum() }
+
+fn width(l: &Line) -> usize { l.iter().map(|(t, _)| cells(t)).sum() }
 
 fn truncate(s: &str, max: usize) -> String {
-    if s.width() <= max { return s.to_string(); }
+    if cells(s) <= max { return s.to_string(); }
     if max == 0 { return String::new(); }
     let (mut out, mut w) = (String::new(), 0);
     for c in s.chars() {
@@ -55,7 +59,7 @@ fn row_line(r: &Row, w: usize, plain: bool, lit: bool) -> Line {
     }
     let kw = width(&keys).min(w);
     let desc = truncate(&r.desc, w.saturating_sub(kw + 1));
-    let pad = w.saturating_sub(desc.width() + kw);
+    let pad = w.saturating_sub(cells(&desc) + kw);
     let mut line = vec![(desc, if lit { Style::Text } else { Style::Muted }), (" ".repeat(pad), Style::Text)];
     line.extend(keys);
     line
@@ -82,7 +86,7 @@ pub fn frame(v: &View, st: &State, w: usize, h: usize) -> (Frame, usize) {
     let focus = st.focus.and_then(|i| v.apps.get(i));
     let end = f.put(1, 0, "Keyboard shortcuts", Style::Header, right);
     let info = match focus { Some(a) => format!("focus: {a}"), None => format!("{} apps · {}", v.apps.len(), v.theme_name) };
-    if end + 2 + info.width() <= right { f.put(right - info.width(), 0, &info, Style::Muted, right); }
+    if end + 2 + cells(&info) <= right { f.put(right - cells(&info), 0, &info, Style::Muted, right); }
 
     let q = st.query.to_lowercase();
     let shown: Vec<&Section> = v.sections.iter().filter(|s| focus.is_none_or(|a| s.app == *a)).collect();
@@ -116,8 +120,8 @@ pub fn frame(v: &View, st: &State, w: usize, h: usize) -> (Frame, usize) {
             for (t, s) in line { x = f.put(x, top + i, t, *s, x0 + col_w); }
         }
     }
-    if scroll > 0 { f.put(right - "↑ more".width(), 2, "↑ more", Style::Muted, w); }
-    if scroll < max_scroll { f.put(right - "↓ more".width(), h - 1, "↓ more", Style::Muted, w); }
+    if scroll > 0 { f.put(right - cells("↑ more"), 2, "↑ more", Style::Muted, w); }
+    if scroll < max_scroll { f.put(right - cells("↓ more"), h - 1, "↓ more", Style::Muted, w); }
     (f, max_scroll)
 }
 
@@ -213,6 +217,22 @@ mod tests {
         let edges: Vec<usize> = rows.iter().map(|&y| last_ink(&f, y, x0, x0 + col_w)).collect();
         assert_eq!(edges.len(), 2);
         assert_eq!(edges[0], edges[1]);
+    }
+
+    #[test]
+    fn emoji_sequences_keep_caps_aligned_and_whole() {
+        let kp = |s: &str| vec![parse_prefixed(s, '+')];
+        let s = build("x", &[Binding::new("", kp("ctrl+x"), "\u{2699}\u{FE0F} Settings"),
+            Binding::new("", kp("ctrl+y"), "\u{1F468}\u{200D}\u{1F469}\u{200D}\u{1F467} Family"),
+            Binding::new("", kp("ctrl+z"), "Plain")], None);
+        let v = View { sections: &s, apps: &["x"], theme_name: "t", plain: false };
+        let (f, _) = frame(&v, &State::default(), 60, 20);
+        let rows: Vec<usize> = (0..f.h).filter(|&y| f.rows[y].iter().any(|c| c.style == Style::Cap)).collect();
+        let edges: Vec<usize> = rows.iter().map(|&y| last_ink(&f, y, 0, 60)).collect();
+        assert_eq!(edges.len(), 3);
+        assert!(edges.iter().all(|&e| e == edges[0]), "caps misaligned: {edges:?}");
+        let t = f.text();
+        assert!(t.contains("Ctrl + X") && t.contains("Ctrl + Y"), "{t}");
     }
 
     #[test]
