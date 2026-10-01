@@ -11,9 +11,11 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 pub mod alacritty;
+mod kdl;
 pub mod kitty;
 pub mod tmux;
 pub mod wezterm;
+pub mod zellij;
 
 pub trait Runner: Send + Sync {
     fn run(&self, cmd: &str, args: &[&str]) -> Option<String>;
@@ -130,10 +132,10 @@ impl Layered {
 pub fn layer(defaults: Vec<Binding>, live: Result<Option<Vec<Change>>, String>, keep_defaults: bool) -> Layered {
     match live {
         Ok(Some(changes)) => {
-            let base = if keep_defaults { defaults.clone() } else { vec![] };
-            let bindings = merge(base, changes);
-            // Mixed only if some default survived (a cleared config is pure Live)
-            let mixed = keep_defaults && defaults.iter().any(|d| bindings.contains(d));
+            // Mixed only if the defaults changed the result (a cleared config is pure Live)
+            let live_only = merge(vec![], changes.clone());
+            let bindings = if keep_defaults { merge(defaults, changes) } else { live_only.clone() };
+            let mixed = bindings != live_only;
             Layered { bindings, origin: if mixed { Origin::Mixed } else { Origin::Live }, note: None }
         }
         Ok(None) => Layered { bindings: defaults, origin: Origin::Defaults, note: None },
@@ -190,7 +192,7 @@ pub trait Source: Sync {
 
 /// Every source in display order.
 pub fn all() -> Vec<Box<dyn Source>> {
-    vec![Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux)]
+    vec![Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij)]
 }
 
 /// Installed sources, loaded in parallel, in the order given.
@@ -239,6 +241,9 @@ mod tests {
         let l = layer(d.clone(), Ok(Some(vec![Change::Bind(Binding::new("", kp("b"), "B"))])), false);
         assert_eq!((l.origin, l.bindings.len()), (Origin::Live, 1));
         let l = layer(d.clone(), Ok(Some(vec![Change::Clear(None)])), true);
+        assert_eq!(l.origin, Origin::Live);
+        // cleared, then a live binding identical to a default: still pure Live
+        let l = layer(d.clone(), Ok(Some(vec![Change::Clear(None), Change::Bind(Binding::new("", kp("a"), "A"))])), true);
         assert_eq!(l.origin, Origin::Live);
         let l = layer(d, Err("x.conf: line 3".into()), true);
         assert_eq!((l.origin, l.note.as_deref()), (Origin::Defaults, Some("config: x.conf: line 3")));

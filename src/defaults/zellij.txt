@@ -1,0 +1,44 @@
+# zellij default keymap (abridged); group = mode
+Shared :: Ctrl g :: Locked mode
+Shared :: Ctrl p :: Pane mode
+Shared :: Ctrl t :: Tab mode
+Shared :: Ctrl n :: Resize mode
+Shared :: Ctrl h :: Move mode
+Shared :: Ctrl s :: Scroll mode
+Shared :: Ctrl o :: Session mode
+Shared :: Ctrl q :: Quit
+Shared :: Alt n :: New pane
+Shared :: Alt h :: Focus left
+Shared :: Alt l :: Focus right
+Shared :: Alt j :: Focus down
+Shared :: Alt k :: Focus up
+Shared :: Alt f :: Toggle floating panes
+Shared :: Alt + :: Grow
+Shared :: Alt - :: Shrink
+Pane :: n :: New pane
+Pane :: d :: New pane below
+Pane :: r :: New pane right
+Pane :: x :: Close pane
+Pane :: f :: Fullscreen pane
+Pane :: z :: Toggle pane frames
+Pane :: w :: Toggle floating panes
+Pane :: e :: Float/embed pane
+Pane :: c :: Rename pane
+Tab :: n :: New tab
+Tab :: x :: Close tab
+Tab :: h :: Previous tab
+Tab :: l :: Next tab
+Tab :: r :: Rename tab
+Tab :: s :: Sync panes
+Tab :: b :: Break pane to tab
+Tab :: Tab :: Last tab
+Resize :: h :: Grow left
+Resize :: l :: Grow right
+Resize :: = :: Grow
+Resize :: - :: Shrink
+Scroll :: e :: Edit scrollback
+Scroll :: s :: Search
+Scroll :: Ctrl f :: Page down
+Scroll :: Ctrl b :: Page up
+Session :: d :: Detach
+Session :: w :: Session manager
