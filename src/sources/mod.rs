@@ -22,6 +22,7 @@ pub mod tmux;
 pub mod wezterm;
 pub mod yazi;
 pub mod zellij;
+pub mod zsh;
 
 pub trait Runner: Send + Sync {
     fn run(&self, cmd: &str, args: &[&str]) -> Option<String>;
@@ -210,7 +211,7 @@ pub trait Source: Sync {
 
 /// Every source in display order.
 pub fn all() -> Vec<Box<dyn Source>> {
-    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij), Box::new(nvim::Nvim), Box::new(yazi::Yazi), Box::new(lazygit::Lazygit), Box::new(fzf::Fzf)]
+    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij), Box::new(zsh::Zsh), Box::new(nvim::Nvim), Box::new(yazi::Yazi), Box::new(lazygit::Lazygit), Box::new(fzf::Fzf)]
 }
 
 /// Installed sources, loaded in parallel, in the order given.

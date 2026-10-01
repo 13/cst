@@ -1,0 +1,25 @@
+# fallback when `zsh -ic bindkey` fails: zsh emacs keymap essentials
+Emacs :: ^A :: Start of line
+Emacs :: ^E :: End of line
+Emacs :: ^B :: Back one char
+Emacs :: ^F :: Forward one char
+Emacs :: ^[b :: Back one word
+Emacs :: ^[f :: Forward one word
+Emacs :: ^D :: Delete char or list completions
+Emacs :: ^H :: Delete previous char
+Emacs :: ^K :: Delete to end of line
+Emacs :: ^U :: Delete line
+Emacs :: ^W :: Delete previous word
+Emacs :: ^[d :: Delete next word
+Emacs :: ^Y :: Paste deleted text
+Emacs :: ^L :: Clear screen
+Emacs :: ^R :: Search history backward
+Emacs :: ^S :: Search history forward
+Emacs :: ^P :: Previous command
+Emacs :: ^N :: Next command
+Emacs :: ^[. :: Insert last argument
+Emacs :: ^T :: Swap chars
+Emacs :: ^_ :: Undo
+Emacs :: ^I :: Complete
+Emacs :: ^[q :: Park command
+Emacs :: ^G :: Cancel

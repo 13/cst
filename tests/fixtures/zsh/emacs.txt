@@ -1,0 +1,7 @@
+bindkey -A emacs main
+---
+"^A" beginning-of-line
+"^X^E" edit-command-line
+"^A"-"^C" self-insert
+"^Xa" "ls -la^J"
+---
