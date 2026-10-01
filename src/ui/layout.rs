@@ -141,7 +141,7 @@ pub fn picker_cols(w: usize) -> usize {
     ((w.saturating_sub(2) + GAP) / (PICK_MIN + GAP)).clamp(1, 4)
 }
 
-/// The app picker: `All apps` then each app with origin and binding count,
+/// The app picker: the apps sorted by name, each with origin and binding count,
 /// row-major in `picker_cols` columns, scrolled so the selection is visible.
 pub fn picker_frame(v: &View, entries: &[Entry], st: &State, w: usize, h: usize) -> Frame {
     let mut f = Frame::new(w, h);
@@ -157,24 +157,20 @@ pub fn picker_frame(v: &View, entries: &[Entry], st: &State, w: usize, h: usize)
     } else {
         let x = f.put(1, 1, &st.pick_query, Style::Text, right);
         let x = f.put(x, 1, "▏", Style::Text, right);
-        if visible.len() == 1 { f.put(x + 2, 1, "No matches", Style::Muted, right); }
+        if visible.is_empty() { f.put(x + 2, 1, "No matches", Style::Muted, right); }
     }
     let n = picker_cols(w);
     let col_w = (w - 2 - GAP * (n - 1)) / n;
     let (top, body_h) = (3, h - 4);
-    let picked = st.picked.min(visible.len() - 1);
+    let picked = st.picked.min(visible.len().saturating_sub(1));
     let first_row = (picked / n).saturating_sub(body_h - 1);
-    let total: usize = entries.iter().map(|e| e.count).sum();
-    for (k, entry) in visible.iter().enumerate() {
+    for (k, &i) in visible.iter().enumerate() {
         let row = k / n;
         if row < first_row || row - first_row >= body_h { continue; }
         let (y, x0) = (top + row - first_row, 1 + (k % n) * (col_w + GAP));
-        let (name, info) = match entry {
-            None => ("All apps".to_string(), total.to_string()),
-            Some(i) => match entries.get(*i) {
-                Some(e) => (e.name.clone(), format!("{}  {}{}", e.origin, e.count, if e.warn { " ⚠" } else { "" })),
-                None => (v.apps[*i].to_string(), String::new()),
-            },
+        let (name, info) = match entries.get(i) {
+            Some(e) => (e.name.clone(), format!("{}  {}{}", e.origin, e.count, if e.warn { " ⚠" } else { "" })),
+            None => (v.apps[i].to_string(), String::new()),
         };
         let selected = k == picked;
         let x = f.put(x0, y, if selected { "▸ " } else { "  " }, Style::Title, x0 + col_w);
@@ -365,16 +361,17 @@ mod tests {
         let f = picker_frame(&view(&s), &entries(), &picker_state(), 120, 30);
         let t = f.text();
         assert!(t.lines().nth(1).unwrap().starts_with(" Choose an app…"));
-        assert!(t.contains("▸ All apps") && t.contains("244"));               // 40 + 123 + 81
-        assert!(t.contains("mixed  123 ⚠") && t.contains("defaults  40"));
-        let (x, y) = find(&f, "All apps").unwrap();
+        assert!(!t.contains("All apps"));
+        assert!(t.contains("▸ kitty") && t.contains("mixed  123 ⚠") && t.contains("defaults  40"));
+        let order: Vec<usize> = ["kitty", "nvim", "tmux"].iter().map(|n| t.find(&format!(" {n} ")).unwrap()).collect();
+        assert!(order[0] < order[1] && order[1] < order[2], "not sorted by name: {t}");   // apps are kitty, tmux, nvim
+        let (x, y) = find(&f, "kitty").unwrap();
         assert_eq!(f.rows[y][x].style, Style::Title);
-        let st = State { picked: 2, ..picker_state() };                      // tmux
-        let f = picker_frame(&view(&s), &entries(), &st, 120, 30);
-        assert!(f.text().contains("▸ tmux"));
+        let st = State { picked: 2, ..picker_state() };                      // third by name: tmux
+        assert!(picker_frame(&view(&s), &entries(), &st, 120, 30).text().contains("▸ tmux"));
         let st = State { pick_query: "zzz".into(), ..picker_state() };
         let t = picker_frame(&view(&s), &entries(), &st, 120, 30).text();
-        assert!(t.contains("zzz▏  No matches") && t.contains("▸ All apps"));
+        assert!(t.contains("zzz▏  No matches") && !t.contains('▸'));
     }
 
     #[test]
@@ -394,9 +391,9 @@ mod tests {
         let apps: Vec<&str> = names.iter().map(String::as_str).collect();
         let es: Vec<Entry> = names.iter().map(|n| Entry { name: n.clone(), origin: "live".into(), count: 1, warn: false }).collect();
         let v = View { sections: &[], apps: &apps, theme_name: "t", plain: false };
-        let st = State { picked: 10, ..picker_state() };                     // last entry: app9
+        let st = State { picked: 9, ..picker_state() };                      // last entry: app9
         let t = picker_frame(&v, &es, &st, 30, 8).text();
         assert!(t.contains("▸ app9"), "{t}");
-        assert!(!t.contains("All apps"));                                    // scrolled past the top
+        assert!(!t.contains("app0"));                                        // scrolled past the top
     }
 }

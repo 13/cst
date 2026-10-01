@@ -3,1040 +3,777 @@
 <rect x="0.0" y="0" width="8.4" height="18" fill="#313244"/>
 <rect x="8.4" y="0" width="151.2" height="18" fill="#313244"/>
 <text x="8.4" y="13" fill="#cdd6f4" font-weight="bold" textLength="151.2" lengthAdjust="spacingAndGlyphs">Keyboard shortcuts</text>
-<rect x="159.6" y="0" width="840.0" height="18" fill="#313244"/>
-<rect x="999.6" y="0" width="168.0" height="18" fill="#313244"/>
-<text x="999.6" y="13" fill="#8f94ae" textLength="168.0" lengthAdjust="spacingAndGlyphs">16 apps · catppuccin</text>
+<rect x="159.6" y="0" width="915.6" height="18" fill="#313244"/>
+<rect x="1075.2" y="0" width="92.4" height="18" fill="#313244"/>
+<text x="1075.2" y="13" fill="#8f94ae" textLength="92.4" lengthAdjust="spacingAndGlyphs">focus: tmux</text>
 <rect x="0.0" y="18" width="8.4" height="18" fill="#313244"/>
 <rect x="8.4" y="18" width="126.0" height="18" fill="#313244"/>
 <text x="8.4" y="31" fill="#8f94ae" textLength="126.0" lengthAdjust="spacingAndGlyphs">Type to filter…</text>
 <rect x="0.0" y="54" width="8.4" height="18" fill="#313244"/>
-<rect x="8.4" y="54" width="142.8" height="18" fill="#313244"/>
-<text x="8.4" y="67" fill="#89b4fa" font-weight="bold" textLength="142.8" lengthAdjust="spacingAndGlyphs">AWESOME · WINDOWS</text>
-<rect x="151.2" y="54" width="252.0" height="18" fill="#313244"/>
-<rect x="403.2" y="54" width="117.6" height="18" fill="#313244"/>
-<text x="403.2" y="67" fill="#89b4fa" font-weight="bold" textLength="117.6" lengthAdjust="spacingAndGlyphs">AWESOME · TAGS</text>
-<rect x="520.8" y="54" width="277.2" height="18" fill="#313244"/>
+<rect x="8.4" y="54" width="109.2" height="18" fill="#313244"/>
+<text x="8.4" y="67" fill="#89b4fa" font-weight="bold" textLength="109.2" lengthAdjust="spacingAndGlyphs">TMUX · PREFIX</text>
+<rect x="117.6" y="54" width="285.6" height="18" fill="#313244"/>
+<rect x="403.2" y="54" width="134.4" height="18" fill="#313244"/>
+<text x="403.2" y="67" fill="#89b4fa" font-weight="bold" textLength="134.4" lengthAdjust="spacingAndGlyphs">TMUX · COPY MODE</text>
+<rect x="537.6" y="54" width="260.4" height="18" fill="#313244"/>
 <rect x="798.0" y="54" width="134.4" height="18" fill="#313244"/>
-<text x="798.0" y="67" fill="#89b4fa" font-weight="bold" textLength="134.4" lengthAdjust="spacingAndGlyphs">AWESOME · SYSTEM</text>
-<rect x="0.0" y="72" width="218.4" height="18" fill="#313244"/>
-<text x="0.0" y="85" fill="#cdd6f4" textLength="218.4" lengthAdjust="spacingAndGlyphs"> Close                    </text>
-<rect x="218.4" y="72" width="58.8" height="18" fill="#45475a"/>
-<text x="218.4" y="85" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="277.2" y="72" width="8.4" height="18" fill="#313244"/>
-<text x="277.2" y="85" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="285.6" y="72" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="85" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
+<text x="798.0" y="67" fill="#89b4fa" font-weight="bold" textLength="134.4" lengthAdjust="spacingAndGlyphs">TMUX · NO PREFIX</text>
+<rect x="0.0" y="72" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="85" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Break pane to… </text>
+<rect x="134.4" y="72" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="85" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="72" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="85" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="72" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="85" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="72" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="85" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="72" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="85" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ! </text>
+<rect x="252.0" y="72" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="85" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="72" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="85" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="72" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="85" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="72" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="85" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="72" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="85" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="85" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="72" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="85" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> C </text>
-<rect x="378.0" y="72" width="285.6" height="18" fill="#313244"/>
-<text x="378.0" y="85" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs">   Go back                        </text>
-<rect x="663.6" y="72" width="58.8" height="18" fill="#45475a"/>
-<text x="663.6" y="85" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="722.4" y="72" width="8.4" height="18" fill="#313244"/>
-<text x="722.4" y="85" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="730.8" y="72" width="42.0" height="18" fill="#45475a"/>
-<text x="730.8" y="85" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Esc </text>
-<rect x="772.8" y="72" width="302.4" height="18" fill="#313244"/>
-<text x="772.8" y="85" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   Keep awake                       </text>
-<rect x="1075.2" y="72" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="85" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
+<text x="352.8" y="85" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ! </text>
+<rect x="378.0" y="72" width="369.6" height="18" fill="#313244"/>
+<text x="378.0" y="85" fill="#cdd6f4" textLength="369.6" lengthAdjust="spacingAndGlyphs">   Begin selection                          </text>
+<rect x="747.6" y="72" width="25.2" height="18" fill="#45475a"/>
+<text x="747.6" y="85" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> v </text>
+<rect x="772.8" y="72" width="310.8" height="18" fill="#313244"/>
+<text x="772.8" y="85" fill="#cdd6f4" textLength="310.8" lengthAdjust="spacingAndGlyphs">   Send keys                         </text>
+<rect x="1083.6" y="72" width="50.4" height="18" fill="#45475a"/>
+<text x="1083.6" y="85" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
 <rect x="1134.0" y="72" width="8.4" height="18" fill="#313244"/>
 <text x="1134.0" y="85" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
 <rect x="1142.4" y="72" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="85" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> C </text>
-<rect x="0.0" y="90" width="226.8" height="18" fill="#313244"/>
-<text x="0.0" y="103" fill="#cdd6f4" textLength="226.8" lengthAdjust="spacingAndGlyphs"> Focus next screen         </text>
-<rect x="226.8" y="90" width="58.8" height="18" fill="#45475a"/>
-<text x="226.8" y="103" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="285.6" y="90" width="8.4" height="18" fill="#313244"/>
-<text x="285.6" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="294.0" y="90" width="50.4" height="18" fill="#45475a"/>
-<text x="294.0" y="103" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<text x="1142.4" y="85" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> L </text>
+<rect x="0.0" y="90" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="103" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Choose buffer  </text>
+<rect x="134.4" y="90" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="103" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="90" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="90" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="103" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="90" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="90" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="103" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> P </text>
+<rect x="252.0" y="90" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="90" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="103" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="90" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="90" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="103" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="90" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="90" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="103" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> J </text>
-<rect x="378.0" y="90" width="218.4" height="18" fill="#313244"/>
-<text x="378.0" y="103" fill="#cdd6f4" textLength="218.4" lengthAdjust="spacingAndGlyphs">   Move window to tag     </text>
-<rect x="596.4" y="90" width="58.8" height="18" fill="#45475a"/>
-<text x="596.4" y="103" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="655.2" y="90" width="8.4" height="18" fill="#313244"/>
-<text x="655.2" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="663.6" y="90" width="58.8" height="18" fill="#45475a"/>
-<text x="663.6" y="103" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="722.4" y="90" width="8.4" height="18" fill="#313244"/>
-<text x="722.4" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="730.8" y="90" width="42.0" height="18" fill="#45475a"/>
-<text x="730.8" y="103" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> 1…9 </text>
-<rect x="772.8" y="90" width="235.2" height="18" fill="#313244"/>
-<text x="772.8" y="103" fill="#cdd6f4" textLength="235.2" lengthAdjust="spacingAndGlyphs">   Night light on/off       </text>
-<rect x="1008.0" y="90" width="58.8" height="18" fill="#45475a"/>
-<text x="1008.0" y="103" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="1066.8" y="90" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="90" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="103" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="90" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="103" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="90" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="103" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> N </text>
-<rect x="0.0" y="108" width="285.6" height="18" fill="#313244"/>
-<text x="0.0" y="121" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs"> Focus next window                </text>
-<rect x="285.6" y="108" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="121" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
+<text x="352.8" y="103" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> P </text>
+<rect x="378.0" y="90" width="369.6" height="18" fill="#313244"/>
+<text x="378.0" y="103" fill="#cdd6f4" textLength="369.6" lengthAdjust="spacingAndGlyphs">   Copy and exit                            </text>
+<rect x="747.6" y="90" width="25.2" height="18" fill="#45475a"/>
+<text x="747.6" y="103" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> y </text>
+<rect x="0.0" y="108" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="121" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Choose session </text>
+<rect x="134.4" y="108" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="121" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="108" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="108" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="121" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="108" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="108" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="121" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> s </text>
+<rect x="252.0" y="108" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="108" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="121" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="108" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="108" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="121" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="108" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="108" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="121" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> J </text>
-<rect x="378.0" y="108" width="159.6" height="18" fill="#313244"/>
-<text x="378.0" y="121" fill="#cdd6f4" textLength="159.6" lengthAdjust="spacingAndGlyphs">   Toggle on tag   </text>
-<rect x="537.6" y="108" width="58.8" height="18" fill="#45475a"/>
-<text x="537.6" y="121" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="596.4" y="108" width="8.4" height="18" fill="#313244"/>
-<text x="596.4" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="604.8" y="108" width="50.4" height="18" fill="#45475a"/>
-<text x="604.8" y="121" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="655.2" y="108" width="8.4" height="18" fill="#313244"/>
-<text x="655.2" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="663.6" y="108" width="58.8" height="18" fill="#45475a"/>
-<text x="663.6" y="121" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="722.4" y="108" width="8.4" height="18" fill="#313244"/>
-<text x="722.4" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="730.8" y="108" width="42.0" height="18" fill="#45475a"/>
-<text x="730.8" y="121" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> 1…9 </text>
-<rect x="772.8" y="108" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="121" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Notification history      </text>
-<rect x="1016.4" y="108" width="58.8" height="18" fill="#45475a"/>
-<text x="1016.4" y="121" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="1075.2" y="108" width="8.4" height="18" fill="#313244"/>
-<text x="1075.2" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1083.6" y="108" width="50.4" height="18" fill="#45475a"/>
-<text x="1083.6" y="121" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1134.0" y="108" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="121" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="108" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="121" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> D </text>
-<rect x="0.0" y="126" width="226.8" height="18" fill="#313244"/>
-<text x="0.0" y="139" fill="#cdd6f4" textLength="226.8" lengthAdjust="spacingAndGlyphs"> Focus previous screen     </text>
-<rect x="226.8" y="126" width="58.8" height="18" fill="#45475a"/>
-<text x="226.8" y="139" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="285.6" y="126" width="8.4" height="18" fill="#313244"/>
-<text x="285.6" y="139" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="294.0" y="126" width="50.4" height="18" fill="#45475a"/>
-<text x="294.0" y="139" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<text x="352.8" y="121" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> s </text>
+<rect x="378.0" y="108" width="369.6" height="18" fill="#313244"/>
+<text x="378.0" y="121" fill="#cdd6f4" textLength="369.6" lengthAdjust="spacingAndGlyphs">   End of line                              </text>
+<rect x="747.6" y="108" width="25.2" height="18" fill="#45475a"/>
+<text x="747.6" y="121" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> L </text>
+<rect x="0.0" y="126" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="139" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Choose window  </text>
+<rect x="134.4" y="126" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="139" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="126" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="139" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="126" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="139" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="126" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="139" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="126" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="139" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> w </text>
+<rect x="252.0" y="126" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="139" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="126" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="139" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="126" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="139" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="126" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="139" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="126" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="139" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="139" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="126" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="139" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> K </text>
-<rect x="378.0" y="126" width="226.8" height="18" fill="#313244"/>
-<text x="378.0" y="139" fill="#cdd6f4" textLength="226.8" lengthAdjust="spacingAndGlyphs">   Toggle tag              </text>
-<rect x="604.8" y="126" width="58.8" height="18" fill="#45475a"/>
-<text x="604.8" y="139" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="663.6" y="126" width="8.4" height="18" fill="#313244"/>
-<text x="663.6" y="139" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="672.0" y="126" width="50.4" height="18" fill="#45475a"/>
-<text x="672.0" y="139" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="722.4" y="126" width="8.4" height="18" fill="#313244"/>
-<text x="722.4" y="139" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="352.8" y="139" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> w </text>
+<rect x="378.0" y="126" width="352.8" height="18" fill="#313244"/>
+<text x="378.0" y="139" fill="#cdd6f4" textLength="352.8" lengthAdjust="spacingAndGlyphs">   Exit copy mode                         </text>
 <rect x="730.8" y="126" width="42.0" height="18" fill="#45475a"/>
-<text x="730.8" y="139" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> 1…9 </text>
-<rect x="772.8" y="126" width="302.4" height="18" fill="#313244"/>
-<text x="772.8" y="139" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   Pomodoro start/pause             </text>
-<rect x="1075.2" y="126" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="139" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="1134.0" y="126" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="139" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="126" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="139" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> Z </text>
-<rect x="0.0" y="144" width="285.6" height="18" fill="#313244"/>
-<text x="0.0" y="157" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs"> Focus previous window            </text>
-<rect x="285.6" y="144" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="157" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
+<text x="730.8" y="139" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Esc </text>
+<rect x="0.0" y="144" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="157" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Clock          </text>
+<rect x="134.4" y="144" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="157" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="144" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="157" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="144" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="157" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="144" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="157" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="144" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="157" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> t </text>
+<rect x="252.0" y="144" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="157" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="144" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="157" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="144" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="157" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="144" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="157" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="144" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="157" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="157" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="144" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="157" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> K </text>
-<rect x="378.0" y="144" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="157" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   View next                        </text>
-<rect x="680.4" y="144" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="157" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
+<text x="352.8" y="157" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> t </text>
+<rect x="378.0" y="144" width="310.8" height="18" fill="#313244"/>
+<text x="378.0" y="157" fill="#cdd6f4" textLength="310.8" lengthAdjust="spacingAndGlyphs">   Rectangle selection               </text>
+<rect x="688.8" y="144" width="50.4" height="18" fill="#45475a"/>
+<text x="688.8" y="157" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
 <rect x="739.2" y="144" width="8.4" height="18" fill="#313244"/>
 <text x="739.2" y="157" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
 <rect x="747.6" y="144" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="157" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> → </text>
-<rect x="772.8" y="144" width="235.2" height="18" fill="#313244"/>
-<text x="772.8" y="157" fill="#cdd6f4" textLength="235.2" lengthAdjust="spacingAndGlyphs">   Power menu               </text>
-<rect x="1008.0" y="144" width="58.8" height="18" fill="#45475a"/>
-<text x="1008.0" y="157" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="1066.8" y="144" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="157" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="144" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="157" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="144" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="157" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="144" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="157" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> Q </text>
-<rect x="0.0" y="162" width="268.8" height="18" fill="#313244"/>
-<text x="0.0" y="175" fill="#cdd6f4" textLength="268.8" lengthAdjust="spacingAndGlyphs"> Go back                        </text>
-<rect x="268.8" y="162" width="58.8" height="18" fill="#45475a"/>
-<text x="268.8" y="175" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="327.6" y="162" width="8.4" height="18" fill="#313244"/>
-<text x="327.6" y="175" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="336.0" y="162" width="42.0" height="18" fill="#45475a"/>
-<text x="336.0" y="175" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Tab </text>
-<rect x="378.0" y="162" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="175" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   View previous                    </text>
-<rect x="680.4" y="162" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="175" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="739.2" y="162" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="175" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="747.6" y="157" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> V </text>
+<rect x="0.0" y="162" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="175" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Close pane     </text>
+<rect x="134.4" y="162" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="175" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="162" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="175" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="162" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="175" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="162" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="175" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="162" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="175" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> x </text>
+<rect x="252.0" y="162" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="175" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="162" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="175" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="162" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="175" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="162" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="175" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
+<rect x="344.4" y="162" width="8.4" height="18" fill="#313244"/>
+<text x="344.4" y="175" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="352.8" y="162" width="25.2" height="18" fill="#45475a"/>
+<text x="352.8" y="175" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> x </text>
+<rect x="378.0" y="162" width="369.6" height="18" fill="#313244"/>
+<text x="378.0" y="175" fill="#cdd6f4" textLength="369.6" lengthAdjust="spacingAndGlyphs">   Start of line                            </text>
 <rect x="747.6" y="162" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="175" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ← </text>
-<rect x="772.8" y="162" width="176.4" height="18" fill="#313244"/>
-<text x="772.8" y="175" fill="#cdd6f4" textLength="176.4" lengthAdjust="spacingAndGlyphs">   Quit awesome (2×) </text>
-<rect x="949.2" y="162" width="58.8" height="18" fill="#45475a"/>
-<text x="949.2" y="175" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="1008.0" y="162" width="8.4" height="18" fill="#313244"/>
-<text x="1008.0" y="175" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1016.4" y="162" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="175" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="162" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="175" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="162" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="175" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="162" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="175" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="162" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="175" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> Q </text>
-<rect x="0.0" y="180" width="285.6" height="18" fill="#313244"/>
-<text x="0.0" y="193" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs"> Jump to urgent client            </text>
-<rect x="285.6" y="180" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="193" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
+<text x="747.6" y="175" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> H </text>
+<rect x="0.0" y="180" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="193" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Close window   </text>
+<rect x="134.4" y="180" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="193" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="180" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="193" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="180" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="193" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="180" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="193" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="180" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="193" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> &amp; </text>
+<rect x="252.0" y="180" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="193" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="180" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="193" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="180" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="193" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="180" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="193" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="180" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="193" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="193" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="180" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="193" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> U </text>
-<rect x="378.0" y="180" width="285.6" height="18" fill="#313244"/>
-<text x="378.0" y="193" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs">   View tag                       </text>
-<rect x="663.6" y="180" width="58.8" height="18" fill="#45475a"/>
-<text x="663.6" y="193" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="722.4" y="180" width="8.4" height="18" fill="#313244"/>
-<text x="722.4" y="193" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="730.8" y="180" width="42.0" height="18" fill="#45475a"/>
-<text x="730.8" y="193" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> 1…9 </text>
-<rect x="772.8" y="180" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="193" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Reload awesome            </text>
-<rect x="1016.4" y="180" width="58.8" height="18" fill="#45475a"/>
-<text x="1016.4" y="193" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="1075.2" y="180" width="8.4" height="18" fill="#313244"/>
-<text x="1075.2" y="193" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1083.6" y="180" width="50.4" height="18" fill="#45475a"/>
-<text x="1083.6" y="193" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1134.0" y="180" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="193" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="180" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="193" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> R </text>
-<rect x="0.0" y="198" width="285.6" height="18" fill="#313244"/>
-<text x="0.0" y="211" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs"> Maximize                         </text>
-<rect x="285.6" y="198" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="211" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="344.4" y="198" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="211" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="352.8" y="198" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="211" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> M </text>
-<rect x="378.0" y="198" width="697.2" height="18" fill="#313244"/>
-<text x="378.0" y="211" fill="#cdd6f4" textLength="697.2" lengthAdjust="spacingAndGlyphs">                                                  Show keyboard shortcuts          </text>
-<rect x="1075.2" y="198" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="211" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="1134.0" y="198" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="211" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="198" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="211" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> I </text>
-<rect x="0.0" y="216" width="218.4" height="18" fill="#313244"/>
-<text x="0.0" y="229" fill="#cdd6f4" textLength="218.4" lengthAdjust="spacingAndGlyphs"> Maximize horizontally    </text>
-<rect x="218.4" y="216" width="58.8" height="18" fill="#45475a"/>
-<text x="218.4" y="229" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="277.2" y="216" width="8.4" height="18" fill="#313244"/>
-<text x="277.2" y="229" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="285.6" y="216" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="229" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="344.4" y="216" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="229" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="352.8" y="216" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="229" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> M </text>
-<rect x="378.0" y="216" width="25.2" height="18" fill="#313244"/>
-<rect x="403.2" y="216" width="134.4" height="18" fill="#313244"/>
-<text x="403.2" y="229" fill="#89b4fa" font-weight="bold" textLength="134.4" lengthAdjust="spacingAndGlyphs">AWESOME · LAYOUT</text>
-<rect x="537.6" y="216" width="537.6" height="18" fill="#313244"/>
-<text x="537.6" y="229" fill="#cdd6f4" textLength="537.6" lengthAdjust="spacingAndGlyphs">                               Show main menu                   </text>
-<rect x="1075.2" y="216" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="229" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="1134.0" y="216" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="229" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="216" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="229" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> W </text>
-<rect x="0.0" y="234" width="226.8" height="18" fill="#313244"/>
-<text x="0.0" y="247" fill="#cdd6f4" textLength="226.8" lengthAdjust="spacingAndGlyphs"> Maximize vertically       </text>
-<rect x="226.8" y="234" width="58.8" height="18" fill="#45475a"/>
-<text x="226.8" y="247" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="285.6" y="234" width="8.4" height="18" fill="#313244"/>
-<text x="285.6" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="294.0" y="234" width="50.4" height="18" fill="#45475a"/>
-<text x="294.0" y="247" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<text x="352.8" y="193" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> &amp; </text>
+<rect x="0.0" y="198" width="252.0" height="18" fill="#313244"/>
+<text x="0.0" y="211" fill="#cdd6f4" textLength="252.0" lengthAdjust="spacingAndGlyphs"> Command prompt               </text>
+<rect x="252.0" y="198" width="50.4" height="18" fill="#45475a"/>
+<text x="252.0" y="211" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="302.4" y="198" width="8.4" height="18" fill="#313244"/>
+<text x="302.4" y="211" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="310.8" y="198" width="25.2" height="18" fill="#45475a"/>
+<text x="310.8" y="211" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="336.0" y="198" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="211" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="344.4" y="198" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="211" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> : </text>
+<rect x="369.6" y="198" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="211" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="216" width="252.0" height="18" fill="#313244"/>
+<text x="0.0" y="229" fill="#cdd6f4" textLength="252.0" lengthAdjust="spacingAndGlyphs"> Copy mode                    </text>
+<rect x="252.0" y="216" width="50.4" height="18" fill="#45475a"/>
+<text x="252.0" y="229" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="302.4" y="216" width="8.4" height="18" fill="#313244"/>
+<text x="302.4" y="229" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="310.8" y="216" width="25.2" height="18" fill="#45475a"/>
+<text x="310.8" y="229" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="336.0" y="216" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="229" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="344.4" y="216" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="229" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> [ </text>
+<rect x="369.6" y="216" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="229" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="234" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="247" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Detach         </text>
+<rect x="134.4" y="234" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="247" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="234" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="234" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="247" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="234" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="234" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="247" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> d </text>
+<rect x="252.0" y="234" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="234" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="247" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="234" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="234" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="247" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="234" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="234" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="247" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> M </text>
-<rect x="378.0" y="234" width="243.6" height="18" fill="#313244"/>
-<text x="378.0" y="247" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Fewer columns             </text>
-<rect x="621.6" y="234" width="58.8" height="18" fill="#45475a"/>
-<text x="621.6" y="247" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="680.4" y="234" width="8.4" height="18" fill="#313244"/>
-<text x="680.4" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="688.8" y="234" width="50.4" height="18" fill="#45475a"/>
-<text x="688.8" y="247" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="739.2" y="234" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="234" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="247" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> L </text>
-<rect x="772.8" y="234" width="235.2" height="18" fill="#313244"/>
-<text x="772.8" y="247" fill="#cdd6f4" textLength="235.2" lengthAdjust="spacingAndGlyphs">   Toggle do-not-disturb    </text>
-<rect x="1008.0" y="234" width="58.8" height="18" fill="#45475a"/>
-<text x="1008.0" y="247" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="1066.8" y="234" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="234" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="247" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="234" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="247" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="234" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="247" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> D </text>
-<rect x="0.0" y="252" width="285.6" height="18" fill="#313244"/>
-<text x="0.0" y="265" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs"> Minimize                         </text>
-<rect x="285.6" y="252" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="265" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="344.4" y="252" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="265" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="352.8" y="252" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="265" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> N </text>
-<rect x="378.0" y="252" width="235.2" height="18" fill="#313244"/>
-<text x="378.0" y="265" fill="#cdd6f4" textLength="235.2" lengthAdjust="spacingAndGlyphs">   Fewer master windows     </text>
-<rect x="613.2" y="252" width="58.8" height="18" fill="#45475a"/>
-<text x="613.2" y="265" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="672.0" y="252" width="8.4" height="18" fill="#313244"/>
-<text x="672.0" y="265" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="680.4" y="252" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="265" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="739.2" y="252" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="265" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="252" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="265" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> L </text>
-<rect x="0.0" y="270" width="193.2" height="18" fill="#313244"/>
-<text x="0.0" y="283" fill="#cdd6f4" textLength="193.2" lengthAdjust="spacingAndGlyphs"> Move to master        </text>
-<rect x="193.2" y="270" width="58.8" height="18" fill="#45475a"/>
-<text x="193.2" y="283" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="252.0" y="270" width="8.4" height="18" fill="#313244"/>
-<text x="252.0" y="283" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="260.4" y="270" width="50.4" height="18" fill="#45475a"/>
-<text x="260.4" y="283" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="310.8" y="270" width="8.4" height="18" fill="#313244"/>
-<text x="310.8" y="283" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="319.2" y="270" width="58.8" height="18" fill="#45475a"/>
-<text x="319.2" y="283" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Enter </text>
-<rect x="378.0" y="270" width="243.6" height="18" fill="#313244"/>
-<text x="378.0" y="283" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   More columns              </text>
-<rect x="621.6" y="270" width="58.8" height="18" fill="#45475a"/>
-<text x="621.6" y="283" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="680.4" y="270" width="8.4" height="18" fill="#313244"/>
-<text x="680.4" y="283" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="688.8" y="270" width="50.4" height="18" fill="#45475a"/>
-<text x="688.8" y="283" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="739.2" y="270" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="283" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="270" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="283" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> H </text>
-<rect x="772.8" y="270" width="25.2" height="18" fill="#313244"/>
-<rect x="798.0" y="270" width="100.8" height="18" fill="#313244"/>
-<text x="798.0" y="283" fill="#89b4fa" font-weight="bold" textLength="100.8" lengthAdjust="spacingAndGlyphs">KITTY · TABS</text>
-<rect x="0.0" y="288" width="285.6" height="18" fill="#313244"/>
-<text x="0.0" y="301" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs"> Move to screen                   </text>
-<rect x="285.6" y="288" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="301" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="344.4" y="288" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="301" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="352.8" y="288" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="301" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> O </text>
-<rect x="378.0" y="288" width="235.2" height="18" fill="#313244"/>
-<text x="378.0" y="301" fill="#cdd6f4" textLength="235.2" lengthAdjust="spacingAndGlyphs">   More master windows      </text>
-<rect x="613.2" y="288" width="58.8" height="18" fill="#45475a"/>
-<text x="613.2" y="301" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="672.0" y="288" width="8.4" height="18" fill="#313244"/>
-<text x="672.0" y="301" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="680.4" y="288" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="301" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="739.2" y="288" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="301" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="288" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="301" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> H </text>
-<rect x="772.8" y="288" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="301" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Close tab                 </text>
-<rect x="1016.4" y="288" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="301" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="288" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="301" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="288" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="301" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="288" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="301" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="288" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="301" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> Q </text>
-<rect x="0.0" y="306" width="226.8" height="18" fill="#313244"/>
-<text x="0.0" y="319" fill="#cdd6f4" textLength="226.8" lengthAdjust="spacingAndGlyphs"> Restore minimized         </text>
-<rect x="226.8" y="306" width="58.8" height="18" fill="#45475a"/>
-<text x="226.8" y="319" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="285.6" y="306" width="8.4" height="18" fill="#313244"/>
-<text x="285.6" y="319" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="294.0" y="306" width="50.4" height="18" fill="#45475a"/>
-<text x="294.0" y="319" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="344.4" y="306" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="319" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="352.8" y="306" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="319" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> N </text>
-<rect x="378.0" y="306" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="319" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   Narrower master                  </text>
-<rect x="680.4" y="306" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="319" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="739.2" y="306" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="319" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="306" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="319" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> H </text>
-<rect x="772.8" y="306" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="319" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Move tab backward         </text>
-<rect x="1016.4" y="306" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="319" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="306" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="319" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="306" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="319" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="306" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="319" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="306" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="319" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> , </text>
-<rect x="0.0" y="324" width="218.4" height="18" fill="#313244"/>
-<text x="0.0" y="337" fill="#cdd6f4" textLength="218.4" lengthAdjust="spacingAndGlyphs"> Swap with next window    </text>
-<rect x="218.4" y="324" width="58.8" height="18" fill="#45475a"/>
-<text x="218.4" y="337" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="277.2" y="324" width="8.4" height="18" fill="#313244"/>
-<text x="277.2" y="337" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="285.6" y="324" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="337" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
+<text x="352.8" y="247" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> d </text>
+<rect x="0.0" y="252" width="252.0" height="18" fill="#313244"/>
+<text x="0.0" y="265" fill="#cdd6f4" textLength="252.0" lengthAdjust="spacingAndGlyphs"> Focus down                   </text>
+<rect x="252.0" y="252" width="50.4" height="18" fill="#45475a"/>
+<text x="252.0" y="265" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="302.4" y="252" width="8.4" height="18" fill="#313244"/>
+<text x="302.4" y="265" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="310.8" y="252" width="25.2" height="18" fill="#45475a"/>
+<text x="310.8" y="265" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="336.0" y="252" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="265" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="344.4" y="252" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="265" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ↓ </text>
+<rect x="369.6" y="252" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="265" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="270" width="252.0" height="18" fill="#313244"/>
+<text x="0.0" y="283" fill="#cdd6f4" textLength="252.0" lengthAdjust="spacingAndGlyphs"> Focus left                   </text>
+<rect x="252.0" y="270" width="50.4" height="18" fill="#45475a"/>
+<text x="252.0" y="283" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="302.4" y="270" width="8.4" height="18" fill="#313244"/>
+<text x="302.4" y="283" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="310.8" y="270" width="25.2" height="18" fill="#45475a"/>
+<text x="310.8" y="283" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="336.0" y="270" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="283" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="344.4" y="270" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="283" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ← </text>
+<rect x="369.6" y="270" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="283" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="288" width="252.0" height="18" fill="#313244"/>
+<text x="0.0" y="301" fill="#cdd6f4" textLength="252.0" lengthAdjust="spacingAndGlyphs"> Focus right                  </text>
+<rect x="252.0" y="288" width="50.4" height="18" fill="#45475a"/>
+<text x="252.0" y="301" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="302.4" y="288" width="8.4" height="18" fill="#313244"/>
+<text x="302.4" y="301" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="310.8" y="288" width="25.2" height="18" fill="#45475a"/>
+<text x="310.8" y="301" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="336.0" y="288" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="301" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="344.4" y="288" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="301" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> → </text>
+<rect x="369.6" y="288" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="301" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="306" width="252.0" height="18" fill="#313244"/>
+<text x="0.0" y="319" fill="#cdd6f4" textLength="252.0" lengthAdjust="spacingAndGlyphs"> Focus up                     </text>
+<rect x="252.0" y="306" width="50.4" height="18" fill="#45475a"/>
+<text x="252.0" y="319" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="302.4" y="306" width="8.4" height="18" fill="#313244"/>
+<text x="302.4" y="319" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="310.8" y="306" width="25.2" height="18" fill="#45475a"/>
+<text x="310.8" y="319" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="336.0" y="306" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="319" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="344.4" y="306" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="319" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ↑ </text>
+<rect x="369.6" y="306" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="319" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="324" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="337" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Go to window   </text>
+<rect x="134.4" y="324" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="337" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="324" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="337" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="324" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="337" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="324" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="337" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="324" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="337" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> 0 </text>
+<rect x="252.0" y="324" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="337" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="324" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="337" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="324" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="337" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="324" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="337" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="324" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="337" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="337" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="324" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="337" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> J </text>
-<rect x="378.0" y="324" width="268.8" height="18" fill="#313244"/>
-<text x="378.0" y="337" fill="#cdd6f4" textLength="268.8" lengthAdjust="spacingAndGlyphs">   Select next                  </text>
-<rect x="646.8" y="324" width="58.8" height="18" fill="#45475a"/>
-<text x="646.8" y="337" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="705.6" y="324" width="8.4" height="18" fill="#313244"/>
-<text x="705.6" y="337" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="714.0" y="324" width="58.8" height="18" fill="#45475a"/>
-<text x="714.0" y="337" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Space </text>
-<rect x="772.8" y="324" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="337" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Move tab forward          </text>
-<rect x="1016.4" y="324" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="337" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="324" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="337" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="324" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="337" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="324" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="337" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="324" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="337" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> . </text>
-<rect x="0.0" y="342" width="218.4" height="18" fill="#313244"/>
-<text x="0.0" y="355" fill="#cdd6f4" textLength="218.4" lengthAdjust="spacingAndGlyphs"> Swap with previous wind… </text>
-<rect x="218.4" y="342" width="58.8" height="18" fill="#45475a"/>
-<text x="218.4" y="355" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="277.2" y="342" width="8.4" height="18" fill="#313244"/>
-<text x="277.2" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="285.6" y="342" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="355" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
+<text x="352.8" y="337" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> 0 </text>
+<rect x="0.0" y="342" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="355" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Last pane      </text>
+<rect x="134.4" y="342" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="355" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="342" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="342" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="355" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="342" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="342" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="355" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ; </text>
+<rect x="252.0" y="342" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="342" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="355" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="342" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="342" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="355" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="342" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="342" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="355" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> K </text>
-<rect x="378.0" y="342" width="201.6" height="18" fill="#313244"/>
-<text x="378.0" y="355" fill="#cdd6f4" textLength="201.6" lengthAdjust="spacingAndGlyphs">   Select previous      </text>
-<rect x="579.6" y="342" width="58.8" height="18" fill="#45475a"/>
-<text x="579.6" y="355" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="638.4" y="342" width="8.4" height="18" fill="#313244"/>
-<text x="638.4" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="646.8" y="342" width="58.8" height="18" fill="#45475a"/>
-<text x="646.8" y="355" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="705.6" y="342" width="8.4" height="18" fill="#313244"/>
-<text x="705.6" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="714.0" y="342" width="58.8" height="18" fill="#45475a"/>
-<text x="714.0" y="355" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Space </text>
-<rect x="772.8" y="342" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="355" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   New tab                   </text>
-<rect x="1016.4" y="342" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="355" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="342" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="342" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="355" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="342" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="355" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="342" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="355" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> T </text>
-<rect x="0.0" y="360" width="285.6" height="18" fill="#313244"/>
-<text x="0.0" y="373" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs"> Switch windows                   </text>
-<rect x="285.6" y="360" width="42.0" height="18" fill="#45475a"/>
-<text x="285.6" y="373" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Alt </text>
-<rect x="327.6" y="360" width="8.4" height="18" fill="#313244"/>
-<text x="327.6" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="336.0" y="360" width="42.0" height="18" fill="#45475a"/>
-<text x="336.0" y="373" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Tab </text>
-<rect x="378.0" y="360" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="373" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   Toggle gaps                      </text>
-<rect x="680.4" y="360" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="373" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="739.2" y="360" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="360" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="373" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> G </text>
-<rect x="772.8" y="360" width="134.4" height="18" fill="#313244"/>
-<text x="772.8" y="373" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs">   Next tab     </text>
-<rect x="907.2" y="360" width="50.4" height="18" fill="#45475a"/>
-<text x="907.2" y="373" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="957.6" y="360" width="8.4" height="18" fill="#313244"/>
-<text x="957.6" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="966.0" y="360" width="58.8" height="18" fill="#45475a"/>
-<text x="966.0" y="373" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1024.8" y="360" width="8.4" height="18" fill="#313244"/>
-<text x="1024.8" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1033.2" y="360" width="25.2" height="18" fill="#45475a"/>
-<text x="1033.2" y="373" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> → </text>
-<rect x="1058.4" y="360" width="8.4" height="18" fill="#313244"/>
-<text x="1058.4" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
-<rect x="1066.8" y="360" width="50.4" height="18" fill="#45475a"/>
-<text x="1066.8" y="373" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1117.2" y="360" width="8.4" height="18" fill="#313244"/>
-<text x="1117.2" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1125.6" y="360" width="42.0" height="18" fill="#45475a"/>
-<text x="1125.6" y="373" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Tab </text>
-<rect x="0.0" y="378" width="193.2" height="18" fill="#313244"/>
-<text x="0.0" y="391" fill="#cdd6f4" textLength="193.2" lengthAdjust="spacingAndGlyphs"> Toggle floating       </text>
-<rect x="193.2" y="378" width="58.8" height="18" fill="#45475a"/>
-<text x="193.2" y="391" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="252.0" y="378" width="8.4" height="18" fill="#313244"/>
-<text x="252.0" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="260.4" y="378" width="50.4" height="18" fill="#45475a"/>
-<text x="260.4" y="391" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="310.8" y="378" width="8.4" height="18" fill="#313244"/>
-<text x="310.8" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="319.2" y="378" width="58.8" height="18" fill="#45475a"/>
-<text x="319.2" y="391" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Space </text>
-<rect x="378.0" y="378" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="391" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   Wider master                     </text>
-<rect x="680.4" y="378" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="391" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="739.2" y="378" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="378" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="391" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> L </text>
-<rect x="772.8" y="378" width="235.2" height="18" fill="#313244"/>
-<text x="772.8" y="391" fill="#cdd6f4" textLength="235.2" lengthAdjust="spacingAndGlyphs">   Previous tab             </text>
-<rect x="1008.0" y="378" width="50.4" height="18" fill="#45475a"/>
-<text x="1008.0" y="391" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1058.4" y="378" width="8.4" height="18" fill="#313244"/>
-<text x="1058.4" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1066.8" y="378" width="58.8" height="18" fill="#45475a"/>
-<text x="1066.8" y="391" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1125.6" y="378" width="8.4" height="18" fill="#313244"/>
-<text x="1125.6" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1134.0" y="378" width="25.2" height="18" fill="#45475a"/>
-<text x="1134.0" y="391" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ← </text>
-<rect x="1159.2" y="378" width="8.4" height="18" fill="#313244"/>
-<text x="1159.2" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
-<rect x="0.0" y="396" width="285.6" height="18" fill="#313244"/>
-<text x="0.0" y="409" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs"> Toggle fullscreen                </text>
-<rect x="285.6" y="396" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="409" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
+<text x="352.8" y="355" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ; </text>
+<rect x="0.0" y="360" width="84.0" height="18" fill="#313244"/>
+<text x="0.0" y="373" fill="#cdd6f4" textLength="84.0" lengthAdjust="spacingAndGlyphs"> Last se… </text>
+<rect x="84.0" y="360" width="50.4" height="18" fill="#45475a"/>
+<text x="84.0" y="373" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="134.4" y="360" width="8.4" height="18" fill="#313244"/>
+<text x="134.4" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="142.8" y="360" width="25.2" height="18" fill="#45475a"/>
+<text x="142.8" y="373" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="168.0" y="360" width="8.4" height="18" fill="#313244"/>
+<text x="168.0" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="176.4" y="360" width="50.4" height="18" fill="#45475a"/>
+<text x="176.4" y="373" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> ⇧Tab </text>
+<rect x="226.8" y="360" width="8.4" height="18" fill="#313244"/>
+<text x="226.8" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="235.2" y="360" width="50.4" height="18" fill="#45475a"/>
+<text x="235.2" y="373" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="285.6" y="360" width="8.4" height="18" fill="#313244"/>
+<text x="285.6" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="294.0" y="360" width="25.2" height="18" fill="#45475a"/>
+<text x="294.0" y="373" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
+<rect x="319.2" y="360" width="8.4" height="18" fill="#313244"/>
+<text x="319.2" y="373" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="327.6" y="360" width="50.4" height="18" fill="#45475a"/>
+<text x="327.6" y="373" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> ⇧Tab </text>
+<rect x="0.0" y="378" width="100.8" height="18" fill="#313244"/>
+<text x="0.0" y="391" fill="#cdd6f4" textLength="100.8" lengthAdjust="spacingAndGlyphs"> Last wind… </text>
+<rect x="100.8" y="378" width="50.4" height="18" fill="#45475a"/>
+<text x="100.8" y="391" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="151.2" y="378" width="8.4" height="18" fill="#313244"/>
+<text x="151.2" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="159.6" y="378" width="25.2" height="18" fill="#45475a"/>
+<text x="159.6" y="391" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="184.8" y="378" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="193.2" y="378" width="42.0" height="18" fill="#45475a"/>
+<text x="193.2" y="391" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Tab </text>
+<rect x="235.2" y="378" width="8.4" height="18" fill="#313244"/>
+<text x="235.2" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="243.6" y="378" width="50.4" height="18" fill="#45475a"/>
+<text x="243.6" y="391" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="294.0" y="378" width="8.4" height="18" fill="#313244"/>
+<text x="294.0" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="302.4" y="378" width="25.2" height="18" fill="#45475a"/>
+<text x="302.4" y="391" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
+<rect x="327.6" y="378" width="8.4" height="18" fill="#313244"/>
+<text x="327.6" y="391" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="336.0" y="378" width="42.0" height="18" fill="#45475a"/>
+<text x="336.0" y="391" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Tab </text>
+<rect x="0.0" y="396" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="409" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> List buffers   </text>
+<rect x="134.4" y="396" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="409" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="396" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="409" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="396" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="409" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="396" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="409" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="396" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="409" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> b </text>
+<rect x="252.0" y="396" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="409" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="396" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="409" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="396" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="409" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="396" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="409" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="396" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="409" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="409" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="396" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="409" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> F </text>
-<rect x="378.0" y="396" width="588.0" height="18" fill="#313244"/>
-<text x="378.0" y="409" fill="#cdd6f4" textLength="588.0" lengthAdjust="spacingAndGlyphs">                                                  Rename tab          </text>
-<rect x="966.0" y="396" width="50.4" height="18" fill="#45475a"/>
-<text x="966.0" y="409" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1016.4" y="396" width="8.4" height="18" fill="#313244"/>
-<text x="1016.4" y="409" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1024.8" y="396" width="42.0" height="18" fill="#45475a"/>
-<text x="1024.8" y="409" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Alt </text>
-<rect x="1066.8" y="396" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="409" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="396" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="409" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="396" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="409" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="396" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="409" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> T </text>
-<rect x="0.0" y="414" width="285.6" height="18" fill="#313244"/>
-<text x="0.0" y="427" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs"> Toggle keep on top               </text>
-<rect x="285.6" y="414" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="427" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
+<text x="352.8" y="409" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> b </text>
+<rect x="0.0" y="414" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="427" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> List keys      </text>
+<rect x="134.4" y="414" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="427" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="414" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="427" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="414" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="427" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="414" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="427" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="414" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="427" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ? </text>
+<rect x="252.0" y="414" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="427" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="414" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="427" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="414" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="427" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="414" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="427" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="414" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="427" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="427" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="414" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="427" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> T </text>
-<rect x="378.0" y="414" width="25.2" height="18" fill="#313244"/>
-<rect x="403.2" y="414" width="117.6" height="18" fill="#313244"/>
-<text x="403.2" y="427" fill="#89b4fa" font-weight="bold" textLength="117.6" lengthAdjust="spacingAndGlyphs">AWESOME · APPS</text>
-<rect x="0.0" y="432" width="285.6" height="18" fill="#313244"/>
-<text x="0.0" y="445" fill="#cdd6f4" textLength="285.6" lengthAdjust="spacingAndGlyphs"> Toggle wibar                     </text>
-<rect x="285.6" y="432" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="445" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="344.4" y="432" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="445" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="352.8" y="432" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="445" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
-<rect x="378.0" y="432" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="445" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   Browser                          </text>
-<rect x="680.4" y="432" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="445" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="739.2" y="432" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="445" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="432" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="445" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
-<rect x="772.8" y="432" width="25.2" height="18" fill="#313244"/>
-<rect x="798.0" y="432" width="126.0" height="18" fill="#313244"/>
-<text x="798.0" y="445" fill="#89b4fa" font-weight="bold" textLength="126.0" lengthAdjust="spacingAndGlyphs">KITTY · WINDOWS</text>
-<rect x="0.0" y="450" width="613.2" height="18" fill="#313244"/>
-<text x="0.0" y="463" fill="#cdd6f4" textLength="613.2" lengthAdjust="spacingAndGlyphs">                                                Btop dropdown            </text>
-<rect x="613.2" y="450" width="58.8" height="18" fill="#45475a"/>
-<text x="613.2" y="463" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="672.0" y="450" width="8.4" height="18" fill="#313244"/>
-<text x="672.0" y="463" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="680.4" y="450" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="463" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="739.2" y="450" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="463" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="450" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="463" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
-<rect x="772.8" y="450" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="463" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Close window              </text>
-<rect x="1016.4" y="450" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="463" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="450" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="463" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="450" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="463" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="450" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="463" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="450" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="463" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> W </text>
-<rect x="0.0" y="468" width="8.4" height="18" fill="#313244"/>
-<rect x="8.4" y="468" width="142.8" height="18" fill="#313244"/>
-<text x="8.4" y="481" fill="#89b4fa" font-weight="bold" textLength="142.8" lengthAdjust="spacingAndGlyphs">KITTY · SCROLLING</text>
-<rect x="151.2" y="468" width="462.0" height="18" fill="#313244"/>
-<text x="151.2" y="481" fill="#cdd6f4" textLength="462.0" lengthAdjust="spacingAndGlyphs">                              Calculator dropdown      </text>
-<rect x="613.2" y="468" width="58.8" height="18" fill="#45475a"/>
-<text x="613.2" y="481" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="672.0" y="468" width="8.4" height="18" fill="#313244"/>
-<text x="672.0" y="481" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="680.4" y="468" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="481" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="739.2" y="468" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="481" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="468" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="481" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> R </text>
-<rect x="772.8" y="468" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="481" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Move window backward      </text>
-<rect x="1016.4" y="468" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="481" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="468" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="481" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="468" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="481" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="468" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="481" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="468" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="481" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
-<rect x="0.0" y="486" width="226.8" height="18" fill="#313244"/>
-<text x="0.0" y="499" fill="#cdd6f4" textLength="226.8" lengthAdjust="spacingAndGlyphs"> Browse scrollback         </text>
-<rect x="226.8" y="486" width="50.4" height="18" fill="#45475a"/>
-<text x="226.8" y="499" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="277.2" y="486" width="8.4" height="18" fill="#313244"/>
-<text x="277.2" y="499" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="285.6" y="486" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="499" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="344.4" y="486" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="499" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="352.8" y="486" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="499" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> H </text>
-<rect x="378.0" y="486" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="499" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   Clipboard history                </text>
-<rect x="680.4" y="486" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="499" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="739.2" y="486" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="499" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="486" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="499" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> V </text>
-<rect x="772.8" y="486" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="499" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Move window forward       </text>
-<rect x="1016.4" y="486" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="499" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="486" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="499" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="486" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="499" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="486" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="499" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="486" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="499" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> F </text>
-<rect x="0.0" y="504" width="226.8" height="18" fill="#313244"/>
-<text x="0.0" y="517" fill="#cdd6f4" textLength="226.8" lengthAdjust="spacingAndGlyphs"> Next prompt               </text>
-<rect x="226.8" y="504" width="50.4" height="18" fill="#45475a"/>
-<text x="226.8" y="517" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="277.2" y="504" width="8.4" height="18" fill="#313244"/>
-<text x="277.2" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="285.6" y="504" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="517" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
+<text x="352.8" y="427" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ? </text>
+<rect x="0.0" y="432" width="126.0" height="18" fill="#313244"/>
+<text x="0.0" y="445" fill="#cdd6f4" textLength="126.0" lengthAdjust="spacingAndGlyphs"> Move window   </text>
+<rect x="126.0" y="432" width="50.4" height="18" fill="#45475a"/>
+<text x="126.0" y="445" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="176.4" y="432" width="8.4" height="18" fill="#313244"/>
+<text x="176.4" y="445" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="184.8" y="432" width="25.2" height="18" fill="#45475a"/>
+<text x="184.8" y="445" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="210.0" y="432" width="8.4" height="18" fill="#313244"/>
+<text x="210.0" y="445" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="218.4" y="432" width="50.4" height="18" fill="#45475a"/>
+<text x="218.4" y="445" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="268.8" y="432" width="8.4" height="18" fill="#313244"/>
+<text x="268.8" y="445" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="277.2" y="432" width="58.8" height="18" fill="#45475a"/>
+<text x="277.2" y="445" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
+<rect x="336.0" y="432" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="445" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="344.4" y="432" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="445" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> H </text>
+<rect x="369.6" y="432" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="445" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="450" width="193.2" height="18" fill="#313244"/>
+<text x="0.0" y="463" fill="#cdd6f4" textLength="193.2" lengthAdjust="spacingAndGlyphs"> New session           </text>
+<rect x="193.2" y="450" width="50.4" height="18" fill="#45475a"/>
+<text x="193.2" y="463" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="243.6" y="450" width="8.4" height="18" fill="#313244"/>
+<text x="243.6" y="463" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="252.0" y="450" width="25.2" height="18" fill="#45475a"/>
+<text x="252.0" y="463" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="277.2" y="450" width="8.4" height="18" fill="#313244"/>
+<text x="277.2" y="463" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="285.6" y="450" width="50.4" height="18" fill="#45475a"/>
+<text x="285.6" y="463" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="336.0" y="450" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="463" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="344.4" y="450" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="463" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> C </text>
+<rect x="369.6" y="450" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="463" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="468" width="252.0" height="18" fill="#313244"/>
+<text x="0.0" y="481" fill="#cdd6f4" textLength="252.0" lengthAdjust="spacingAndGlyphs"> New window                   </text>
+<rect x="252.0" y="468" width="50.4" height="18" fill="#45475a"/>
+<text x="252.0" y="481" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="302.4" y="468" width="8.4" height="18" fill="#313244"/>
+<text x="302.4" y="481" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="310.8" y="468" width="25.2" height="18" fill="#45475a"/>
+<text x="310.8" y="481" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="336.0" y="468" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="481" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="344.4" y="468" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="481" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> c </text>
+<rect x="369.6" y="468" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="481" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="486" width="218.4" height="18" fill="#313244"/>
+<text x="0.0" y="499" fill="#cdd6f4" textLength="218.4" lengthAdjust="spacingAndGlyphs"> Next layout              </text>
+<rect x="218.4" y="486" width="50.4" height="18" fill="#45475a"/>
+<text x="218.4" y="499" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="268.8" y="486" width="8.4" height="18" fill="#313244"/>
+<text x="268.8" y="499" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="277.2" y="486" width="25.2" height="18" fill="#45475a"/>
+<text x="277.2" y="499" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="302.4" y="486" width="8.4" height="18" fill="#313244"/>
+<text x="302.4" y="499" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="310.8" y="486" width="58.8" height="18" fill="#45475a"/>
+<text x="310.8" y="499" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Space </text>
+<rect x="369.6" y="486" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="499" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="504" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="517" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Next pane      </text>
+<rect x="134.4" y="504" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="517" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="504" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="504" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="517" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="504" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="504" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="517" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> o </text>
+<rect x="252.0" y="504" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="504" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="517" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="504" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="504" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="517" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
 <rect x="344.4" y="504" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="344.4" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
 <rect x="352.8" y="504" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="517" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> X </text>
-<rect x="378.0" y="504" width="243.6" height="18" fill="#313244"/>
-<text x="378.0" y="517" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Color picker              </text>
-<rect x="621.6" y="504" width="58.8" height="18" fill="#45475a"/>
-<text x="621.6" y="517" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="680.4" y="504" width="8.4" height="18" fill="#313244"/>
-<text x="680.4" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="688.8" y="504" width="50.4" height="18" fill="#45475a"/>
-<text x="688.8" y="517" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="739.2" y="504" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="504" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="517" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> C </text>
-<rect x="772.8" y="504" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="517" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   New OS window             </text>
-<rect x="1016.4" y="504" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="517" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="504" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="504" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="517" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="504" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="517" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="504" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="517" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> N </text>
-<rect x="0.0" y="522" width="226.8" height="18" fill="#313244"/>
-<text x="0.0" y="535" fill="#cdd6f4" textLength="226.8" lengthAdjust="spacingAndGlyphs"> Previous prompt           </text>
-<rect x="226.8" y="522" width="50.4" height="18" fill="#45475a"/>
-<text x="226.8" y="535" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<text x="352.8" y="517" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> o </text>
+<rect x="0.0" y="522" width="193.2" height="18" fill="#313244"/>
+<text x="0.0" y="535" fill="#cdd6f4" textLength="193.2" lengthAdjust="spacingAndGlyphs"> Next window           </text>
+<rect x="193.2" y="522" width="50.4" height="18" fill="#45475a"/>
+<text x="193.2" y="535" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="243.6" y="522" width="8.4" height="18" fill="#313244"/>
+<text x="243.6" y="535" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="252.0" y="522" width="25.2" height="18" fill="#45475a"/>
+<text x="252.0" y="535" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
 <rect x="277.2" y="522" width="8.4" height="18" fill="#313244"/>
-<text x="277.2" y="535" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="285.6" y="522" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="535" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="344.4" y="522" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="535" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="352.8" y="522" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="535" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> Z </text>
-<rect x="378.0" y="522" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="535" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   Emoji picker                     </text>
-<rect x="680.4" y="522" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="535" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="739.2" y="522" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="535" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="522" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="535" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> E </text>
-<rect x="772.8" y="522" width="210.0" height="18" fill="#313244"/>
-<text x="772.8" y="535" fill="#cdd6f4" textLength="210.0" lengthAdjust="spacingAndGlyphs">   New window            </text>
-<rect x="982.8" y="522" width="50.4" height="18" fill="#45475a"/>
-<text x="982.8" y="535" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1033.2" y="522" width="8.4" height="18" fill="#313244"/>
-<text x="1033.2" y="535" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1041.6" y="522" width="58.8" height="18" fill="#45475a"/>
-<text x="1041.6" y="535" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1100.4" y="522" width="8.4" height="18" fill="#313244"/>
-<text x="1100.4" y="535" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1108.8" y="522" width="58.8" height="18" fill="#45475a"/>
-<text x="1108.8" y="535" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Enter </text>
-<rect x="0.0" y="540" width="226.8" height="18" fill="#313244"/>
-<text x="0.0" y="553" fill="#cdd6f4" textLength="226.8" lengthAdjust="spacingAndGlyphs"> Scroll line down          </text>
-<rect x="226.8" y="540" width="50.4" height="18" fill="#45475a"/>
-<text x="226.8" y="553" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="277.2" y="540" width="8.4" height="18" fill="#313244"/>
-<text x="277.2" y="553" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="285.6" y="540" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="553" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="344.4" y="540" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="553" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="352.8" y="540" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="553" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ↓ </text>
-<rect x="378.0" y="540" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="553" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   File manager                     </text>
-<rect x="680.4" y="540" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="553" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="739.2" y="540" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="553" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="540" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="553" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> D </text>
-<rect x="772.8" y="540" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="553" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Next layout               </text>
-<rect x="1016.4" y="540" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="553" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="540" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="553" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="540" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="553" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="540" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="553" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="540" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="553" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> L </text>
-<rect x="0.0" y="558" width="226.8" height="18" fill="#313244"/>
-<text x="0.0" y="571" fill="#cdd6f4" textLength="226.8" lengthAdjust="spacingAndGlyphs"> Scroll line up            </text>
-<rect x="226.8" y="558" width="50.4" height="18" fill="#45475a"/>
-<text x="226.8" y="571" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<text x="277.2" y="535" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="285.6" y="522" width="50.4" height="18" fill="#45475a"/>
+<text x="285.6" y="535" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="336.0" y="522" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="535" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="344.4" y="522" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="535" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> L </text>
+<rect x="369.6" y="522" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="535" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="540" width="252.0" height="18" fill="#313244"/>
+<text x="0.0" y="553" fill="#cdd6f4" textLength="252.0" lengthAdjust="spacingAndGlyphs"> Paste                        </text>
+<rect x="252.0" y="540" width="50.4" height="18" fill="#45475a"/>
+<text x="252.0" y="553" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="302.4" y="540" width="8.4" height="18" fill="#313244"/>
+<text x="302.4" y="553" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="310.8" y="540" width="25.2" height="18" fill="#45475a"/>
+<text x="310.8" y="553" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="336.0" y="540" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="553" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="344.4" y="540" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="553" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ] </text>
+<rect x="369.6" y="540" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="553" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="558" width="193.2" height="18" fill="#313244"/>
+<text x="0.0" y="571" fill="#cdd6f4" textLength="193.2" lengthAdjust="spacingAndGlyphs"> Previous window       </text>
+<rect x="193.2" y="558" width="50.4" height="18" fill="#45475a"/>
+<text x="193.2" y="571" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="243.6" y="558" width="8.4" height="18" fill="#313244"/>
+<text x="243.6" y="571" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="252.0" y="558" width="25.2" height="18" fill="#45475a"/>
+<text x="252.0" y="571" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
 <rect x="277.2" y="558" width="8.4" height="18" fill="#313244"/>
-<text x="277.2" y="571" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="285.6" y="558" width="58.8" height="18" fill="#45475a"/>
-<text x="285.6" y="571" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="344.4" y="558" width="8.4" height="18" fill="#313244"/>
-<text x="344.4" y="571" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="352.8" y="558" width="25.2" height="18" fill="#45475a"/>
-<text x="352.8" y="571" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ↑ </text>
-<rect x="378.0" y="558" width="235.2" height="18" fill="#313244"/>
-<text x="378.0" y="571" fill="#cdd6f4" textLength="235.2" lengthAdjust="spacingAndGlyphs">   Lock screen              </text>
-<rect x="613.2" y="558" width="58.8" height="18" fill="#45475a"/>
-<text x="613.2" y="571" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="672.0" y="558" width="8.4" height="18" fill="#313244"/>
-<text x="672.0" y="571" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="680.4" y="558" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="571" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="739.2" y="558" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="571" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="558" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="571" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
-<rect x="772.8" y="558" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="571" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Next window               </text>
-<rect x="1016.4" y="558" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="571" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="558" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="571" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="558" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="571" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="558" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="571" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="558" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="571" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ] </text>
-<rect x="0.0" y="576" width="201.6" height="18" fill="#313244"/>
-<text x="0.0" y="589" fill="#cdd6f4" textLength="201.6" lengthAdjust="spacingAndGlyphs"> Scroll page down       </text>
-<rect x="201.6" y="576" width="50.4" height="18" fill="#45475a"/>
-<text x="201.6" y="589" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<text x="277.2" y="571" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="285.6" y="558" width="50.4" height="18" fill="#45475a"/>
+<text x="285.6" y="571" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="336.0" y="558" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="571" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="344.4" y="558" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="571" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> H </text>
+<rect x="369.6" y="558" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="571" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
+<rect x="0.0" y="576" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="589" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Rename session </text>
+<rect x="134.4" y="576" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="589" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="576" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="576" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="589" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="576" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="576" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="589" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> $ </text>
 <rect x="252.0" y="576" width="8.4" height="18" fill="#313244"/>
-<text x="252.0" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="260.4" y="576" width="58.8" height="18" fill="#45475a"/>
-<text x="260.4" y="589" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="319.2" y="576" width="8.4" height="18" fill="#313244"/>
-<text x="319.2" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="327.6" y="576" width="50.4" height="18" fill="#45475a"/>
-<text x="327.6" y="589" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> PgDn </text>
-<rect x="378.0" y="576" width="235.2" height="18" fill="#313244"/>
-<text x="378.0" y="589" fill="#cdd6f4" textLength="235.2" lengthAdjust="spacingAndGlyphs">   Notes dropdown           </text>
-<rect x="613.2" y="576" width="58.8" height="18" fill="#45475a"/>
-<text x="613.2" y="589" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="672.0" y="576" width="8.4" height="18" fill="#313244"/>
-<text x="672.0" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="680.4" y="576" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="589" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="739.2" y="576" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="576" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="589" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> O </text>
-<rect x="772.8" y="576" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="589" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Previous window           </text>
-<rect x="1016.4" y="576" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="589" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="576" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="576" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="589" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="576" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="576" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="589" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> [ </text>
-<rect x="0.0" y="594" width="201.6" height="18" fill="#313244"/>
-<text x="0.0" y="607" fill="#cdd6f4" textLength="201.6" lengthAdjust="spacingAndGlyphs"> Scroll page up         </text>
-<rect x="201.6" y="594" width="50.4" height="18" fill="#45475a"/>
-<text x="201.6" y="607" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<text x="252.0" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="576" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="589" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="576" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="576" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="589" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
+<rect x="344.4" y="576" width="8.4" height="18" fill="#313244"/>
+<text x="344.4" y="589" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="352.8" y="576" width="25.2" height="18" fill="#45475a"/>
+<text x="352.8" y="589" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> $ </text>
+<rect x="0.0" y="594" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="607" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Rename window  </text>
+<rect x="134.4" y="594" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="607" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="594" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="594" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="607" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="594" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="594" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="607" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> , </text>
 <rect x="252.0" y="594" width="8.4" height="18" fill="#313244"/>
-<text x="252.0" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="260.4" y="594" width="58.8" height="18" fill="#45475a"/>
-<text x="260.4" y="607" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="319.2" y="594" width="8.4" height="18" fill="#313244"/>
-<text x="319.2" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="327.6" y="594" width="50.4" height="18" fill="#45475a"/>
-<text x="327.6" y="607" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> PgUp </text>
-<rect x="378.0" y="594" width="235.2" height="18" fill="#313244"/>
-<text x="378.0" y="607" fill="#cdd6f4" textLength="235.2" lengthAdjust="spacingAndGlyphs">   Obsidian dropdown        </text>
-<rect x="613.2" y="594" width="58.8" height="18" fill="#45475a"/>
-<text x="613.2" y="607" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="672.0" y="594" width="8.4" height="18" fill="#313244"/>
-<text x="672.0" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="680.4" y="594" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="607" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="739.2" y="594" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="594" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="607" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> E </text>
-<rect x="772.8" y="594" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="607" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Resize window             </text>
-<rect x="1016.4" y="594" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="607" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="594" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="594" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="607" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="594" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="594" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="607" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> R </text>
-<rect x="0.0" y="612" width="210.0" height="18" fill="#313244"/>
-<text x="0.0" y="625" fill="#cdd6f4" textLength="210.0" lengthAdjust="spacingAndGlyphs"> Scroll to bottom        </text>
-<rect x="210.0" y="612" width="50.4" height="18" fill="#45475a"/>
-<text x="210.0" y="625" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="260.4" y="612" width="8.4" height="18" fill="#313244"/>
-<text x="260.4" y="625" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="268.8" y="612" width="58.8" height="18" fill="#45475a"/>
-<text x="268.8" y="625" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="327.6" y="612" width="8.4" height="18" fill="#313244"/>
-<text x="327.6" y="625" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="336.0" y="612" width="42.0" height="18" fill="#45475a"/>
-<text x="336.0" y="625" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> End </text>
-<rect x="378.0" y="612" width="268.8" height="18" fill="#313244"/>
-<text x="378.0" y="625" fill="#cdd6f4" textLength="268.8" lengthAdjust="spacingAndGlyphs">   Open a terminal              </text>
-<rect x="646.8" y="612" width="58.8" height="18" fill="#45475a"/>
-<text x="646.8" y="625" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="705.6" y="612" width="8.4" height="18" fill="#313244"/>
-<text x="705.6" y="625" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="714.0" y="612" width="58.8" height="18" fill="#45475a"/>
-<text x="714.0" y="625" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Enter </text>
-<rect x="0.0" y="630" width="201.6" height="18" fill="#313244"/>
-<text x="0.0" y="643" fill="#cdd6f4" textLength="201.6" lengthAdjust="spacingAndGlyphs"> Scroll to top          </text>
-<rect x="201.6" y="630" width="50.4" height="18" fill="#45475a"/>
-<text x="201.6" y="643" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<text x="252.0" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="594" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="607" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="594" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="594" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="607" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
+<rect x="344.4" y="594" width="8.4" height="18" fill="#313244"/>
+<text x="344.4" y="607" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="352.8" y="594" width="25.2" height="18" fill="#45475a"/>
+<text x="352.8" y="607" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> , </text>
+<rect x="0.0" y="612" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="625" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Resize down    </text>
+<rect x="134.4" y="612" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="625" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="612" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="625" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="612" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="625" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="612" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="625" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="612" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="625" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> J </text>
+<rect x="252.0" y="612" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="625" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="612" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="625" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="612" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="625" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="612" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="625" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
+<rect x="344.4" y="612" width="8.4" height="18" fill="#313244"/>
+<text x="344.4" y="625" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="352.8" y="612" width="25.2" height="18" fill="#45475a"/>
+<text x="352.8" y="625" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> J </text>
+<rect x="0.0" y="630" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="643" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Resize left    </text>
+<rect x="134.4" y="630" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="643" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="630" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="643" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="630" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="643" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="630" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="643" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="630" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="643" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> H </text>
 <rect x="252.0" y="630" width="8.4" height="18" fill="#313244"/>
-<text x="252.0" y="643" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="260.4" y="630" width="58.8" height="18" fill="#45475a"/>
-<text x="260.4" y="643" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="319.2" y="630" width="8.4" height="18" fill="#313244"/>
-<text x="319.2" y="643" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="327.6" y="630" width="50.4" height="18" fill="#45475a"/>
-<text x="327.6" y="643" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Home </text>
-<rect x="378.0" y="630" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="643" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   Quake terminal                   </text>
-<rect x="680.4" y="630" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="643" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="739.2" y="630" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="643" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="630" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="643" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> ^ </text>
-<rect x="772.8" y="630" width="25.2" height="18" fill="#313244"/>
-<rect x="798.0" y="630" width="100.8" height="18" fill="#313244"/>
-<text x="798.0" y="643" fill="#89b4fa" font-weight="bold" textLength="100.8" lengthAdjust="spacingAndGlyphs">KITTY · FONT</text>
-<rect x="0.0" y="648" width="571.2" height="18" fill="#313244"/>
-<text x="0.0" y="661" fill="#cdd6f4" textLength="571.2" lengthAdjust="spacingAndGlyphs">                                                Record region       </text>
-<rect x="571.2" y="648" width="58.8" height="18" fill="#45475a"/>
-<text x="571.2" y="661" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="630.0" y="648" width="8.4" height="18" fill="#313244"/>
-<text x="630.0" y="661" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="638.4" y="648" width="50.4" height="18" fill="#45475a"/>
-<text x="638.4" y="661" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="688.8" y="648" width="8.4" height="18" fill="#313244"/>
-<text x="688.8" y="661" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="697.2" y="648" width="42.0" height="18" fill="#45475a"/>
-<text x="697.2" y="661" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Alt </text>
-<rect x="739.2" y="648" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="661" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="648" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="661" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> S </text>
-<rect x="772.8" y="648" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="661" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Bigger font               </text>
-<rect x="1016.4" y="648" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="661" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="648" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="661" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="648" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="661" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="648" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="661" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="648" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="661" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> = </text>
-<rect x="0.0" y="666" width="8.4" height="18" fill="#313244"/>
-<rect x="8.4" y="666" width="100.8" height="18" fill="#313244"/>
-<text x="8.4" y="679" fill="#89b4fa" font-weight="bold" textLength="100.8" lengthAdjust="spacingAndGlyphs">KITTY · MISC</text>
-<rect x="109.2" y="666" width="512.4" height="18" fill="#313244"/>
-<text x="109.2" y="679" fill="#cdd6f4" textLength="512.4" lengthAdjust="spacingAndGlyphs">                                   Record screen             </text>
-<rect x="621.6" y="666" width="58.8" height="18" fill="#45475a"/>
-<text x="621.6" y="679" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="680.4" y="666" width="8.4" height="18" fill="#313244"/>
-<text x="680.4" y="679" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="688.8" y="666" width="50.4" height="18" fill="#45475a"/>
-<text x="688.8" y="679" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="739.2" y="666" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="679" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="666" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="679" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> S </text>
-<rect x="772.8" y="666" width="218.4" height="18" fill="#313244"/>
-<text x="772.8" y="679" fill="#cdd6f4" textLength="218.4" lengthAdjust="spacingAndGlyphs">   Reset font size        </text>
-<rect x="991.2" y="666" width="50.4" height="18" fill="#45475a"/>
-<text x="991.2" y="679" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1041.6" y="666" width="8.4" height="18" fill="#313244"/>
-<text x="1041.6" y="679" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1050.0" y="666" width="58.8" height="18" fill="#45475a"/>
-<text x="1050.0" y="679" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1108.8" y="666" width="8.4" height="18" fill="#313244"/>
-<text x="1108.8" y="679" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1117.2" y="666" width="50.4" height="18" fill="#45475a"/>
-<text x="1117.2" y="679" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Bksp </text>
-<rect x="0.0" y="684" width="210.0" height="18" fill="#313244"/>
-<text x="0.0" y="697" fill="#cdd6f4" textLength="210.0" lengthAdjust="spacingAndGlyphs"> Clear terminal          </text>
-<rect x="210.0" y="684" width="50.4" height="18" fill="#45475a"/>
-<text x="210.0" y="697" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="260.4" y="684" width="8.4" height="18" fill="#313244"/>
-<text x="260.4" y="697" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="268.8" y="684" width="58.8" height="18" fill="#45475a"/>
-<text x="268.8" y="697" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="327.6" y="684" width="8.4" height="18" fill="#313244"/>
-<text x="327.6" y="697" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="336.0" y="684" width="42.0" height="18" fill="#45475a"/>
-<text x="336.0" y="697" fill="#cdd6f4" textLength="42.0" lengthAdjust="spacingAndGlyphs"> Del </text>
-<rect x="378.0" y="684" width="302.4" height="18" fill="#313244"/>
-<text x="378.0" y="697" fill="#cdd6f4" textLength="302.4" lengthAdjust="spacingAndGlyphs">   Screenshot fullscreen            </text>
-<rect x="680.4" y="684" width="58.8" height="18" fill="#45475a"/>
-<text x="680.4" y="697" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Super </text>
-<rect x="739.2" y="684" width="8.4" height="18" fill="#313244"/>
-<text x="739.2" y="697" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="747.6" y="684" width="25.2" height="18" fill="#45475a"/>
-<text x="747.6" y="697" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> S </text>
-<rect x="772.8" y="684" width="243.6" height="18" fill="#313244"/>
-<text x="772.8" y="697" fill="#cdd6f4" textLength="243.6" lengthAdjust="spacingAndGlyphs">   Smaller font              </text>
-<rect x="1016.4" y="684" width="50.4" height="18" fill="#45475a"/>
-<text x="1016.4" y="697" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
-<rect x="1066.8" y="684" width="8.4" height="18" fill="#313244"/>
-<text x="1066.8" y="697" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1075.2" y="684" width="58.8" height="18" fill="#45475a"/>
-<text x="1075.2" y="697" fill="#cdd6f4" textLength="58.8" lengthAdjust="spacingAndGlyphs"> Shift </text>
-<rect x="1134.0" y="684" width="8.4" height="18" fill="#313244"/>
-<text x="1134.0" y="697" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
-<rect x="1142.4" y="684" width="25.2" height="18" fill="#45475a"/>
-<text x="1142.4" y="697" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> - </text>
+<text x="252.0" y="643" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="630" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="643" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="630" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="643" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="630" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="643" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
+<rect x="344.4" y="630" width="8.4" height="18" fill="#313244"/>
+<text x="344.4" y="643" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="352.8" y="630" width="25.2" height="18" fill="#45475a"/>
+<text x="352.8" y="643" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> H </text>
+<rect x="0.0" y="648" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="661" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Resize right   </text>
+<rect x="134.4" y="648" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="661" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="648" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="661" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="648" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="661" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="648" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="661" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="648" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="661" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> L </text>
+<rect x="252.0" y="648" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="661" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="648" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="661" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="648" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="661" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="648" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="661" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
+<rect x="344.4" y="648" width="8.4" height="18" fill="#313244"/>
+<text x="344.4" y="661" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="352.8" y="648" width="25.2" height="18" fill="#45475a"/>
+<text x="352.8" y="661" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> L </text>
+<rect x="0.0" y="666" width="134.4" height="18" fill="#313244"/>
+<text x="0.0" y="679" fill="#cdd6f4" textLength="134.4" lengthAdjust="spacingAndGlyphs"> Resize up      </text>
+<rect x="134.4" y="666" width="50.4" height="18" fill="#45475a"/>
+<text x="134.4" y="679" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="184.8" y="666" width="8.4" height="18" fill="#313244"/>
+<text x="184.8" y="679" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="193.2" y="666" width="25.2" height="18" fill="#45475a"/>
+<text x="193.2" y="679" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="218.4" y="666" width="8.4" height="18" fill="#313244"/>
+<text x="218.4" y="679" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="226.8" y="666" width="25.2" height="18" fill="#45475a"/>
+<text x="226.8" y="679" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> K </text>
+<rect x="252.0" y="666" width="8.4" height="18" fill="#313244"/>
+<text x="252.0" y="679" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">/</text>
+<rect x="260.4" y="666" width="50.4" height="18" fill="#45475a"/>
+<text x="260.4" y="679" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="310.8" y="666" width="8.4" height="18" fill="#313244"/>
+<text x="310.8" y="679" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="319.2" y="666" width="25.2" height="18" fill="#45475a"/>
+<text x="319.2" y="679" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> A </text>
+<rect x="344.4" y="666" width="8.4" height="18" fill="#313244"/>
+<text x="344.4" y="679" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="352.8" y="666" width="25.2" height="18" fill="#45475a"/>
+<text x="352.8" y="679" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> K </text>
+<rect x="0.0" y="684" width="252.0" height="18" fill="#313244"/>
+<text x="0.0" y="697" fill="#cdd6f4" textLength="252.0" lengthAdjust="spacingAndGlyphs"> Run shell command            </text>
+<rect x="252.0" y="684" width="50.4" height="18" fill="#45475a"/>
+<text x="252.0" y="697" fill="#cdd6f4" textLength="50.4" lengthAdjust="spacingAndGlyphs"> Ctrl </text>
+<rect x="302.4" y="684" width="8.4" height="18" fill="#313244"/>
+<text x="302.4" y="697" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">+</text>
+<rect x="310.8" y="684" width="25.2" height="18" fill="#45475a"/>
+<text x="310.8" y="697" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> B </text>
+<rect x="336.0" y="684" width="8.4" height="18" fill="#313244"/>
+<text x="336.0" y="697" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">›</text>
+<rect x="344.4" y="684" width="25.2" height="18" fill="#45475a"/>
+<text x="344.4" y="697" fill="#cdd6f4" textLength="25.2" lengthAdjust="spacingAndGlyphs"> r </text>
+<rect x="369.6" y="684" width="8.4" height="18" fill="#313244"/>
+<text x="369.6" y="697" fill="#8f94ae" textLength="8.4" lengthAdjust="spacingAndGlyphs">…</text>
 <rect x="0.0" y="702" width="1117.2" height="18" fill="#313244"/>
 <rect x="1117.2" y="702" width="50.4" height="18" fill="#313244"/>
 <text x="1117.2" y="715" fill="#8f94ae" textLength="50.4" lengthAdjust="spacingAndGlyphs">↓ more</text>

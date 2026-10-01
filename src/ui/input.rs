@@ -48,11 +48,11 @@ pub fn apply(st: &mut State, key: Key, apps: usize, page: usize) {
         Key::Esc => st.query.clear(),
         Key::Quit => st.quit = true,
         Key::Tab => {
-            st.focus = match st.focus { None if apps > 0 => Some(0), Some(i) if i + 1 < apps => Some(i + 1), _ => None };
+            if apps > 0 { st.focus = Some(match st.focus { Some(i) if i + 1 < apps => i + 1, _ => 0 }); }
             st.scroll = 0;
         }
         Key::BackTab => {
-            st.focus = match st.focus { None if apps > 0 => Some(apps - 1), Some(i) if i > 0 => Some(i - 1), _ => None };
+            if apps > 0 { st.focus = Some(match st.focus { Some(i) if i > 0 && i < apps => i - 1, _ => apps - 1 }); }
             st.scroll = 0;
         }
         Key::Up => st.scroll = st.scroll.saturating_sub(1),
@@ -65,18 +65,21 @@ pub fn apply(st: &mut State, key: Key, apps: usize, page: usize) {
     }
 }
 
-/// Picker rows for a filter: `None` (All apps) first, then matching apps.
-pub fn picker_entries(apps: &[&str], query: &str) -> Vec<Option<usize>> {
+/// Picker rows for a filter: indices of the matching apps, sorted by name.
+pub fn picker_entries(apps: &[&str], query: &str) -> Vec<usize> {
     let q = query.to_lowercase();
-    std::iter::once(None)
-        .chain(apps.iter().enumerate().filter(|(_, a)| a.to_lowercase().contains(&q)).map(|(i, _)| Some(i)))
-        .collect()
+    let mut out: Vec<usize> = (0..apps.len()).filter(|&i| apps[i].to_lowercase().contains(&q)).collect();
+    out.sort_by_key(|&i| apps[i].to_lowercase());
+    out
 }
 
 /// cols: entries per row in the picker grid (layout::picker_cols).
 pub fn apply_picker(st: &mut State, key: Key, apps: &[&str], cols: usize) {
-    let n = picker_entries(apps, &st.pick_query).len();
+    let entries = picker_entries(apps, &st.pick_query);
+    let n = entries.len();
     let cols = cols.max(1);
+    let moving = matches!(key, Key::Right | Key::Tab | Key::Left | Key::BackTab | Key::Down | Key::Up | Key::Home | Key::PageUp | Key::End | Key::PageDown | Key::Enter);
+    if n == 0 && moving { return; }   // nothing matches: nothing to move to or open
     match key {
         Key::Char(c) => { st.pick_query.push(c); st.picked = 0; }
         Key::Backspace => { st.pick_query.pop(); st.picked = 0; }
@@ -91,7 +94,7 @@ pub fn apply_picker(st: &mut State, key: Key, apps: &[&str], cols: usize) {
         Key::Home | Key::PageUp => st.picked = 0,
         Key::End | Key::PageDown => st.picked = n - 1,
         Key::Enter => {
-            st.focus = picker_entries(apps, &st.pick_query)[st.picked.min(n - 1)];
+            st.focus = Some(entries[st.picked.min(n - 1)]);
             st.screen = Screen::Sheet;
             st.from_picker = true;
             st.query.clear();
@@ -138,14 +141,14 @@ mod tests {
     }
 
     #[test]
-    fn focus_cycles_through_apps_and_back_to_all() {
+    fn tab_cycles_through_apps_and_wraps() {
         let mut st = State::default();
         let seq: Vec<Option<usize>> = (0..4).map(|_| { apply(&mut st, Key::Tab, 3, 10); st.focus }).collect();
-        assert_eq!(seq, vec![Some(0), Some(1), Some(2), None]);
+        assert_eq!(seq, vec![Some(0), Some(1), Some(2), Some(0)]);     // never a combined view
         apply(&mut st, Key::BackTab, 3, 10);
         assert_eq!(st.focus, Some(2));
         let mut none = State::default();
-        apply(&mut none, Key::Tab, 0, 10);
+        apply(&mut none, Key::Tab, 0, 10);                             // no apps: no panic
         assert_eq!(none.focus, None);
     }
 
@@ -165,48 +168,48 @@ mod tests {
         assert_eq!(st.scroll, 0);
     }
 
-    const APPS: [&str; 3] = ["kitty", "tmux", "zsh"];
+    const APPS: [&str; 3] = ["tmux", "Kitty", "zsh"];   // detection order, mixed case
 
     fn picker() -> State { State { screen: Screen::Picker, ..Default::default() } }
 
     #[test]
-    fn picker_entries_keep_all_apps_first() {
-        assert_eq!(picker_entries(&APPS, ""), vec![None, Some(0), Some(1), Some(2)]);
-        assert_eq!(picker_entries(&APPS, "T"), vec![None, Some(0), Some(1)]);   // kitty, tmux
-        assert_eq!(picker_entries(&APPS, "zzz"), vec![None]);
+    fn picker_entries_sorted_by_name() {
+        assert_eq!(picker_entries(&APPS, ""), vec![1, 0, 2]);          // Kitty, tmux, zsh
+        assert_eq!(picker_entries(&APPS, "T"), vec![1, 0]);            // Kitty, tmux
+        assert_eq!(picker_entries(&APPS, "zzz"), Vec::<usize>::new());
     }
 
     #[test]
     fn picker_moves_wrap_and_rows() {
         let mut st = picker();
         apply_picker(&mut st, Key::Left, &APPS, 2);
-        assert_eq!(st.picked, 3);                       // wraps to the last of 4 entries
+        assert_eq!(st.picked, 2);                       // wraps to the last of 3 entries
         apply_picker(&mut st, Key::Right, &APPS, 2);
         assert_eq!(st.picked, 0);
         apply_picker(&mut st, Key::Down, &APPS, 2);
         assert_eq!(st.picked, 2);                       // one row = 2 columns
         apply_picker(&mut st, Key::Down, &APPS, 2);
-        assert_eq!(st.picked, 3);                       // clamped
+        assert_eq!(st.picked, 2);                       // clamped
         apply_picker(&mut st, Key::Up, &APPS, 2);
-        assert_eq!(st.picked, 1);
-        apply_picker(&mut st, Key::Home, &APPS, 2);
         assert_eq!(st.picked, 0);
         apply_picker(&mut st, Key::Tab, &APPS, 2);
         assert_eq!(st.picked, 1);
+        apply_picker(&mut st, Key::Home, &APPS, 2);
+        assert_eq!(st.picked, 0);
     }
 
     #[test]
     fn picker_enter_opens_sheet_and_esc_comes_back() {
         let mut st = picker();
         for c in "t".chars() { apply_picker(&mut st, Key::Char(c), &APPS, 2); }
-        apply_picker(&mut st, Key::End, &APPS, 2);      // [All, kitty, tmux] → tmux
+        apply_picker(&mut st, Key::End, &APPS, 2);      // [Kitty, tmux] → tmux
         apply_picker(&mut st, Key::Enter, &APPS, 2);
-        assert_eq!((st.screen, st.focus, st.from_picker), (Screen::Sheet, Some(1), true));
+        assert_eq!((st.screen, st.focus, st.from_picker), (Screen::Sheet, Some(0), true));
         apply(&mut st, Key::Char('x'), 3, 10);
         apply(&mut st, Key::Esc, 3, 10);                // clears the sheet filter
         assert_eq!(st.screen, Screen::Sheet);
         apply(&mut st, Key::Esc, 3, 10);                // empty filter: back to the picker
-        assert_eq!((st.screen, st.quit, st.picked, st.pick_query.as_str()), (Screen::Picker, false, 2, "t"));
+        assert_eq!((st.screen, st.quit, st.picked, st.pick_query.as_str()), (Screen::Picker, false, 1, "t"));
         apply_picker(&mut st, Key::Esc, &APPS, 2);      // clears the picker filter
         assert_eq!((st.pick_query.as_str(), st.quit), ("", false));
         apply_picker(&mut st, Key::Esc, &APPS, 2);
@@ -214,14 +217,13 @@ mod tests {
     }
 
     #[test]
-    fn filter_without_matches_keeps_all_apps() {
+    fn filter_without_matches_enter_does_nothing() {
         let mut st = picker();
         for c in "zzz".chars() { apply_picker(&mut st, Key::Char(c), &APPS, 2); }
-        apply_picker(&mut st, Key::Down, &APPS, 2);
-        apply_picker(&mut st, Key::Right, &APPS, 2);
+        for k in [Key::Down, Key::Right, Key::Left, Key::Up, Key::End, Key::Tab, Key::BackTab] { apply_picker(&mut st, k, &APPS, 2); }
         assert_eq!(st.picked, 0);
         apply_picker(&mut st, Key::Enter, &APPS, 2);
-        assert_eq!((st.screen, st.focus), (Screen::Sheet, None));
+        assert_eq!((st.screen, st.focus), (Screen::Picker, None));
     }
 
     #[test]

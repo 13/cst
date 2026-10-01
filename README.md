@@ -13,7 +13,7 @@ awesome WM popup.
 [![AUR](https://img.shields.io/aur/version/cst-bin)](https://aur.archlinux.org/packages/cst-bin)
 [![License: MIT](https://img.shields.io/github/license/13/cst)](LICENSE)
 
-<img src="docs/screenshot.svg" alt="cst showing awesome, kitty, tmux and zellij shortcuts in columns" width="100%">
+<img src="docs/screenshot.svg" alt="cst showing tmux shortcuts in columns" width="100%">
 <br>
 <img src="docs/picker.svg" alt="the cst app picker" width="100%">
 
@@ -24,7 +24,7 @@ awesome WM popup.
 - **Your real bindings** — reads each app's config or asks the running app, then layers
   it over sensible defaults. Rebind something and `cst` shows the new key.
 - **Type to filter** — rows that don't match dim instead of disappearing, so nothing jumps.
-- **One app or all** — pick one from the start screen, `cst tmux`, or Tab through apps inside the sheet.
+- **One app at a time** — pick one from the start screen, `cst tmux`, or Tab through apps inside the sheet.
 - **Looks like your desktop** — colours come from your active awesome theme
   (falls back to Catppuccin); truecolor, 256 colours or `NO_COLOR`.
 - **Fast and small** — one static binary, no runtime dependencies, starts in about 100 ms (most of it your shell's own startup for the zsh/bash sheets).
@@ -99,7 +99,7 @@ cargo install --git https://github.com/13/cst
 ## Usage
 
 ```sh
-cst            # pick an app (or All apps)
+cst            # pick an app (sorted by name)
 cst tmux       # straight to one app
 cst --list     # detected apps and where their keys come from
 ```
