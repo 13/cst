@@ -93,6 +93,20 @@ mod tests {
     }
 
     #[test]
+    fn real_emacs_capture_with_fzf_and_p10k() {
+        let l = load(Some(fixture("real.txt")));
+        let titles: Vec<&str> = l.sections.iter().map(|s| s.title.as_str()).collect();
+        assert_eq!(titles, vec!["ZSH · EMACS"]);
+        let e = "ZSH · EMACS";
+        assert!(keys_of(&l, e, "Search history (fzf)").contains(&"Ctrl+R".to_string()));
+        assert!(keys_of(&l, e, "Insert file (fzf)").contains(&"Ctrl+T".to_string()));
+        assert!(keys_of(&l, e, "Change directory (fzf)").contains(&"Alt+C".to_string()));
+        assert!(keys_of(&l, e, "Capitalize word").contains(&"Alt+Shift+C".to_string()));
+        assert!(keys_of(&l, e, "Previous matching command").contains(&"↑".to_string()));
+        assert!(keys_of(&l, e, "Edit command in $EDITOR").contains(&"Ctrl+X › Ctrl+E".to_string()));
+    }
+
+    #[test]
     fn emacs_mode_ranges_and_macros() {
         let l = load(Some(fixture("emacs.txt")));
         let titles: Vec<&str> = l.sections.iter().map(|s| s.title.as_str()).collect();

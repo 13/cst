@@ -52,6 +52,8 @@ const NAMES: &[(&str, &str)] = &[
     ("exchange-point-and-mark", "Swap cursor and mark"), ("set-mark-command", "Set mark"),
     ("overwrite-mode", "Toggle overwrite"), ("vi-editing-mode", "Switch to vi mode"),
     ("emacs-editing-mode", "Switch to emacs mode"), ("redisplay", "Redraw line"), ("repaint", "Redraw line"),
+    ("fzf-history-widget", "Search history (fzf)"), ("fzf-file-widget", "Insert file (fzf)"),
+    ("fzf-cd-widget", "Change directory (fzf)"), ("fzf-completion", "Complete (fzf)"),
 ];
 
 fn lookup(name: &str) -> Option<String> {

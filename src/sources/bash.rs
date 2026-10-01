@@ -56,6 +56,10 @@ mod tests {
         assert!(keys_of(&l, "BASH · EMACS", "Forward one word").contains(&"Ctrl+→".to_string()));
         assert!(keys_of(&l, "BASH · EMACS", "Previous command").contains(&"↑".to_string()));
         assert!(!l.sections[0].rows.iter().any(|r| r.desc.contains("not bound") || r.desc == "Self insert"));
+        // "\e[5D": backward-word is Ctrl+←, so plain ← stays with backward-char
+        assert!(keys_of(&l, "BASH · EMACS", "Back one char").contains(&"←".to_string()));
+        assert!(keys_of(&l, "BASH · EMACS", "Back one word").contains(&"Ctrl+←".to_string()));
+        assert!(!keys_of(&l, "BASH · EMACS", "Back one word").contains(&"←".to_string()));
     }
 
     #[test]

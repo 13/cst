@@ -193,7 +193,9 @@ fn csi(body: &str, ss3: bool) -> Option<Combo> {
     let fin = body.chars().last()?;
     let params = &body[..body.len() - fin.len_utf8()];
     let mut nums = params.split(';').map(|p| p.parse::<u32>().ok());
-    let (first, modp) = (nums.next().flatten(), nums.next().flatten());
+    let (first, mut modp) = (nums.next().flatten(), nums.next().flatten());
+    // legacy rxvt/xterm `ESC [ 5 D`: on a letter final the lone parameter is the modifier
+    if fin != '~' && modp.is_none() && first.is_some_and(|f| f > 1) { modp = first; }
     let key: String = match (fin, first) {
         ('A', _) => "↑".into(), ('B', _) => "↓".into(), ('C', _) => "→".into(), ('D', _) => "←".into(),
         ('H', _) => "Home".into(), ('F', _) => "End".into(), ('Z', _) => "⇧Tab".into(),
@@ -215,6 +217,13 @@ fn csi(body: &str, ss3: bool) -> Option<Combo> {
     Some(combo(&mods, &key))
 }
 
+/// ESC/Meta + a character; an upper-case letter is a shifted key (Alt+Shift+C ≠ Alt+C).
+fn alt_char(c: char) -> Combo {
+    if c == ' ' { return combo(&["alt"], "Space"); }
+    let mods: &[&str] = if c.is_ascii_uppercase() { &["alt", "shift"] } else { &["alt"] };
+    combo(mods, &c.to_string())
+}
+
 pub fn parse_term(s: &str, style: Term) -> Seq {
     let u = units(s, style);
     let mut seq = Vec::new();
@@ -234,15 +243,11 @@ pub fn parse_term(s: &str, style: Term) -> Seq {
                 i = j;
             }
             Unit::Esc => match u.get(i + 1) {
-                Some(&Unit::Ch(c)) => {
-                    let k = if c == ' ' { "Space".to_string() } else { c.to_string() };
-                    seq.push(combo(&["alt"], &k));
-                    i += 2;
-                }
+                Some(&Unit::Ch(c)) => { seq.push(alt_char(c)); i += 2; }
                 Some(&Unit::Ctrl(c)) => { seq.push(ctrl_combo(c, true)); i += 2; }
                 _ => { seq.push(vec!["Esc".into()]); i += 1; }
             },
-            Unit::Meta(c) => { seq.push(combo(&["alt"], &c.to_string())); i += 1; }
+            Unit::Meta(c) => { seq.push(alt_char(c)); i += 1; }
             Unit::Ctrl(c) => { seq.push(ctrl_combo(c, false)); i += 1; }
             Unit::Ch(c) => { seq.push(vec![if c == ' ' { "Space".into() } else { key_name(&c.to_string(), false) }]); i += 1; }
         }
@@ -359,6 +364,16 @@ mod tests {
         assert_eq!(t("^", Term::Zsh), "^");
         assert_eq!(t("\\", Term::Readline), "\\");
         assert_eq!(t("", Term::Zsh), "");
+    }
+
+    #[test]
+    fn term_legacy_ctrl_arrows_and_alt_case() {
+        assert_eq!(t("\\e[5D", Term::Readline), "Ctrl+←");    // rxvt/old xterm: param 5 = Ctrl
+        assert_eq!(t("^[[5C", Term::Zsh), "Ctrl+→");
+        assert_eq!(t("^[[2A", Term::Zsh), "Shift+↑");
+        assert_eq!(t("^[C", Term::Zsh), "Alt+Shift+C");           // ESC + uppercase is a shifted letter
+        assert_eq!(t("^[c", Term::Zsh), "Alt+C");
+        assert_eq!(t("\\eL", Term::Readline), "Alt+Shift+L");
     }
 
     #[test]
