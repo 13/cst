@@ -17,7 +17,7 @@ fn restore() {
 
 /// Full-screen sheet until the user quits; the terminal is restored on every
 /// exit path, including a panic.
-pub fn run(sections: &[Section], apps: &[&str], theme: &Theme, mode: ColorMode, mut st: input::State) -> io::Result<()> {
+pub fn run(sections: &[Section], apps: &[&str], entries: &[layout::Entry], theme: &Theme, mode: ColorMode, mut st: input::State) -> io::Result<()> {
     let mut out = io::stdout();
     terminal::enable_raw_mode()?;
     execute!(out, EnterAlternateScreen, Hide)?;
@@ -28,12 +28,22 @@ pub fn run(sections: &[Section], apps: &[&str], theme: &Theme, mode: ColorMode, 
     let result = (|| -> io::Result<()> {
         loop {
             let (w, h) = terminal::size()?;
-            let (f, max) = layout::frame(&view, &st, w as usize, h as usize);
-            st.scroll = st.scroll.min(max);
+            let (w, h) = (w as usize, h as usize);
+            let f = match st.screen {
+                input::Screen::Picker => layout::picker_frame(&view, entries, &st, w, h),
+                input::Screen::Sheet => {
+                    let (f, max) = layout::frame(&view, &st, w, h);
+                    st.scroll = st.scroll.min(max);
+                    f
+                }
+            };
             term.draw(&mut out, &f)?;
             match event::read()? {
                 Event::Key(k) => if let Some(key) = input::from_event(&k) {
-                    input::apply(&mut st, key, apps.len(), (h as usize).saturating_sub(4).max(1));
+                    match st.screen {
+                        input::Screen::Picker => input::apply_picker(&mut st, key, apps, layout::picker_cols(w)),
+                        input::Screen::Sheet => input::apply(&mut st, key, apps.len(), h.saturating_sub(4).max(1)),
+                    }
                 },
                 Event::Resize(..) => term.invalidate(),
                 _ => {}
