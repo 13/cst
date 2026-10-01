@@ -71,9 +71,8 @@ pub fn widget_desc(name: &str) -> String {
 pub fn readline_keyname(name: &str) -> Combo {
     let mut c = parse_prefixed(name, '-');
     let last = name.rsplit('-').next().unwrap_or(name);
-    if last.eq_ignore_ascii_case("del") {
-        if let Some(k) = c.last_mut() { *k = "Bksp".into(); }
-    }
+    if last.eq_ignore_ascii_case("del")
+        && let Some(k) = c.last_mut() { *k = "Bksp".into(); }
     c
 }
 
