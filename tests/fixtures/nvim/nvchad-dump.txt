@@ -1,0 +1,123 @@
+n	<Tab>	buffer goto next
+n	<Esc>	general clear highlights
+n	 od	Obsidian
+n	 cp	Copilot panel
+n	 tf	Toggle format on save
+n	 pf	Prettify
+n	 Mu	MasonUpdateAll
+n	 Mi	MasonInstallAll
+n	 L	Lazy sync
+n	 mp	Markdown Preview
+n	 wk	whichkey query lookup
+n	 wK	whichkey all keymaps
+n	 v	terminal new vertical term
+n	 h	terminal new horizontal term
+n	 fa	telescope find all files
+n	 ff	telescope find files
+n	 th	telescope nvchad themes
+n	 pt	telescope pick hidden term
+n	 gt	telescope git status
+n	 cm	telescope git commits
+n	 fz	telescope find in current buffer
+n	 fo	telescope find oldfiles
+n	 ma	telescope find marks
+n	 fh	telescope help page
+n	 fb	telescope find buffers
+n	 fw	telescope live grep
+n	 e	nvimtree focus window
+n	 /	toggle comment
+n	 x	buffer close
+n	 b	buffer new
+n	 ds	LSP diagnostic loclist
+n	 fm	general format file
+n	 ch	toggle nvcheatsheet
+n	 rn	toggle relative number
+n	 n	toggle line number
+n	&	:help &-default
+n	;	CMD enter command mode
+n	Y	:help Y-default
+n	[ 	Add empty line above cursor
+n	[B	:brewind
+n	[b	:bprevious
+n	[<C-T>	:ptprevious
+n	[T	:trewind
+n	[t	:tprevious
+n	[A	:rewind
+n	[a	:previous
+n	[<C-L>	:lpfile
+n	[L	:lrewind
+n	[l	:lprevious
+n	[<C-Q>	:cpfile
+n	[Q	:crewind
+n	[q	:cprevious
+n	[D	Jump to the first diagnostic in the current buffer
+n	[d	Jump to the previous diagnostic in the current buffer
+n	] 	Add empty line below cursor
+n	]B	:blast
+n	]b	:bnext
+n	]<C-T>	:ptnext
+n	]T	:tlast
+n	]t	:tnext
+n	]A	:last
+n	]a	:next
+n	]<C-L>	:lnfile
+n	]L	:llast
+n	]l	:lnext
+n	]<C-Q>	:cnfile
+n	]Q	:clast
+n	]q	:cnext
+n	]D	Jump to the last diagnostic in the current buffer
+n	]d	Jump to the next diagnostic in the current buffer
+n	gO	vim.lsp.buf.document_symbol()
+n	grt	vim.lsp.buf.type_definition()
+n	gri	vim.lsp.buf.implementation()
+n	grr	vim.lsp.buf.references()
+n	grx	vim.lsp.codelens.run()
+n	gra	vim.lsp.buf.code_action()
+n	grn	vim.lsp.buf.rename()
+n	gcc	Toggle comment line
+n	gc	Toggle comment
+n	gx	Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
+n	<M-i>	terminal toggle floating term
+n	<M-h>	terminal toggleable horizontal term
+n	<M-v>	terminal toggleable vertical term
+n	<C-N>	nvimtree toggle window
+n	<S-Tab>	buffer goto prev
+n	<C-C>	general copy whole file
+n	<C-S>	general save file
+n	<C-K>	switch window up
+n	<C-J>	switch window down
+n	<C-H>	switch window left
+n	<C-W><C-D>	Show diagnostics under the cursor
+n	<C-W>d	Show diagnostics under the cursor
+n	<C-L>	switch window right
+i	<C-K>	move up
+i	<C-J>	move down
+i	<C-L>	Copilot Accept
+i	<C-H>	move left
+i	<C-E>	move end of line
+i	<C-B>	move beginning of line
+i	<S-Tab>	vim.snippet.jump if active, otherwise <S-Tab>
+i	<C-S>	vim.lsp.buf.signature_help()
+i	<C-W>	:help i_CTRL-W-default
+i	<C-U>	:help i_CTRL-U-default
+i	<Tab>	vim.snippet.jump if active, otherwise <Tab>
+v	<Tab>	vim.snippet.jump if active, otherwise <Tab>
+v	 pf	Prettify
+v	 /	toggle comment
+v	 fm	general format file
+v	#	:help v_#-default
+v	*	:help v_star-default
+v	@	:help v_@-default
+v	Q	:help v_Q-default
+v	[N	Select previous sibling node
+v	[n	Select previous node
+v	]N	Select next sibling node
+v	]n	Select next node
+v	an	Select parent (outer) node
+v	gra	vim.lsp.buf.code_action()
+v	gc	Toggle comment
+v	gx	Opens filepath or URI under cursor with the system handler (file explorer, web browser, …)
+v	in	Select child (inner) node
+v	<S-Tab>	vim.snippet.jump if active, otherwise <S-Tab>
+v	<C-S>	vim.lsp.buf.signature_help()
