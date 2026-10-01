@@ -1,0 +1,21 @@
+[general]
+import = ["theme.toml", "~/missing.toml"]
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Control|Shift"
+action = "SpawnNewInstance"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Control|Shift"
+action = "None"
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Alt"
+chars = "ls\n"
+
+[[keyboard.bindings]]
+key = "F2"
+command = { program = "alacritty", args = ["msg", "config"] }

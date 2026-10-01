@@ -48,6 +48,10 @@ pub fn key_name(s: &str, has_mods: bool) -> String {
             return (code - 9).to_string();
         }
     }
+    // alacritty "Key0".."Key9"
+    if let Some(d) = lower.strip_prefix("key").filter(|d| d.len() == 1 && d.chars().all(|c| c.is_ascii_digit())) {
+        return d.to_string();
+    }
     if lower.len() >= 2 && lower.starts_with('f') && lower[1..].chars().all(|c| c.is_ascii_digit()) {
         return lower.to_uppercase();
     }
@@ -134,7 +138,7 @@ mod tests {
         for (raw, want) in [("Return", "Enter"), ("CR", "Enter"), ("space", "Space"), ("Escape", "Esc"),
             ("Left", "←"), ("LeftArrow", "←"), ("BSpace", "Bksp"), ("DC", "Del"), ("PPage", "PgUp"),
             ("page_down", "PgDn"), ("equal", "="), ("comma", ","), ("BTab", "⇧Tab"), ("#12", "3"),
-            ("f11", "F11"), ("XF86AudioMute", "Mute"), ("Home", "Home")] {
+            ("f11", "F11"), ("XF86AudioMute", "Mute"), ("Home", "Home"), ("Key0", "0")] {
             assert_eq!(key_name(raw, false), want, "{raw}");
         }
     }

@@ -1,0 +1,41 @@
+# group :: keys (kitty notation, kitty_mod expanded) :: description
+Tabs :: kitty_mod+t :: New tab
+Tabs :: kitty_mod+q :: Close tab
+Tabs :: kitty_mod+right :: Next tab
+Tabs :: ctrl+tab :: Next tab
+Tabs :: kitty_mod+left :: Previous tab
+Tabs :: ctrl+shift+tab :: Previous tab
+Tabs :: kitty_mod+. :: Move tab forward
+Tabs :: kitty_mod+, :: Move tab backward
+Tabs :: kitty_mod+alt+t :: Rename tab
+Windows :: kitty_mod+enter :: New window
+Windows :: kitty_mod+n :: New OS window
+Windows :: kitty_mod+w :: Close window
+Windows :: kitty_mod+] :: Next window
+Windows :: kitty_mod+[ :: Previous window
+Windows :: kitty_mod+f :: Move window forward
+Windows :: kitty_mod+b :: Move window backward
+Windows :: kitty_mod+r :: Resize window
+Windows :: kitty_mod+l :: Next layout
+Clipboard :: kitty_mod+c :: Copy
+Clipboard :: kitty_mod+v :: Paste
+Clipboard :: kitty_mod+s :: Paste selection
+Scrolling :: kitty_mod+up :: Scroll line up
+Scrolling :: kitty_mod+down :: Scroll line down
+Scrolling :: kitty_mod+page_up :: Scroll page up
+Scrolling :: kitty_mod+page_down :: Scroll page down
+Scrolling :: kitty_mod+home :: Scroll to top
+Scrolling :: kitty_mod+end :: Scroll to bottom
+Scrolling :: kitty_mod+h :: Browse scrollback
+Scrolling :: kitty_mod+z :: Previous prompt
+Scrolling :: kitty_mod+x :: Next prompt
+Font :: kitty_mod+equal :: Bigger font
+Font :: kitty_mod+minus :: Smaller font
+Font :: kitty_mod+backspace :: Reset font size
+Misc :: kitty_mod+e :: Open URL
+Misc :: kitty_mod+u :: Unicode input
+Misc :: kitty_mod+f2 :: Edit config
+Misc :: kitty_mod+f5 :: Reload config
+Misc :: kitty_mod+f11 :: Toggle fullscreen
+Misc :: kitty_mod+escape :: Kitty shell
+Misc :: kitty_mod+delete :: Clear terminal

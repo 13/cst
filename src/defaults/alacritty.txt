@@ -1,0 +1,17 @@
+# group :: Mods|Mods+Key :: description
+Clipboard :: Control|Shift+C :: Copy
+Clipboard :: Control|Shift+V :: Paste
+Clipboard :: Shift+Insert :: Paste selection
+Font :: Control+Equals :: Bigger font
+Font :: Control+Plus :: Bigger font
+Font :: Control+Minus :: Smaller font
+Font :: Control+Key0 :: Reset font size
+Scrolling :: Shift+PageUp :: Scroll page up
+Scrolling :: Shift+PageDown :: Scroll page down
+Scrolling :: Shift+Home :: Scroll to top
+Scrolling :: Shift+End :: Scroll to bottom
+Search :: Control|Shift+F :: Search forward
+Search :: Control|Shift+B :: Search backward
+Vi mode :: Control|Shift+Space :: Toggle vi mode
+Window :: Control|Shift+N :: New window
+Window :: F11 :: Toggle fullscreen

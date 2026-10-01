@@ -10,6 +10,9 @@ use std::process::{Command, Stdio};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 
+pub mod alacritty;
+pub mod kitty;
+
 pub trait Runner: Send + Sync {
     fn run(&self, cmd: &str, args: &[&str]) -> Option<String>;
 }
@@ -185,7 +188,7 @@ pub trait Source: Sync {
 
 /// Every source in display order.
 pub fn all() -> Vec<Box<dyn Source>> {
-    vec![]
+    vec![Box::new(kitty::Kitty), Box::new(alacritty::Alacritty)]
 }
 
 /// Installed sources, loaded in parallel, in the order given.
