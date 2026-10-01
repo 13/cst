@@ -5,7 +5,7 @@
 **Every keyboard shortcut you have, on one screen.**
 
 A fast terminal cheatsheet that reads the *live* keybindings of your window manager,
-terminals, multiplexers, shells and tools — custom ones included — in the style of an
+terminals, multiplexers, shells, editors and tools — custom ones included — in the style of an
 awesome WM popup.
 
 [![CI](https://github.com/13/cst/actions/workflows/ci.yml/badge.svg)](https://github.com/13/cst/actions/workflows/ci.yml)
@@ -45,7 +45,13 @@ awesome WM popup.
 | fish | the live `bind` table (fish 3 and 4 notations), per mode |
 | nushell | reedline defaults plus `$env.config.keybindings` |
 | readline | `~/.inputrc` (or `$INPUTRC`) over readline's defaults — shown when you have one |
-| nvim | mappings with a description (`nvim --headless`) over core motions |
+| nano | `bind`/`unbind` in `/etc/nanorc`, `~/.nanorc`, `~/.config/nano/nanorc` over nano's defaults |
+| vi | a classic-vi command reference (hidden when `vi` is really vim or nvim) |
+| vim | vim's essential commands plus your own mappings (`:map` / `:imap`) |
+| nvim | mappings with a description (read after startup, so plugins' maps are included) over core motions |
+| NvChad | NvChad's own mappings, sectioned like its cheatsheet (Telescope, Terminal, NvimTree…) |
+| micro | `~/.config/micro/bindings.json` over micro's defaults |
+| emacs | a reference of the default keys |
 | yazi | `keymap.toml` over yazi's defaults |
 | lazygit | `keybinding:` in `config.yml` over lazygit's defaults |
 | fzf | `--bind` in `FZF_DEFAULT_OPTS` / `FZF_DEFAULT_OPTS_FILE` |
