@@ -1,6 +1,6 @@
 [package]
 name = "cst"
-version = "0.5.0"
+version = "0.5.1"
 edition = "2024"
 description = "Keyboard shortcut cheatsheet for your terminal apps, in the style of an awesome WM popup"
 license = "MIT"
