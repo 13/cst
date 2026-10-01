@@ -1,0 +1,263 @@
+//! Sections → screen: header, filter line, balanced columns of key-cap rows
+//! (the awesome Mod+i sheet, in cells). Filtering dims, never moves, rows.
+use super::input::State;
+use super::render::{Frame, Style};
+use crate::keys::Seq;
+use crate::model::{columns, row_matches, section_height, Row, Section};
+use unicode_width::{UnicodeWidthChar, UnicodeWidthStr};
+
+pub struct View<'a> { pub sections: &'a [Section], pub apps: &'a [&'a str], pub theme_name: &'a str, pub plain: bool }
+
+const COL_MIN: usize = 44;
+const GAP: usize = 3;
+
+type Line = Vec<(String, Style)>;
+
+fn width(l: &Line) -> usize { l.iter().map(|(t, _)| t.width()).sum() }
+
+fn truncate(s: &str, max: usize) -> String {
+    if s.width() <= max { return s.to_string(); }
+    if max == 0 { return String::new(); }
+    let (mut out, mut w) = (String::new(), 0);
+    for c in s.chars() {
+        let cw = c.width().unwrap_or(0);
+        if w + cw + 1 > max { break; }
+        out.push(c);
+        w += cw;
+    }
+    out.push('…');
+    out
+}
+
+fn keys_line(alts: &[Seq], plain: bool, lit: bool) -> Line {
+    let cap = if lit { Style::Cap } else { Style::Muted };
+    let mut l = Line::new();
+    for (i, seq) in alts.iter().enumerate() {
+        if i > 0 { l.push(("/".into(), Style::Muted)); }
+        for (j, combo) in seq.iter().enumerate() {
+            if j > 0 { l.push(("›".into(), Style::Muted)); }
+            for (k, key) in combo.iter().enumerate() {
+                if k > 0 { l.push(("+".into(), Style::Muted)); }
+                l.push((if plain { format!("[{key}]") } else { format!(" {key} ") }, cap));
+            }
+        }
+    }
+    l
+}
+
+/// Description left, key caps right-aligned to the column edge; only the
+/// first alternative (plus …) when they don't all fit beside 8 cells of text.
+fn row_line(r: &Row, w: usize, plain: bool, lit: bool) -> Line {
+    let mut keys = keys_line(&r.alts, plain, lit);
+    if width(&keys) + 1 + (w / 3).min(8) > w && r.alts.len() > 1 {
+        keys = keys_line(&r.alts[..1], plain, lit);
+        keys.push(("…".into(), Style::Muted));
+    }
+    let kw = width(&keys).min(w);
+    let desc = truncate(&r.desc, w.saturating_sub(kw + 1));
+    let pad = w.saturating_sub(desc.width() + kw);
+    let mut line = vec![(desc, if lit { Style::Text } else { Style::Muted }), (" ".repeat(pad), Style::Text)];
+    line.extend(keys);
+    line
+}
+
+fn section_lines(s: &Section, w: usize, plain: bool, q: &str) -> Vec<Line> {
+    let lit = |r: &Row| q.is_empty() || row_matches(s, r, q);
+    let any = q.is_empty() || s.rows.iter().any(|r| lit(r));
+    let mut out = vec![vec![(truncate(&s.title, w), if any { Style::Title } else { Style::Muted })]];
+    if let Some(n) = &s.note { out.push(vec![(truncate(&format!("⚠ {n}"), w), Style::Muted)]); }
+    out.extend(s.rows.iter().map(|r| row_line(r, w, plain, lit(r))));
+    out.push(vec![]);
+    out
+}
+
+/// The whole screen for this state, and the largest useful scroll offset.
+pub fn frame(v: &View, st: &State, w: usize, h: usize) -> (Frame, usize) {
+    let mut f = Frame::new(w, h);
+    if w < 20 || h < 5 {
+        f.put(0, 0, "Terminal too small", Style::Muted, w);
+        return (f, 0);
+    }
+    let right = w - 1;
+    let focus = st.focus.and_then(|i| v.apps.get(i));
+    let end = f.put(1, 0, "Keyboard shortcuts", Style::Header, right);
+    let info = match focus { Some(a) => format!("focus: {a}"), None => format!("{} apps · {}", v.apps.len(), v.theme_name) };
+    if end + 2 + info.width() <= right { f.put(right - info.width(), 0, &info, Style::Muted, right); }
+
+    let q = st.query.to_lowercase();
+    let shown: Vec<&Section> = v.sections.iter().filter(|s| focus.is_none_or(|a| s.app == *a)).collect();
+    if st.query.is_empty() {
+        f.put(1, 1, "Type to filter…", Style::Muted, right);
+    } else {
+        let x = f.put(1, 1, &st.query, Style::Text, right);
+        let x = f.put(x, 1, "▏", Style::Text, right);
+        if !shown.iter().any(|s| s.rows.iter().any(|r| row_matches(s, r, &q))) {
+            f.put(x + 2, 1, "No matches", Style::Muted, right);
+        }
+    }
+
+    let (top, body_h) = (3, h - 4);
+    if shown.is_empty() {
+        f.put(1, top, "No supported apps found", Style::Muted, right);
+        return (f, 0);
+    }
+    let n = (w / COL_MIN).clamp(1, 4);
+    let col_w = (w - 2 - GAP * (n - 1)) / n;
+    let heights: Vec<usize> = shown.iter().map(|s| section_height(s)).collect();
+    let cols: Vec<Vec<Line>> = columns(&heights, n).iter()
+        .map(|idx| idx.iter().flat_map(|&i| section_lines(shown[i], col_w, v.plain, &q)).collect())
+        .collect();
+    let max_scroll = cols.iter().map(Vec::len).max().unwrap_or(0).saturating_sub(body_h);
+    let scroll = st.scroll.min(max_scroll);
+    for (c, lines) in cols.iter().enumerate() {
+        let x0 = 1 + c * (col_w + GAP);
+        for (i, line) in lines.iter().skip(scroll).take(body_h).enumerate() {
+            let mut x = x0;
+            for (t, s) in line { x = f.put(x, top + i, t, *s, x0 + col_w); }
+        }
+    }
+    if scroll > 0 { f.put(right - "↑ more".width(), 2, "↑ more", Style::Muted, w); }
+    if scroll < max_scroll { f.put(right - "↓ more".width(), h - 1, "↓ more", Style::Muted, w); }
+    (f, max_scroll)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::keys::{parse_prefixed, parse_vim};
+    use crate::model::{build, Binding};
+    use std::path::PathBuf;
+
+    const APPS: [&str; 3] = ["kitty", "tmux", "nvim"];
+
+    fn sample() -> Vec<Section> {
+        let kp = |s: &str| vec![parse_prefixed(s, '+')];
+        let tp = |k: &str| vec![parse_prefixed("C-b", '-'), vec![k.to_string()]];
+        let mut v = build("kitty", &[Binding::new("Tabs", kp("ctrl+shift+t"), "New tab"),
+            Binding::new("Tabs", kp("ctrl+shift+q"), "Close tab"), Binding::new("Tabs", kp("super+t"), "New tab")], None);
+        v.extend(build("tmux", &[Binding::new("Prefix", tp("%"), "Split right"), Binding::new("Prefix", tp("\""), "Split down")],
+            Some("config: .tmux.conf: unreadable".into())));
+        v.extend(build("nvim", &[Binding::new("Mappings", parse_vim(" ff"), "日本語のテスト"),
+            Binding::new("Mappings", parse_vim("gg"), "Top of file")], None));
+        v
+    }
+
+    fn view(s: &[Section]) -> View<'_> { View { sections: s, apps: &APPS, theme_name: "catppuccin", plain: false } }
+
+    fn snapshot(name: &str, text: &str) {
+        let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/snapshots").join(name);
+        if std::env::var_os("UPDATE_SNAPSHOTS").is_some() || !path.exists() {
+            std::fs::create_dir_all(path.parent().unwrap()).unwrap();
+            std::fs::write(&path, text).unwrap();
+            return;
+        }
+        assert_eq!(std::fs::read_to_string(&path).unwrap(), text, "snapshot {name} changed; rerun with UPDATE_SNAPSHOTS=1 if intended");
+    }
+
+    /// (x, y) of the first cell sequence spelling `needle` (ASCII needles).
+    fn find(f: &Frame, needle: &str) -> Option<(usize, usize)> {
+        let n: Vec<String> = needle.chars().map(|c| c.to_string()).collect();
+        f.rows.iter().enumerate().find_map(|(y, row)| {
+            (0..row.len().saturating_sub(n.len() - 1)).find(|&x| row[x..x + n.len()].iter().map(|c| &c.ch).eq(n.iter())).map(|x| (x, y))
+        })
+    }
+
+    fn last_ink(f: &Frame, y: usize, from: usize, to: usize) -> usize {
+        (from..to.min(f.w)).rev().find(|&x| !f.rows[y][x].ch.trim().is_empty()).unwrap()
+    }
+
+    #[test]
+    fn snapshots() {
+        let s = sample();
+        snapshot("sheet_120x40.txt", &frame(&view(&s), &State::default(), 120, 40).0.text());
+        snapshot("sheet_60x20.txt", &frame(&view(&s), &State::default(), 60, 20).0.text());
+    }
+
+    #[test]
+    fn header_and_filter_line() {
+        let s = sample();
+        let t = frame(&view(&s), &State::default(), 120, 40).0.text();
+        let first: Vec<&str> = t.lines().collect();
+        assert!(first[0].starts_with(" Keyboard shortcuts") && first[0].ends_with("3 apps · catppuccin"));
+        assert_eq!(first[1], " Type to filter…");
+        let st = State { query: "zzz".into(), ..Default::default() };
+        assert!(frame(&view(&s), &st, 120, 40).0.text().contains("zzz▏  No matches"));
+    }
+
+    #[test]
+    fn caps_styled_and_filter_dims() {
+        let s = sample();
+        let (f, _) = frame(&view(&s), &State::default(), 120, 40);
+        let (x, y) = find(&f, "Ctrl").unwrap();
+        assert_eq!(f.rows[y][x].style, Style::Cap);
+        let st = State { query: "split".into(), ..Default::default() };
+        let (f, _) = frame(&view(&s), &st, 120, 40);
+        let (x, y) = find(&f, "New tab").unwrap();
+        assert_eq!(f.rows[y][x].style, Style::Muted);
+        let (x, y) = find(&f, "Split right").unwrap();
+        assert_eq!(f.rows[y][x].style, Style::Text);
+        let (x, y) = find(&f, "KITTY").unwrap();
+        assert_eq!(f.rows[y][x].style, Style::Muted);
+        let (x, y) = find(&f, "TMUX").unwrap();
+        assert_eq!(f.rows[y][x].style, Style::Title);
+        assert_eq!(find(&f, "Split right").unwrap().1, find(&frame(&view(&s), &State::default(), 120, 40).0, "Split right").unwrap().1); // nothing moves
+    }
+
+    #[test]
+    fn wide_chars_keep_caps_aligned() {
+        let s = sample();
+        let (f, _) = frame(&view(&s), &State::default(), 120, 40);
+        let (x0, y0) = find(&f, "NVIM").unwrap();   // nvim shares its column with kitty; only rows below its title
+        let col_w = (120 - 2 - 3) / 2;
+        let rows: Vec<usize> = (y0 + 1..f.h).filter(|&y| f.rows[y][x0..x0 + col_w].iter().any(|c| c.style == Style::Cap)).collect();
+        let edges: Vec<usize> = rows.iter().map(|&y| last_ink(&f, y, x0, x0 + col_w)).collect();
+        assert_eq!(edges.len(), 2);
+        assert_eq!(edges[0], edges[1]);
+    }
+
+    #[test]
+    fn narrow_terminal_one_column_with_ellipsis() {
+        let s = sample();
+        let (f, _) = frame(&view(&s), &State::default(), 30, 40);
+        let t = f.text();
+        assert!(t.contains("New tab") && t.contains('…'));
+        assert!(f.rows.iter().all(|r| r.len() == 30));
+    }
+
+    #[test]
+    fn too_small() {
+        let s = sample();
+        assert_eq!(frame(&view(&s), &State::default(), 19, 5).0.text().trim(), "Terminal too small");
+        assert_eq!(frame(&view(&s), &State::default(), 40, 4).0.text().trim(), "Terminal too small");
+    }
+
+    #[test]
+    fn scrolling_indicators_and_clamp() {
+        let s = sample();
+        let (f, max) = frame(&view(&s), &State::default(), 60, 8);
+        assert!(max > 0);
+        assert!(f.text().lines().nth(7).unwrap().ends_with("↓ more"));
+        assert!(!f.text().lines().nth(2).unwrap_or("").contains("↑ more"));
+        let (f, max2) = frame(&view(&s), &State { scroll: 1000, ..Default::default() }, 60, 8);
+        assert_eq!(max2, max);
+        assert!(f.text().lines().nth(2).unwrap().ends_with("↑ more"));
+        assert!(!f.text().contains("↓ more"));
+    }
+
+    #[test]
+    fn focus_shows_one_app() {
+        let s = sample();
+        let t = frame(&view(&s), &State { focus: Some(1), ..Default::default() }, 120, 40).0.text();
+        assert!(t.contains("TMUX · PREFIX") && t.contains("focus: tmux") && !t.contains("KITTY"));
+        assert!(t.contains("⚠ config: .tmux.conf: unreadable"));
+    }
+
+    #[test]
+    fn empty_and_plain() {
+        let t = frame(&View { sections: &[], apps: &[], theme_name: "x", plain: false }, &State::default(), 80, 10).0.text();
+        assert!(t.contains("No supported apps found"));
+        let s = sample();
+        let t = frame(&View { plain: true, ..view(&s) }, &State::default(), 120, 40).0.text();
+        assert!(t.contains("[Ctrl]+[Shift]+[T]"));
+    }
+}

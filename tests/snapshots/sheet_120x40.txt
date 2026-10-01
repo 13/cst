@@ -1,0 +1,39 @@
+ Keyboard shortcuts                                                                                 3 apps · catppuccin
+ Type to filter…
+
+ TMUX · PREFIX                                               KITTY · TABS
+ ⚠ config: .tmux.conf: unreadable                            Close tab                               Ctrl + Shift + Q
+ Split down                                  Ctrl + B › "    New tab                     Ctrl + Shift + T / Super + T
+ Split right                                 Ctrl + B › %
+                                                             NVIM · MAPPINGS
+                                                             Top of file                                        g › g
+                                                             日本語のテスト                             Space › f › f
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
