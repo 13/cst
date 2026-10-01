@@ -12,6 +12,7 @@ use std::time::{Duration, Instant};
 
 pub mod alacritty;
 pub mod kitty;
+pub mod wezterm;
 
 pub trait Runner: Send + Sync {
     fn run(&self, cmd: &str, args: &[&str]) -> Option<String>;
@@ -188,7 +189,7 @@ pub trait Source: Sync {
 
 /// Every source in display order.
 pub fn all() -> Vec<Box<dyn Source>> {
-    vec![Box::new(kitty::Kitty), Box::new(alacritty::Alacritty)]
+    vec![Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty)]
 }
 
 /// Installed sources, loaded in parallel, in the order given.

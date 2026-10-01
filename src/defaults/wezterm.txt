@@ -1,0 +1,19 @@
+# used only if `wezterm show-keys` fails; keys MODS|MODS+key
+Tabs :: CTRL|SHIFT+t :: New tab
+Tabs :: CTRL+Tab :: Next tab
+Tabs :: CTRL|SHIFT+Tab :: Previous tab
+Tabs :: CTRL|SHIFT+w :: Close tab
+Panes :: CTRL|SHIFT|ALT+" :: Split vertical
+Panes :: CTRL|SHIFT|ALT+% :: Split horizontal
+Panes :: CTRL|SHIFT+LeftArrow :: Focus pane
+Panes :: CTRL|SHIFT+z :: Zoom pane
+Clipboard :: CTRL|SHIFT+c :: Copy
+Clipboard :: CTRL|SHIFT+v :: Paste
+Font :: CTRL+= :: Bigger font
+Font :: CTRL+- :: Smaller font
+Font :: CTRL+0 :: Reset font size
+Misc :: CTRL|SHIFT+f :: Search
+Misc :: CTRL|SHIFT+x :: Copy mode
+Misc :: CTRL|SHIFT+p :: Command palette
+Misc :: CTRL|SHIFT+r :: Reload config
+Misc :: ALT+Enter :: Toggle fullscreen

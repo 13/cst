@@ -1,0 +1,26 @@
+Default key table
+-----------------
+
+	CTRL                 Tab                ->   ActivateTabRelative(1)
+	SHIFT | CTRL         Tab                ->   ActivateTabRelative(-1)
+	CTRL                 C                  ->   CopyTo(Clipboard)
+	SHIFT | CTRL         C                  ->   CopyTo(Clipboard)
+	CTRL                 !                  ->   ActivateTab(0)
+	SHIFT | CTRL         !                  ->   ActivateTab(0)
+	CTRL                 @                  ->   ActivateTab(1)
+	ALT | CTRL           "                  ->   SplitVertical(SpawnCommand domain=CurrentPaneDomain)
+	SUPER                t                  ->   SpawnTab(CurrentPaneDomain)
+	LEADER               c                  ->   SpawnTab(CurrentPaneDomain)
+	CTRL                 F                  ->   Search(CurrentSelectionOrEmptyString)
+	                     F11                ->   EmitEvent("toggle-something")
+
+Key Table: copy_mode
+--------------------
+
+	                     Escape             ->   CopyMode(Close)
+	                     v                  ->   CopyMode(SetSelectionMode(Cell))
+
+Mouse
+-----
+
+	Down { streak: 1, button: Left }   ->   SelectTextAtMouseCursor(Cell)
