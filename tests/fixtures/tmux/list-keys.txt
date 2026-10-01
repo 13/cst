@@ -7,3 +7,5 @@ bind-key    -T prefix       z                         resize-pane -Z
 bind-key -r -T prefix       Up                        select-pane -U
 bind-key    -T root         MouseDown1Pane            select-pane -t = \; send-keys -M
 bind-key    -T root         C-l                       send-keys C-l
+bind-key    -T prefix       $                         command-prompt -I "#S" { rename-session "%%" }
+bind-key    -T prefix       ,                         command-prompt -I "#W" { rename-window "%%" }

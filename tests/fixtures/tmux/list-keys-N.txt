@@ -1,0 +1,4 @@
+C-b $       Rename current session
+C-b ,       Rename current window
+C-b c       Create a new window
+C-l         Clear the screen

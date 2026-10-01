@@ -61,6 +61,7 @@ impl Source for Tmux {
             st.prefix2 = show("prefix2");
             st.copy = if show("mode-keys").as_deref() == Some("vi") { vec!["copy-mode-vi"] } else { vec!["copy-mode"] };
             parse_text(env, &list, Path::new("/"), 0, &mut st);
+            if let Some(notes) = env.run("tmux", &["list-keys", "-N"]) { apply_notes(&mut st, &notes); }
             layer(defaults, Ok(Some(std::mem::take(&mut st.changes))), false)
         } else {
             let conf = env.home.join(".tmux.conf");
@@ -75,6 +76,26 @@ impl Source for Tmux {
             layer(defaults, live, true)
         };
         expand_prefix(layered, &st).into_loaded("tmux")
+    }
+}
+
+/// `list-keys` prints no notes; `list-keys -N` prints `<prefix> <key>  <note>`
+/// (prefix table) or `<key>  <note>` (root). Notes become the descriptions.
+fn apply_notes(st: &mut State, notes: &str) {
+    for line in notes.lines() {
+        let mut words = line.split_whitespace();
+        let (Some(first), Some(second)) = (words.next(), words.next()) else { continue };
+        let (table, key, note) = if first == st.prefix || Some(first) == st.prefix2.as_deref() {
+            ("prefix", second, words.collect::<Vec<_>>().join(" "))
+        } else {
+            ("root", first, std::iter::once(second).chain(words).collect::<Vec<_>>().join(" "))
+        };
+        let seq = vec![parse_prefixed(key, '-')];
+        for c in &mut st.changes {
+            if let Change::Bind(b) = c && b.scope == table && b.seq == seq && !note.is_empty() {
+                b.desc = note.clone();
+            }
+        }
     }
 }
 
@@ -284,6 +305,7 @@ mod tests {
         let env = Env::test(&fixtures().join("home"), FakeRunner(HashMap::from([
             ("tmux list-sessions".into(), "0: 1 windows (created Thu Oct  1 10:00:00 2026)\n".into()),
             ("tmux list-keys".into(), list),
+            ("tmux list-keys -N".into(), std::fs::read_to_string(fixtures().join("list-keys-N.txt")).unwrap()),
             ("tmux show -gv prefix".into(), "C-b\n".into()),
             ("tmux show -gv prefix2".into(), "None\n".into()),
             ("tmux show -gv mode-keys".into(), "vi\n".into()),
@@ -291,14 +313,18 @@ mod tests {
         let l = Tmux.load(&env);
         assert_eq!(l.origin, Origin::Live);
         let p = "TMUX · PREFIX";
-        assert_eq!(keys_of(&l, p, "New window"), vec!["Ctrl+B › c"]);
+        // -N notes are the descriptions: distinct keys don't collapse into "Command prompt"
+        assert_eq!(keys_of(&l, p, "Rename current session"), vec!["Ctrl+B › $"]);
+        assert_eq!(keys_of(&l, p, "Rename current window"), vec!["Ctrl+B › ,"]);
+        assert_eq!(keys_of(&l, p, "Create a new window"), vec!["Ctrl+B › c"]);
+        assert!(keys_of(&l, p, "Command prompt").is_empty());
+        assert_eq!(keys_of(&l, "TMUX · NO PREFIX", "Clear the screen"), vec!["Ctrl+L"]);
         assert_eq!(keys_of(&l, p, "Close pane"), vec!["Ctrl+B › x"]);
         assert_eq!(keys_of(&l, p, "Zoom pane"), vec!["Ctrl+B › z"]);
         assert_eq!(keys_of(&l, p, "Focus up"), vec!["Ctrl+B › ↑"]);
         assert!(keys_of(&l, p, "Split right").is_empty());                        // no defaults merged
         assert_eq!(keys_of(&l, "TMUX · COPY MODE", "Begin selection"), vec!["v"]);
         assert!(keys_of(&l, "TMUX · COPY MODE", "Exit copy mode").is_empty());   // emacs table hidden in vi mode
-        assert_eq!(keys_of(&l, "TMUX · NO PREFIX", "Send keys"), vec!["Ctrl+L"]);
         assert!(!all_keys(&l).iter().any(|k| k.contains("Mouse")));
     }
 
