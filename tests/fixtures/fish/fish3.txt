@@ -1,0 +1,5 @@
+bind --preset \ca beginning-of-line
+bind --preset \e\[A up-or-search
+bind --preset -k dc delete-char
+bind --preset \cx\ce edit_command_buffer
+bind --preset -M default dd kill-whole-line

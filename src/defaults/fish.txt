@@ -1,0 +1,21 @@
+# fallback when `fish -c bind` fails
+Default :: ctrl-a :: Start of line
+Default :: ctrl-e :: End of line
+Default :: alt-left :: Back one word
+Default :: alt-right :: Forward one word
+Default :: ctrl-w :: Delete previous word
+Default :: ctrl-u :: Delete to start of line
+Default :: ctrl-k :: Delete to end of line
+Default :: ctrl-y :: Paste deleted text
+Default :: ctrl-r :: History pager
+Default :: alt-up :: Insert last argument
+Default :: ctrl-z :: Undo
+Default :: alt-e :: Edit command in $EDITOR
+Default :: alt-h :: Help for command
+Default :: alt-l :: List directory
+Default :: alt-p :: Pipe to pager
+Default :: alt-s :: Prepend sudo
+Default :: ctrl-c :: Cancel
+Default :: ctrl-l :: Clear screen
+Default :: tab :: Complete
+Default :: shift-tab :: Complete and search

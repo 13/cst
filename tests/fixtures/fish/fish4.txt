@@ -1,0 +1,9 @@
+bind --preset '' self-insert
+bind --preset ctrl-a beginning-of-line
+bind --preset ctrl-e end-of-line
+bind --preset alt-left prevd-or-backward-word
+bind --preset ctrl-x,ctrl-e edit_command_buffer
+bind --preset alt-. history-token-search-backward
+bind --preset -M insert ctrl-r history-pager
+bind ctrl-g 'commandline -f cancel'
+bind --preset -M visual -m default y fish_clipboard_copy end-selection repaint-mode
