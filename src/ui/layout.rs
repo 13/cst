@@ -2,7 +2,7 @@
 //! (the awesome Mod+i sheet, in cells). Filtering dims, never moves, rows.
 use super::input::{picker_entries, State};
 use super::render::{Frame, Style};
-use crate::keys::{Combo, Seq};
+use crate::keys::{same_key, typed_key, Combo, Seq};
 use crate::model::{columns, row_matches, section_height, Row, Section};
 use unicode_width::UnicodeWidthChar;
 
@@ -73,7 +73,7 @@ impl Hit<'_> {
         match self {
             Hit::Text(q) => q.is_empty() || row_matches(s, r, q),
             // the key anywhere in a sequence: Ctrl+B lights every tmux prefix binding
-            Hit::Key(c) => r.alts.iter().any(|seq| seq.iter().any(|step| step == *c)),
+            Hit::Key(c) => r.alts.iter().any(|seq| seq.iter().any(|step| same_key(step, c))),
         }
     }
     fn is_all(&self) -> bool { matches!(self, Hit::Text(q) if q.is_empty()) }
@@ -107,7 +107,9 @@ pub fn frame(v: &View, st: &State, w: usize, h: usize) -> (Frame, usize) {
     header(&mut f, &info);
 
     let shown: Vec<&Section> = v.sections.iter().filter(|s| focus.is_none_or(|a| s.app == *a)).collect();
-    let hit = match &st.pressed { Some(c) => Hit::Key(c), None => Hit::Text(st.query.to_lowercase()) };
+    // a pressed shortcut, or one typed as `<tab>`, looks up a key; other text filters
+    let typed = typed_key(&st.query);
+    let hit = match st.pressed.as_ref().or(typed.as_ref()) { Some(c) => Hit::Key(c), None => Hit::Text(st.query.to_lowercase()) };
     let none_hit = !shown.iter().any(|s| s.rows.iter().any(|r| hit.hits(s, r)));
     let x = if let Some(c) = &st.pressed {
         // the pressed shortcut as key caps, like the rows show it
@@ -120,7 +122,8 @@ pub fn frame(v: &View, st: &State, w: usize, h: usize) -> (Frame, usize) {
     } else {
         let x = f.put(1, 1, &st.query, Style::Text, right);
         let x = f.put(x, 1, "▏", Style::Text, right);
-        if none_hit { f.put(x + 2, 1, "No matches", Style::Muted, right) } else { x }
+        let none = if typed.is_some() { "No binding" } else { "No matches" };
+        if none_hit { f.put(x + 2, 1, none, Style::Muted, right) } else { x }
     };
     quit_hint(&mut f, x, st);
 
@@ -440,5 +443,26 @@ mod tests {
         assert!(frame(&view(&s), &st, 120, 40).0.text().lines().nth(1).unwrap().contains("Ctrl+C again to quit"));
         let p = State { screen: crate::ui::input::Screen::Picker, ctrl_c_at: Some(std::time::Instant::now()), ..Default::default() };
         assert!(picker_frame(&view(&s), &entries(), &p, 120, 30).text().lines().nth(1).unwrap().contains("Ctrl+C again to quit"));
+    }
+
+    #[test]
+    fn typed_key_lookup() {
+        let s = vec![Section { app: "kitty".into(), title: "Keys".into(), note: None, rows: vec![
+            Row { desc: "Next tab".into(), alts: vec![vec![vec!["Tab".into()]]] },
+            Row { desc: "Previous".into(), alts: vec![vec![vec!["⇧Tab".into()]]] },
+            Row { desc: "Confirm".into(), alts: vec![vec![vec!["Enter".into()]]] }] }];
+        let style = |q: &str, desc: &str| {
+            let st = State { query: q.into(), ..Default::default() };
+            let (f, _) = frame(&view(&s), &st, 120, 20);
+            let (x, y) = find(&f, desc).unwrap();
+            f.rows[y][x].style
+        };
+        assert_eq!(style("<tab>", "Next tab"), Style::Text);
+        assert_eq!(style("<tab>", "Previous"), Style::Muted);          // exact key, not "tab" in text
+        assert_eq!(style("<s-tab>", "Previous"), Style::Text);         // ⇧Tab == Shift+Tab
+        assert_eq!(style("<cr>", "Confirm"), Style::Text);
+        assert_eq!(style("<cr>", "Next tab"), Style::Muted);
+        let st = State { query: "<f9>".into(), ..Default::default() };
+        assert!(frame(&view(&s), &st, 120, 20).0.text().lines().nth(1).unwrap().contains("No binding"));
     }
 }

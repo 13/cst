@@ -111,6 +111,7 @@ from a sheet or to quit.
 |---|---|
 | type | filter (non-matching rows dim) |
 | a shortcut (`Ctrl+B`, `Alt+←`, `F5`…) | look it up: rows using it stay lit (shown, not run) |
+| `<tab>`, `<s-tab>`, `<cr>`, `<esc>`, `<up>`, `<c-a>`… | look up a key typed in vim notation — for keys `cst` uses itself |
 | `Backspace` | delete a character, or clear the lookup |
 | `Tab` / `Shift+Tab` | focus the next / previous app |
 | `↑` `↓` `PgUp` `PgDn` `Home` `End` | scroll |

@@ -109,6 +109,29 @@ pub fn parse_vim(s: &str) -> Seq {
     seq
 }
 
+/// A filter typed as one vim-style key, `<tab>`, `<s-tab>`, `<cr>`, `<up>`,
+/// `<c-a>`: the keys a sheet keeps for itself can still be looked up.
+pub fn typed_key(q: &str) -> Option<Combo> {
+    let q = q.trim();
+    if !q.starts_with('<') || !q.ends_with('>') { return None; }
+    let mut seq = parse_vim(q);
+    if seq.len() != 1 || seq[0] == ["Leader"] { return None; }
+    seq.pop()
+}
+
+/// Combos equal once "⇧Tab" (zsh `^[[Z`, fish `btab`) is read as Shift+Tab.
+pub fn same_key(a: &Combo, b: &Combo) -> bool {
+    let norm = |c: &Combo| -> Combo {
+        let mut mods: Vec<&str> = c[..c.len().saturating_sub(1)].iter().map(String::as_str).collect();
+        let mut key = c.last().map_or("", String::as_str);
+        if key == "⇧Tab" { mods.push("Shift"); key = "Tab"; }
+        let mut out: Combo = MOD_ORDER.iter().filter(|m| mods.contains(m)).map(|m| m.to_string()).collect();
+        out.push(key.to_string());
+        out
+    };
+    norm(a) == norm(b)
+}
+
 pub fn seq_text(seq: &Seq) -> String {
     seq.iter().map(|c| c.join("+")).collect::<Vec<_>>().join(" › ")
 }
@@ -447,5 +470,20 @@ mod tests {
             ("CtrlShiftUp", "Ctrl+Shift+↑"), ("Ctrl-Shift-Up", "Ctrl+Shift+↑"), ("AltUp", "Alt+↑"), ("CtrlHome", "Ctrl+Home"), ("Shift", "Shift")] {
             assert_eq!(parse_micro(raw).join("+"), want, "{raw}");
         }
+    }
+
+    #[test]
+    fn typed_keys_and_shift_tab() {
+        let c = |v: &[&str]| v.iter().map(|s| s.to_string()).collect::<Combo>();
+        assert_eq!(typed_key("<tab>"), Some(c(&["Tab"])));
+        assert_eq!(typed_key(" <S-Tab> "), Some(c(&["Shift", "Tab"])));
+        assert_eq!(typed_key("<cr>"), Some(c(&["Enter"])));
+        assert_eq!(typed_key("<esc>"), Some(c(&["Esc"])));
+        assert_eq!(typed_key("<up>"), Some(c(&["↑"])));
+        assert_eq!(typed_key("<c-a>"), Some(c(&["Ctrl", "A"])));
+        for q in ["tab", "<tab", "<>", "<tab>x", "<tab><cr>", "<leader>"] { assert_eq!(typed_key(q), None, "{q}"); }
+        assert!(same_key(&c(&["⇧Tab"]), &c(&["Shift", "Tab"])));
+        assert!(same_key(&c(&["Ctrl", "⇧Tab"]), &c(&["Ctrl", "Shift", "Tab"])));
+        assert!(!same_key(&c(&["Tab"]), &c(&["Shift", "Tab"])));
     }
 }
