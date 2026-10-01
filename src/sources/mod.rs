@@ -139,11 +139,14 @@ impl Layered {
 pub fn layer(defaults: Vec<Binding>, live: Result<Option<Vec<Change>>, String>, keep_defaults: bool) -> Layered {
     match live {
         Ok(Some(changes)) => {
-            // Mixed only if the defaults changed the result (a cleared config is pure Live)
+            // by effect: defaults contributed nothing → Live (a cleared config),
+            // the live layer changed nothing → Defaults, else Mixed
             let live_only = merge(vec![], changes.clone());
-            let bindings = if keep_defaults { merge(defaults, changes) } else { live_only.clone() };
-            let mixed = bindings != live_only;
-            Layered { bindings, origin: if mixed { Origin::Mixed } else { Origin::Live }, note: None }
+            let bindings = if keep_defaults { merge(defaults.clone(), changes) } else { live_only.clone() };
+            let origin = if bindings == live_only { Origin::Live }
+                else if bindings == defaults { Origin::Defaults }
+                else { Origin::Mixed };
+            Layered { bindings, origin, note: None }
         }
         Ok(None) => Layered { bindings: defaults, origin: Origin::Defaults, note: None },
         Err(reason) => Layered { bindings: defaults, origin: Origin::Defaults, note: Some(format!("config: {reason}")) },
@@ -254,6 +257,9 @@ mod tests {
         assert_eq!((l.origin, l.bindings.len()), (Origin::Live, 1));
         let l = layer(d.clone(), Ok(Some(vec![Change::Clear(None)])), true);
         assert_eq!(l.origin, Origin::Live);
+        // a config that changes nothing (kitty.conf without map lines) is Defaults
+        let l = layer(d.clone(), Ok(Some(vec![])), true);
+        assert_eq!(l.origin, Origin::Defaults);
         // cleared, then a live binding identical to a default: still pure Live
         let l = layer(d.clone(), Ok(Some(vec![Change::Clear(None), Change::Bind(Binding::new("", kp("a"), "A"))])), true);
         assert_eq!(l.origin, Origin::Live);
