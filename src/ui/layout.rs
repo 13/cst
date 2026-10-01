@@ -2,7 +2,7 @@
 //! (the awesome Mod+i sheet, in cells). Filtering dims, never moves, rows.
 use super::input::{picker_entries, State};
 use super::render::{Frame, Style};
-use crate::keys::Seq;
+use crate::keys::{Combo, Seq};
 use crate::model::{columns, row_matches, section_height, Row, Section};
 use unicode_width::UnicodeWidthChar;
 
@@ -65,14 +65,33 @@ fn row_line(r: &Row, w: usize, plain: bool, lit: bool) -> Line {
     line
 }
 
-fn section_lines(s: &Section, w: usize, plain: bool, q: &str) -> Vec<Line> {
-    let lit = |r: &Row| q.is_empty() || row_matches(s, r, q);
-    let any = q.is_empty() || s.rows.iter().any(&lit);
+/// What lights a row: a text filter (empty = everything) or a pressed key.
+enum Hit<'a> { Text(String), Key(&'a Combo) }
+
+impl Hit<'_> {
+    fn hits(&self, s: &Section, r: &Row) -> bool {
+        match self {
+            Hit::Text(q) => q.is_empty() || row_matches(s, r, q),
+            // the key anywhere in a sequence: Ctrl+B lights every tmux prefix binding
+            Hit::Key(c) => r.alts.iter().any(|seq| seq.iter().any(|step| step == *c)),
+        }
+    }
+    fn is_all(&self) -> bool { matches!(self, Hit::Text(q) if q.is_empty()) }
+}
+
+fn section_lines(s: &Section, w: usize, plain: bool, hit: &Hit) -> Vec<Line> {
+    let lit = |r: &Row| hit.hits(s, r);
+    let any = hit.is_all() || s.rows.iter().any(&lit);
     let mut out = vec![vec![(truncate(&s.title, w), if any { Style::Title } else { Style::Muted })]];
     if let Some(n) = &s.note { out.push(vec![(truncate(&format!("⚠ {n}"), w), Style::Muted)]); }
     out.extend(s.rows.iter().map(|r| row_line(r, w, plain, lit(r))));
     out.push(vec![]);
     out
+}
+
+/// "Ctrl+C again to quit" after a first Ctrl+C.
+fn quit_hint(f: &mut Frame, x: usize, st: &State) {
+    if st.ctrl_c_at.is_some() { f.put(x + 2, 1, "Ctrl+C again to quit", Style::Muted, f.w - 1); }
 }
 
 /// The whole screen for this state, and the largest useful scroll offset.
@@ -87,17 +106,23 @@ pub fn frame(v: &View, st: &State, w: usize, h: usize) -> (Frame, usize) {
     let info = match focus { Some(a) => format!("focus: {a}"), None => format!("{} apps · {}", v.apps.len(), v.theme_name) };
     header(&mut f, &info);
 
-    let q = st.query.to_lowercase();
     let shown: Vec<&Section> = v.sections.iter().filter(|s| focus.is_none_or(|a| s.app == *a)).collect();
-    if st.query.is_empty() {
-        f.put(1, 1, "Type to filter…", Style::Muted, right);
+    let hit = match &st.pressed { Some(c) => Hit::Key(c), None => Hit::Text(st.query.to_lowercase()) };
+    let none_hit = !shown.iter().any(|s| s.rows.iter().any(|r| hit.hits(s, r)));
+    let x = if let Some(c) = &st.pressed {
+        // the pressed shortcut as key caps, like the rows show it
+        let mut x = 1;
+        for (t, style) in keys_line(&[vec![c.clone()]], v.plain, true) { x = f.put(x, 1, &t, style, right); }
+        if none_hit { x = f.put(x + 2, 1, "No binding", Style::Muted, right); }
+        x
+    } else if st.query.is_empty() {
+        f.put(1, 1, "Type to filter…", Style::Muted, right)
     } else {
         let x = f.put(1, 1, &st.query, Style::Text, right);
         let x = f.put(x, 1, "▏", Style::Text, right);
-        if !shown.iter().any(|s| s.rows.iter().any(|r| row_matches(s, r, &q))) {
-            f.put(x + 2, 1, "No matches", Style::Muted, right);
-        }
-    }
+        if none_hit { f.put(x + 2, 1, "No matches", Style::Muted, right) } else { x }
+    };
+    quit_hint(&mut f, x, st);
 
     let (top, body_h) = (3, h - 4);
     if shown.is_empty() {
@@ -108,7 +133,7 @@ pub fn frame(v: &View, st: &State, w: usize, h: usize) -> (Frame, usize) {
     let col_w = (w - 2 - GAP * (n - 1)) / n;
     let heights: Vec<usize> = shown.iter().map(|s| section_height(s)).collect();
     let cols: Vec<Vec<Line>> = columns(&heights, n).iter()
-        .map(|idx| idx.iter().flat_map(|&i| section_lines(shown[i], col_w, v.plain, &q)).collect())
+        .map(|idx| idx.iter().flat_map(|&i| section_lines(shown[i], col_w, v.plain, &hit)).collect())
         .collect();
     let max_scroll = cols.iter().map(Vec::len).max().unwrap_or(0).saturating_sub(body_h);
     let scroll = st.scroll.min(max_scroll);
@@ -152,13 +177,14 @@ pub fn picker_frame(v: &View, entries: &[Entry], st: &State, w: usize, h: usize)
     let right = w - 1;
     header(&mut f, &format!("{} apps · {}", v.apps.len(), v.theme_name));
     let visible = picker_entries(v.apps, &st.pick_query);
-    if st.pick_query.is_empty() {
-        f.put(1, 1, "Choose an app…", Style::Muted, right);
+    let x = if st.pick_query.is_empty() {
+        f.put(1, 1, "Choose an app…", Style::Muted, right)
     } else {
         let x = f.put(1, 1, &st.pick_query, Style::Text, right);
         let x = f.put(x, 1, "▏", Style::Text, right);
-        if visible.is_empty() { f.put(x + 2, 1, "No matches", Style::Muted, right); }
-    }
+        if visible.is_empty() { f.put(x + 2, 1, "No matches", Style::Muted, right) } else { x }
+    };
+    quit_hint(&mut f, x, st);
     let n = picker_cols(w);
     let col_w = (w - 2 - GAP * (n - 1)) / n;
     let (top, body_h) = (3, h - 4);
@@ -395,5 +421,24 @@ mod tests {
         let t = picker_frame(&v, &es, &st, 30, 8).text();
         assert!(t.contains("▸ app9"), "{t}");
         assert!(!t.contains("app0"));                                        // scrolled past the top
+    }
+
+    #[test]
+    fn key_lookup_lights_matching_rows() {
+        let s = sample();
+        let st = State { pressed: Some(vec!["Ctrl".into(), "B".into()]), ..Default::default() };
+        let (f, _) = frame(&view(&s), &st, 120, 40);
+        let line1 = f.text().lines().nth(1).unwrap().to_string();
+        assert!(line1.contains("Ctrl + B") && !line1.contains("No binding"), "{line1}");
+        let (x, y) = find(&f, "Split right").unwrap();
+        assert_eq!(f.rows[y][x].style, Style::Text);                   // Ctrl+B › % matches at step 1
+        let (x, y) = find(&f, "New tab").unwrap();
+        assert_eq!(f.rows[y][x].style, Style::Muted);
+        let st = State { pressed: Some(vec!["Ctrl".into(), "Z".into()]), ..Default::default() };
+        assert!(frame(&view(&s), &st, 120, 40).0.text().lines().nth(1).unwrap().contains("No binding"));
+        let st = State { pressed: Some(vec!["Ctrl".into(), "C".into()]), ctrl_c_at: Some(std::time::Instant::now()), ..Default::default() };
+        assert!(frame(&view(&s), &st, 120, 40).0.text().lines().nth(1).unwrap().contains("Ctrl+C again to quit"));
+        let p = State { screen: crate::ui::input::Screen::Picker, ctrl_c_at: Some(std::time::Instant::now()), ..Default::default() };
+        assert!(picker_frame(&view(&s), &entries(), &p, 120, 30).text().lines().nth(1).unwrap().contains("Ctrl+C again to quit"));
     }
 }

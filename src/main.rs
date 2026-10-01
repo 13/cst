@@ -11,9 +11,10 @@ Usage: cst            pick an app (Enter opens it, Esc goes back)
        cst --list     show detected apps and where their keys come from
        cst --help | --version
 
-Keys: type to filter · Backspace · Ctrl+U clear · Tab/Shift+Tab focus app
+Keys: type to filter · press a shortcut (Ctrl+…, Alt+…, F5) to look it up
+      Backspace · Tab/Shift+Tab next/previous app
       ↑ ↓ PgUp PgDn Home End scroll · Esc clear filter, back to the picker, quit
-      Ctrl+C quit
+      Ctrl+C twice quit
 ";
 
 fn origin_name(o: Origin) -> &'static str {

@@ -110,11 +110,17 @@ from a sheet or to quit.
 | Key | Action |
 |---|---|
 | type | filter (non-matching rows dim) |
-| `Backspace` / `Ctrl+U` | delete a character / clear the filter |
+| a shortcut (`Ctrl+B`, `Alt+←`, `F5`…) | look it up: rows using it stay lit (shown, not run) |
+| `Backspace` | delete a character, or clear the lookup |
 | `Tab` / `Shift+Tab` | focus the next / previous app |
 | `↑` `↓` `PgUp` `PgDn` `Home` `End` | scroll |
-| `Esc` | clear the filter; with an empty filter go back to the picker (or quit) |
-| `Ctrl+C` | quit |
+| `Esc` | clear the filter or lookup; with nothing to clear go back to the picker (or quit) |
+| `Ctrl+C` `Ctrl+C` | quit (press twice within a second; once looks up Ctrl+C) |
+
+In terminals that speak the kitty keyboard protocol (kitty, foot, alacritty, wezterm with
+`enable_kitty_keyboard = true`) `cst` turns it on, so
+`Ctrl+Shift+T` and `Ctrl+T` (or `Ctrl+I` and `Tab`) are told apart. Shortcuts your terminal
+handles itself (kitty's `Ctrl+Shift+T` opens a tab) never reach `cst`.
 
 ## Theming
 

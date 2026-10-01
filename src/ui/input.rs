@@ -6,20 +6,50 @@ pub enum Screen { Picker, #[default] Sheet }
 pub struct State {
     pub query: String, pub focus: Option<usize>, pub scroll: usize, pub quit: bool,
     pub screen: Screen, pub from_picker: bool, pub picked: usize, pub pick_query: String,
+    /// A shortcut pressed in a sheet: rows using it are lit (shown, not run).
+    pub pressed: Option<Combo>,
+    /// When Ctrl+C was last pressed; a second press within a second quits.
+    pub ctrl_c_at: Option<Instant>,
 }
 
+use crate::keys::{combo, Combo};
 use crossterm::event::{KeyCode, KeyEvent, KeyEventKind, KeyModifiers};
+use std::time::{Duration, Instant};
 
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub enum Key { Char(char), Backspace, ClearQuery, Esc, Quit, Tab, BackTab, Up, Down, Left, Right, Enter, PageUp, PageDown, Home, End }
+#[derive(Clone, Debug, PartialEq)]
+pub enum Key { Char(char), Backspace, Esc, Tab, BackTab, Up, Down, Left, Right, Enter, PageUp, PageDown, Home, End, Combo(Combo) }
+
+/// A key with Ctrl/Alt/Super, Shift on a non-character key, or an F-key, as
+/// the sheets name it (Ctrl+C, Alt+←, Ctrl+Shift+T, F5); None otherwise.
+fn combo_of(e: &KeyEvent) -> Option<Combo> {
+    let m = e.modifiers;
+    let (ctrl, alt, sup) = (m.contains(KeyModifiers::CONTROL), m.contains(KeyModifiers::ALT),
+        m.intersects(KeyModifiers::SUPER | KeyModifiers::HYPER | KeyModifiers::META));
+    let mut shift = m.contains(KeyModifiers::SHIFT);
+    let name = match e.code {
+        KeyCode::Char(' ') => "space".to_string(),
+        KeyCode::Char(c) if c.is_ascii_uppercase() => { shift = true; c.to_ascii_lowercase().to_string() }
+        KeyCode::Char(c) => c.to_string(),
+        KeyCode::Left => "left".into(), KeyCode::Right => "right".into(), KeyCode::Up => "up".into(), KeyCode::Down => "down".into(),
+        KeyCode::Enter => "enter".into(), KeyCode::Tab => "tab".into(), KeyCode::Backspace => "backspace".into(),
+        KeyCode::Delete => "delete".into(), KeyCode::Insert => "insert".into(), KeyCode::Home => "home".into(),
+        KeyCode::End => "end".into(), KeyCode::PageUp => "pageup".into(), KeyCode::PageDown => "pagedown".into(),
+        KeyCode::Esc => "esc".into(), KeyCode::F(n) => format!("f{n}"),
+        _ => return None,
+    };
+    let lookup = ctrl || alt || sup || matches!(e.code, KeyCode::F(_))
+        || (m.contains(KeyModifiers::SHIFT) && !matches!(e.code, KeyCode::Char(_)));
+    if !lookup { return None; }
+    let mods: Vec<&str> = [(sup, "super"), (ctrl, "ctrl"), (alt, "alt"), (shift, "shift")].iter().filter(|(on, _)| *on).map(|(_, n)| *n).collect();
+    Some(combo(&mods, &name))
+}
 
 pub fn from_event(e: &KeyEvent) -> Option<Key> {
     if e.kind == KeyEventKind::Release { return None; }
-    let ctrl = e.modifiers.contains(KeyModifiers::CONTROL);
+    if e.code == KeyCode::BackTab { return Some(Key::BackTab); }
+    if let Some(c) = combo_of(e) { return Some(Key::Combo(c)); }
     Some(match e.code {
-        KeyCode::Char('c') | KeyCode::Char('d') if ctrl => Key::Quit,
-        KeyCode::Char('u') if ctrl => Key::ClearQuery,
-        KeyCode::Char(c) if !ctrl && !e.modifiers.contains(KeyModifiers::ALT) => Key::Char(c),
+        KeyCode::Char(c) => Key::Char(c),
         KeyCode::Backspace => Key::Backspace,
         KeyCode::Esc => Key::Esc,
         KeyCode::Tab => Key::Tab,
@@ -40,13 +70,14 @@ pub fn from_event(e: &KeyEvent) -> Option<Key> {
 /// apps: number of apps (for focus cycling); page: body height (for PgUp/PgDn).
 pub fn apply(st: &mut State, key: Key, apps: usize, page: usize) {
     match key {
-        Key::Char(c) => { st.query.push(c); st.scroll = 0; }
+        Key::Combo(c) => { st.pressed = Some(c); st.query.clear(); st.scroll = 0; }
+        Key::Char(c) => { st.pressed = None; st.query.push(c); st.scroll = 0; }
+        Key::Backspace if st.pressed.is_some() => st.pressed = None,
         Key::Backspace => { st.query.pop(); }
-        Key::ClearQuery => st.query.clear(),
+        Key::Esc if st.pressed.is_some() => st.pressed = None,
         // back to the picker when the sheet was opened from it
         Key::Esc if st.query.is_empty() => if st.from_picker { st.screen = Screen::Picker } else { st.quit = true },
         Key::Esc => st.query.clear(),
-        Key::Quit => st.quit = true,
         Key::Tab => {
             if apps > 0 { st.focus = Some(match st.focus { Some(i) if i + 1 < apps => i + 1, _ => 0 }); }
             st.scroll = 0;
@@ -63,6 +94,15 @@ pub fn apply(st: &mut State, key: Key, apps: usize, page: usize) {
         Key::End => st.scroll = usize::MAX / 2,
         Key::Left | Key::Right | Key::Enter => {}
     }
+}
+
+/// Every key goes through here first: Ctrl+C twice within a second quits,
+/// any other key forgets the first press.
+pub fn note_key(st: &mut State, key: &Key, now: Instant) {
+    let is_ctrl_c = matches!(key, Key::Combo(c) if c.len() == 2 && c[0] == "Ctrl" && c[1] == "C");
+    if !is_ctrl_c { st.ctrl_c_at = None; return; }
+    if st.ctrl_c_at.is_some_and(|t| now.duration_since(t) <= Duration::from_secs(1)) { st.quit = true; }
+    st.ctrl_c_at = Some(now);
 }
 
 /// Picker rows for a filter: indices of the matching apps, sorted by name.
@@ -83,10 +123,9 @@ pub fn apply_picker(st: &mut State, key: Key, apps: &[&str], cols: usize) {
     match key {
         Key::Char(c) => { st.pick_query.push(c); st.picked = 0; }
         Key::Backspace => { st.pick_query.pop(); st.picked = 0; }
-        Key::ClearQuery => { st.pick_query.clear(); st.picked = 0; }
         Key::Esc if st.pick_query.is_empty() => st.quit = true,
         Key::Esc => { st.pick_query.clear(); st.picked = 0; }
-        Key::Quit => st.quit = true,
+        Key::Combo(_) => {}
         Key::Right | Key::Tab => st.picked = (st.picked + 1) % n,
         Key::Left | Key::BackTab => st.picked = (st.picked + n - 1) % n,
         Key::Down => st.picked = (st.picked + cols).min(n - 1),
@@ -112,11 +151,7 @@ mod tests {
 
     #[test]
     fn events_map_to_keys() {
-        assert_eq!(from_event(&ev(KeyCode::Char('c'), KeyModifiers::CONTROL)), Some(Key::Quit));
-        assert_eq!(from_event(&ev(KeyCode::Char('d'), KeyModifiers::CONTROL)), Some(Key::Quit));
-        assert_eq!(from_event(&ev(KeyCode::Char('u'), KeyModifiers::CONTROL)), Some(Key::ClearQuery));
         assert_eq!(from_event(&ev(KeyCode::Char('S'), KeyModifiers::SHIFT)), Some(Key::Char('S')));
-        assert_eq!(from_event(&ev(KeyCode::Char('x'), KeyModifiers::ALT)), None);
         assert_eq!(from_event(&ev(KeyCode::BackTab, KeyModifiers::SHIFT)), Some(Key::BackTab));
         let mut release = ev(KeyCode::Char('a'), KeyModifiers::NONE);
         release.kind = KeyEventKind::Release;
@@ -134,9 +169,7 @@ mod tests {
         assert_eq!((st.query.as_str(), st.quit), ("", false));
         apply(&mut st, Key::Esc, 3, 10);
         assert!(st.quit);
-        let mut st = State { query: "abc".into(), ..Default::default() };
-        apply(&mut st, Key::ClearQuery, 3, 10);
-        assert_eq!(st.query, "");
+        let mut st = State::default();
         apply(&mut st, Key::Backspace, 3, 10); // empty: no panic
     }
 
@@ -233,5 +266,72 @@ mod tests {
         assert!(st.quit);
         assert_eq!(from_event(&ev(KeyCode::Enter, KeyModifiers::NONE)), Some(Key::Enter));
         assert_eq!(from_event(&ev(KeyCode::Left, KeyModifiers::NONE)), Some(Key::Left));
+    }
+
+    fn combo_of(v: &[&str]) -> Key { Key::Combo(v.iter().map(|s| s.to_string()).collect()) }
+
+    #[test]
+    fn combos_from_events() {
+        use KeyModifiers as M;
+        let k = |code, m| from_event(&ev(code, m));
+        assert_eq!(k(KeyCode::Char('c'), M::CONTROL), Some(combo_of(&["Ctrl", "C"])));
+        assert_eq!(k(KeyCode::Char('u'), M::CONTROL), Some(combo_of(&["Ctrl", "U"])));     // a lookup now, not "clear"
+        assert_eq!(k(KeyCode::Left, M::ALT), Some(combo_of(&["Alt", "←"])));
+        assert_eq!(k(KeyCode::F(5), M::NONE), Some(combo_of(&["F5"])));
+        assert_eq!(k(KeyCode::F(5), M::SHIFT), Some(combo_of(&["Shift", "F5"])));
+        assert_eq!(k(KeyCode::Up, M::SHIFT), Some(combo_of(&["Shift", "↑"])));
+        assert_eq!(k(KeyCode::Char('t'), M::CONTROL | M::SHIFT), Some(combo_of(&["Ctrl", "Shift", "T"])));  // kitty protocol
+        assert_eq!(k(KeyCode::Char('T'), M::CONTROL | M::SHIFT), Some(combo_of(&["Ctrl", "Shift", "T"])));
+        assert_eq!(k(KeyCode::Char('T'), M::ALT), Some(combo_of(&["Alt", "Shift", "T"])));                 // legacy Alt+Shift+T
+        assert_eq!(k(KeyCode::Char(' '), M::CONTROL), Some(combo_of(&["Ctrl", "Space"])));
+        assert_eq!(k(KeyCode::Tab, M::CONTROL), Some(combo_of(&["Ctrl", "Tab"])));
+        assert_eq!(k(KeyCode::Char('x'), M::SUPER), Some(combo_of(&["Super", "X"])));
+        assert_eq!(k(KeyCode::Char('x'), M::NONE), Some(Key::Char('x')));
+        assert_eq!(k(KeyCode::Char('X'), M::SHIFT), Some(Key::Char('X')));
+        assert_eq!(k(KeyCode::BackTab, M::SHIFT), Some(Key::BackTab));
+        assert_eq!(k(KeyCode::Left, M::NONE), Some(Key::Left));
+    }
+
+    #[test]
+    fn lookup_letters_and_clearing() {
+        let mut st = State::default();
+        apply(&mut st, combo_of(&["Ctrl", "B"]), 3, 10);
+        assert_eq!(st.pressed, Some(vec!["Ctrl".to_string(), "B".to_string()]));
+        apply(&mut st, Key::Char('x'), 3, 10);                         // typing switches to a text filter
+        assert_eq!((st.pressed.clone(), st.query.as_str()), (None, "x"));
+        apply(&mut st, combo_of(&["Ctrl", "B"]), 3, 10);               // a lookup replaces the text filter
+        assert_eq!((st.pressed.is_some(), st.query.as_str()), (true, ""));
+        apply(&mut st, Key::Backspace, 3, 10);
+        assert_eq!(st.pressed, None);
+        apply(&mut st, combo_of(&["F5"]), 3, 10);
+        apply(&mut st, Key::Esc, 3, 10);                               // Esc clears the lookup first
+        assert_eq!((st.pressed.clone(), st.quit), (None, false));
+        apply(&mut st, Key::Esc, 3, 10);
+        assert!(st.quit);
+        let mut p = State { screen: Screen::Picker, ..Default::default() };
+        apply_picker(&mut p, combo_of(&["Ctrl", "B"]), &["a", "b"], 2);   // the picker ignores lookups
+        assert_eq!((p.pressed.clone(), p.screen, p.quit), (None, Screen::Picker, false));
+    }
+
+    #[test]
+    fn ctrl_c_twice_within_a_second_quits() {
+        use std::time::Duration;
+        let t0 = std::time::Instant::now();
+        let cc = combo_of(&["Ctrl", "C"]);
+        let mut st = State::default();
+        note_key(&mut st, &cc, t0);
+        assert!(!st.quit && st.ctrl_c_at == Some(t0));
+        note_key(&mut st, &cc, t0 + Duration::from_millis(500));
+        assert!(st.quit);
+        let mut st = State::default();
+        note_key(&mut st, &cc, t0);
+        note_key(&mut st, &cc, t0 + Duration::from_secs(2));            // too slow: just another lookup
+        assert!(!st.quit);
+        let mut st = State::default();
+        note_key(&mut st, &cc, t0);
+        note_key(&mut st, &Key::Char('a'), t0 + Duration::from_millis(100));   // another key in between resets
+        assert_eq!(st.ctrl_c_at, None);
+        note_key(&mut st, &cc, t0 + Duration::from_millis(200));
+        assert!(!st.quit);
     }
 }
