@@ -2,6 +2,12 @@
 name = "cst"
 version = "0.1.0"
 edition = "2024"
+description = "Keyboard shortcut cheatsheet for your terminal apps, in the style of an awesome WM popup"
+license = "MIT"
+repository = "https://github.com/13/cst"
+readme = "README.md"
+keywords = ["cheatsheet", "keybindings", "tui", "shortcuts"]
+categories = ["command-line-utilities"]
 
 [dependencies]
 crossterm = "0.29.0"
