@@ -14,8 +14,10 @@ pub mod alacritty;
 pub mod awesome;
 mod kdl;
 pub mod kitty;
+pub mod nvim;
 pub mod tmux;
 pub mod wezterm;
+pub mod yazi;
 pub mod zellij;
 
 pub trait Runner: Send + Sync {
@@ -158,6 +160,11 @@ pub fn parse_defaults(text: &str, parse: &dyn Fn(&str) -> Seq, scope_of: &dyn Fn
     }).collect()
 }
 
+/// Live bindings join the group of the default with the same description.
+pub fn default_group(defaults: &[Binding], desc: &str) -> String {
+    defaults.iter().find(|d| d.desc.eq_ignore_ascii_case(desc)).map(|d| d.group.clone()).unwrap_or_else(|| "Custom".into())
+}
+
 /// Exact action first, else the longest whole-word prefix (args dropped).
 pub fn describe(table: &[(&str, &str)], action: &str) -> Option<String> {
     let a = action.trim().to_lowercase();
@@ -193,7 +200,7 @@ pub trait Source: Sync {
 
 /// Every source in display order.
 pub fn all() -> Vec<Box<dyn Source>> {
-    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij)]
+    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij), Box::new(nvim::Nvim), Box::new(yazi::Yazi)]
 }
 
 /// Installed sources, loaded in parallel, in the order given.

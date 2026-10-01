@@ -1,0 +1,36 @@
+# vim notation; sequences written as typed
+Motion :: gg :: Top of file
+Motion :: G :: End of file
+Motion :: w :: Next word
+Motion :: b :: Previous word
+Motion :: 0 :: Start of line
+Motion :: $ :: End of line
+Motion :: % :: Matching bracket
+Motion :: <C-d> :: Half page down
+Motion :: <C-u> :: Half page up
+Motion :: <C-o> :: Jump back
+Motion :: <C-i> :: Jump forward
+Editing :: i :: Insert
+Editing :: a :: Append
+Editing :: o :: Open line below
+Editing :: O :: Open line above
+Editing :: u :: Undo
+Editing :: <C-r> :: Redo
+Editing :: . :: Repeat
+Editing :: dd :: Delete line
+Editing :: yy :: Yank line
+Editing :: p :: Paste after
+Editing :: gcc :: Toggle comment
+Search :: / :: Search forward
+Search :: ? :: Search backward
+Search :: n :: Next match
+Search :: N :: Previous match
+Search :: * :: Search word
+Windows :: <C-w>s :: Split
+Windows :: <C-w>v :: Vertical split
+Windows :: <C-w>w :: Next window
+Windows :: <C-w>q :: Close window
+Windows :: <C-w>h :: Focus left
+Windows :: <C-w>l :: Focus right
+Files :: :w<CR> :: Save
+Files :: :q<CR> :: Quit

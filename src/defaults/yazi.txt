@@ -1,0 +1,35 @@
+# space-separated keys, each in vim notation
+Navigation :: k :: Up
+Navigation :: j :: Down
+Navigation :: h :: Parent directory
+Navigation :: l :: Enter directory
+Navigation :: g g :: Top
+Navigation :: G :: Bottom
+Navigation :: <C-u> :: Half page up
+Navigation :: <C-d> :: Half page down
+Navigation :: g h :: Go home
+Navigation :: z :: Jump with zoxide
+Selection :: <Space> :: Toggle selection
+Selection :: v :: Visual mode
+Selection :: <C-a> :: Select all
+Selection :: <Esc> :: Cancel selection
+Operations :: o :: Open
+Operations :: <Enter> :: Open
+Operations :: y :: Yank
+Operations :: x :: Cut
+Operations :: p :: Paste
+Operations :: d :: Trash
+Operations :: D :: Delete permanently
+Operations :: a :: Create
+Operations :: r :: Rename
+Operations :: . :: Toggle hidden
+Operations :: ; :: Run shell command
+Search :: s :: Search by name (fd)
+Search :: S :: Search content (rg)
+Search :: / :: Find next
+Search :: f :: Filter
+Tabs :: t :: New tab
+Tabs :: [ :: Previous tab
+Tabs :: ] :: Next tab
+Other :: ~ :: Help
+Other :: q :: Quit
