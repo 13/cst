@@ -21,3 +21,5 @@ jobs:
         run: cargo build --release && scripts/test-install.sh
       - name: Release script test
         run: scripts/test-release.sh
+      - name: ansi2svg selftest
+        run: python3 scripts/ansi2svg.py --selftest
