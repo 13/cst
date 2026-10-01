@@ -57,9 +57,12 @@ yay -S cst-bin        # or paru -S cst-bin
 **Arch Linux (package from the release page)**
 
 ```sh
-curl -LO https://github.com/13/cst/releases/latest/download/cst-bin-<version>-1-x86_64.pkg.tar.zst
-sudo pacman -U cst-bin-*-x86_64.pkg.tar.zst
+gh release download -R 13/cst -p 'cst-bin-[0-9]*-x86_64.pkg.tar.zst'
+sudo pacman -U cst-bin-[0-9]*-x86_64.pkg.tar.zst
 ```
+
+(or download `cst-bin-<version>-1-x86_64.pkg.tar.zst` from the
+[latest release](https://github.com/13/cst/releases/latest) in a browser)
 
 **Any x86_64 Linux (one line)**
 

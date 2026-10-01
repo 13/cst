@@ -25,7 +25,8 @@ an unused tag. It bumps `Cargo.toml`, commits `release vX.Y.Z`, tags
    `.sha256`.
 2. **pacman** — builds `cst-bin-X.Y.Z-1-x86_64.pkg.tar.zst` from
    `packaging/aur/PKGBUILD.in` in an Arch container and attaches it, the
-   PKGBUILD and `.SRCINFO` to the release.
+   PKGBUILD and `.SRCINFO` (as `cst-bin.SRCINFO`: GitHub renames assets
+   that start with a dot) to the release.
 3. **aur** — pushes PKGBUILD and `.SRCINFO` to `cst-bin` on the AUR.
 
 A failed job can be re-run from the Actions tab (`gh run rerun <id>
