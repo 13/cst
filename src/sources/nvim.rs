@@ -30,8 +30,10 @@ impl Source for Nvim {
     fn binary(&self) -> &'static str { "nvim" }
     fn load(&self, env: &Env) -> Loaded {
         let defaults = parse_defaults(DEFAULTS, &|k| parse_vim(k), &|_| String::new());
+        // NvChad's own mappings have their own sheet
+        let nvchad = super::nvchad::nvchad_descs(env).unwrap_or_default();
         let live = dump(env)
-            .map(|out| Some(rows(&out).filter(|(mode, _, _)| *mode == "n").map(|(_, lhs, desc)| {
+            .map(|out| Some(rows(&out).filter(|(mode, _, desc)| *mode == "n" && !nvchad.contains(&desc.to_lowercase())).map(|(_, lhs, desc)| {
                 let group = match default_group(&defaults, desc).as_str() { "Custom" => "Mappings".to_string(), g => g.to_string() };
                 Change::Bind(Binding::new(&group, parse_vim(lhs), desc))
             }).collect()))
