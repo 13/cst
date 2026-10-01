@@ -1,0 +1,86 @@
+name: release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-unknown-linux-musl
+      - uses: Swatinem/rust-cache@v2
+      - name: Tag matches Cargo.toml version
+        run: |
+          v="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
+          if [ "v$v" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match Cargo.toml version $v"; exit 1
+          fi
+      - name: Tests
+        run: cargo test
+      - name: Build static binary
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q musl-tools
+          cargo build --release --target x86_64-unknown-linux-musl
+      - name: Package
+        run: |
+          mkdir -p dist/cst-x86_64-linux
+          cp target/x86_64-unknown-linux-musl/release/cst README.md LICENSE dist/cst-x86_64-linux/
+          tar -czf dist/cst-x86_64-linux.tar.gz -C dist cst-x86_64-linux
+          (cd dist && sha256sum cst-x86_64-linux.tar.gz > cst-x86_64-linux.tar.gz.sha256)
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" --title "cst $GITHUB_REF_NAME" --generate-notes dist/cst-x86_64-linux.tar.gz dist/cst-x86_64-linux.tar.gz.sha256
+
+  pacman:
+    needs: build
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build cst-bin package
+        run: |
+          pacman -Syu --noconfirm --needed github-cli
+          v="${GITHUB_REF_NAME#v}"
+          mkdir -p /tmp/pkg && cd /tmp/pkg
+          curl -fsSL -o "cst-x86_64-linux-$v.tar.gz" "https://github.com/$GITHUB_REPOSITORY/releases/download/$GITHUB_REF_NAME/cst-x86_64-linux.tar.gz"
+          "$GITHUB_WORKSPACE/packaging/aur/render.sh" "$v" "$(sha256sum "cst-x86_64-linux-$v.tar.gz" | cut -d' ' -f1)" > PKGBUILD
+          useradd -m builder
+          chown -R builder /tmp/pkg
+          su builder -c 'cd /tmp/pkg && makepkg -f --noconfirm && makepkg --printsrcinfo > .SRCINFO'
+      - name: Upload package
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd /tmp/pkg
+          gh release upload "$GITHUB_REF_NAME" ./*.pkg.tar.zst PKGBUILD .SRCINFO --repo "$GITHUB_REPOSITORY"
+
+  aur:
+    needs: pacman
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push cst-bin to the AUR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          AUR_SSH_KEY: ${{ secrets.AUR_SSH_KEY }}
+        run: |
+          if [ -z "$AUR_SSH_KEY" ]; then
+            echo "::warning::AUR_SSH_KEY is not set, skipping the AUR push (see docs/RELEASING.md)"; exit 0
+          fi
+          mkdir -p ~/.ssh
+          printf '%s\n' "$AUR_SSH_KEY" > ~/.ssh/aur && chmod 600 ~/.ssh/aur
+          ssh-keyscan -t ed25519,rsa aur.archlinux.org >> ~/.ssh/known_hosts 2>/dev/null
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/aur -o IdentitiesOnly=yes"
+          git clone -q ssh://aur@aur.archlinux.org/cst-bin.git aur
+          gh release download "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" -p PKGBUILD -p .SRCINFO -D aur --clobber
+          cd aur
+          git config user.name "cst release bot"
+          git config user.email "13@users.noreply.github.com"
+          git add PKGBUILD .SRCINFO
+          if git diff --cached --quiet; then echo "AUR already up to date"; exit 0; fi
+          git commit -qm "cst-bin ${GITHUB_REF_NAME#v}"
+          git push -q origin HEAD:master

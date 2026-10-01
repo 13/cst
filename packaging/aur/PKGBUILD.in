@@ -1,0 +1,18 @@
+# Maintainer: ben <13@users.noreply.github.com>
+pkgname=cst-bin
+pkgver=@VERSION@
+pkgrel=1
+pkgdesc="Keyboard shortcut cheatsheet for your terminal apps (awesome, tmux, zellij, kitty, ...)"
+arch=('x86_64')
+url="https://github.com/13/cst"
+license=('MIT')
+provides=('cst')
+conflicts=('cst')
+source=("cst-x86_64-linux-$pkgver.tar.gz::$url/releases/download/v$pkgver/cst-x86_64-linux.tar.gz")
+sha256sums=('@SHA256@')
+
+package() {
+  install -Dm755 cst-x86_64-linux/cst "$pkgdir/usr/bin/cst"
+  install -Dm644 cst-x86_64-linux/LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 cst-x86_64-linux/README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}
