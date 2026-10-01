@@ -14,7 +14,15 @@ impl Source for Nushell {
     fn binary(&self) -> &'static str { "nu" }
     fn load(&self, env: &Env) -> Loaded {
         let defaults = parse_defaults(DEFAULTS, &|k| vec![parse_prefixed(k, '+')], &|g| g.to_lowercase().replace(' ', "_"));
-        let live = match env.run("nu", &["-c", NU_SCRIPT]) {
+        // `nu -c` skips the user's config files, which hold $env.config.keybindings
+        let dir = env.config("nushell");
+        let mut args: Vec<String> = Vec::new();
+        for (flag, file) in [("--env-config", "env.nu"), ("--config", "config.nu")] {
+            if dir.join(file).is_file() { args.extend([flag.to_string(), dir.join(file).display().to_string()]); }
+        }
+        args.extend(["-c".to_string(), NU_SCRIPT.to_string()]);
+        let args: Vec<&str> = args.iter().map(String::as_str).collect();
+        let live = match env.run("nu", &args) {
             None => Err("nu keybindings failed".to_string()),
             Some(out) => {
                 let changes: Vec<Change> = out.lines().flat_map(line_changes).collect();
@@ -111,6 +119,18 @@ mod tests {
         assert_eq!(keys_of(&l, e, "Insertnewline"), vec!["Alt+Enter"]);
         assert!(keys_of(&l, e, "Cut word left").is_empty());                    // user null unbinds the default
         assert_eq!(keys_of(&l, "NUSHELL · VI INSERT", "Ctrl c"), vec!["Ctrl+C"]);
+    }
+
+    #[test]
+    fn user_config_files_are_passed_to_nu() {
+        // `nu -c` skips config.nu, which holds the user's keybindings
+        let home = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/nushell/home");
+        let dir = home.join(".config/nushell");
+        let out = std::fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/tests/fixtures/nushell/keys.tsv")).unwrap();
+        let key = format!("nu --env-config {} --config {} -c {NU_SCRIPT}", dir.join("env.nu").display(), dir.join("config.nu").display());
+        let l = Nushell.load(&Env::test(&home, FakeRunner(HashMap::from([(key, out)]))));
+        assert_eq!(l.origin, Origin::Live);
+        assert_eq!(keys_of(&l, "NUSHELL · EMACS", "Fzf menu"), vec!["Ctrl+T"]);
     }
 
     #[test]
