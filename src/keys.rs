@@ -31,6 +31,7 @@ const NAMES: &[(&str, &str)] = &[
     ("backslash", "\\"), ("bslash", "\\"), ("bar", "|"), ("asciicircum", "^"), ("dead_circumflex", "^"),
     ("grave", "`"), ("apostrophe", "'"), ("semicolon", ";"), ("bracketleft", "["), ("bracketright", "]"),
     ("numpadadd", "+"), ("numpadsubtract", "-"),
+    ("rubout", "Bksp"), ("ret", "Enter"), ("lfd", "Enter"), ("newline", "Enter"), ("spc", "Space"),
     ("xf86audioraisevolume", "Vol+"), ("xf86audiolowervolume", "Vol−"), ("xf86audiomute", "Mute"),
     ("xf86audiomicmute", "Mic mute"), ("xf86audioplay", "Play"), ("xf86audionext", "Next"),
     ("xf86audioprev", "Prev"), ("xf86audiostop", "Stop"),
@@ -112,6 +113,143 @@ pub fn seq_text(seq: &Seq) -> String {
     seq.iter().map(|c| c.join("+")).collect::<Vec<_>>().join(" › ")
 }
 
+/// Notation of terminal byte sequences: zsh `bindkey` (`^X`, `^[`),
+/// readline (`\C-x`, `\M-x`, `\e`, octal) and fish 3 (`\cx`, `\e`, `\x7f`).
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub enum Term { Zsh, Readline, Fish3 }
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+enum Unit { Ctrl(char), Esc, Meta(char), Ch(char) }
+
+fn byte_unit(b: u32) -> Unit {
+    match b {
+        0x1b => Unit::Esc,
+        0x7f => Unit::Ctrl('?'),
+        0..=0x1f => Unit::Ctrl(char::from_u32(b + 0x40).unwrap_or('?')),
+        _ => Unit::Ch(char::from_u32(b).unwrap_or('?')),
+    }
+}
+
+fn units(s: &str, style: Term) -> Vec<Unit> {
+    let mut out = Vec::new();
+    let mut it = s.chars().peekable();
+    while let Some(c) = it.next() {
+        if c == '^' && style == Term::Zsh {
+            match it.next() {
+                Some('[') => out.push(Unit::Esc),
+                Some(n) => out.push(Unit::Ctrl(n.to_ascii_uppercase())),
+                None => out.push(Unit::Ch('^')),
+            }
+            continue;
+        }
+        if c != '\\' {
+            out.push(Unit::Ch(c));
+            continue;
+        }
+        match it.next() {
+            Some('C') if style == Term::Readline && it.peek() == Some(&'-') => {
+                it.next();
+                if let Some(n) = it.next() { out.push(Unit::Ctrl(n.to_ascii_uppercase())) }
+            }
+            Some('M') if it.peek() == Some(&'-') => {
+                it.next();
+                if let Some(n) = it.next() { out.push(Unit::Meta(n)) }
+            }
+            Some('c') if style == Term::Fish3 => if let Some(n) = it.next() { out.push(Unit::Ctrl(n.to_ascii_uppercase())) },
+            Some('e') | Some('E') => out.push(Unit::Esc),
+            Some('t') => out.push(Unit::Ctrl('I')),
+            Some('r') | Some('n') => out.push(Unit::Ctrl('M')),
+            Some('x') if style == Term::Fish3 => {
+                let hex: String = (0..2).filter_map(|_| it.next_if(|d| d.is_ascii_hexdigit())).collect();
+                out.push(u32::from_str_radix(&hex, 16).map(byte_unit).unwrap_or(Unit::Ch('x')));
+            }
+            Some(d) if style == Term::Readline && d.is_digit(8) => {
+                let mut oct = d.to_string();
+                while oct.len() < 3 { match it.next_if(|x| x.is_digit(8)) { Some(x) => oct.push(x), None => break } }
+                out.push(byte_unit(u32::from_str_radix(&oct, 8).unwrap_or(0)));
+            }
+            Some(o) => out.push(Unit::Ch(o)),
+            None => out.push(Unit::Ch('\\')),
+        }
+    }
+    out
+}
+
+fn ctrl_combo(c: char, alt: bool) -> Combo {
+    let plain = |name: &str| if alt { combo(&["alt"], name) } else { vec![name.to_string()] };
+    let mods: &[&str] = if alt { &["ctrl", "alt"] } else { &["ctrl"] };
+    match c {
+        'I' => plain("Tab"),
+        'M' | 'J' => plain("Enter"),
+        '?' => plain("Bksp"),
+        '[' => plain("Esc"),
+        '@' => combo(mods, "Space"),
+        _ => combo(mods, &c.to_string()),
+    }
+}
+
+/// CSI (`ESC [`) / SS3 (`ESC O`) sequence body (params + final) → key.
+fn csi(body: &str, ss3: bool) -> Option<Combo> {
+    let fin = body.chars().last()?;
+    let params = &body[..body.len() - fin.len_utf8()];
+    let mut nums = params.split(';').map(|p| p.parse::<u32>().ok());
+    let (first, modp) = (nums.next().flatten(), nums.next().flatten());
+    let key: String = match (fin, first) {
+        ('A', _) => "↑".into(), ('B', _) => "↓".into(), ('C', _) => "→".into(), ('D', _) => "←".into(),
+        ('H', _) => "Home".into(), ('F', _) => "End".into(), ('Z', _) => "⇧Tab".into(),
+        ('P', _) if ss3 => "F1".into(), ('Q', _) if ss3 => "F2".into(),
+        ('R', _) if ss3 => "F3".into(), ('S', _) if ss3 => "F4".into(),
+        ('~', Some(1 | 7)) => "Home".into(), ('~', Some(4 | 8)) => "End".into(),
+        ('~', Some(2)) => "Ins".into(), ('~', Some(3)) => "Del".into(),
+        ('~', Some(5)) => "PgUp".into(), ('~', Some(6)) => "PgDn".into(),
+        ('~', Some(n @ 11..=15)) => format!("F{}", n - 10),
+        ('~', Some(n @ 17..=21)) => format!("F{}", n - 11),
+        ('~', Some(n @ 23..=24)) => format!("F{}", n - 12),
+        _ => return None,
+    };
+    let mods: Vec<&str> = match modp {
+        Some(m) if m >= 2 => [(1, "shift"), (2, "alt"), (4, "ctrl")].iter()
+            .filter(|(bit, _)| (m - 1) & bit != 0).map(|(_, n)| *n).collect(),
+        _ => vec![],
+    };
+    Some(combo(&mods, &key))
+}
+
+pub fn parse_term(s: &str, style: Term) -> Seq {
+    let u = units(s, style);
+    let mut seq = Vec::new();
+    let mut i = 0;
+    while i < u.len() {
+        match u[i] {
+            Unit::Esc if matches!(u.get(i + 1), Some(Unit::Ch('[' | 'O'))) => {
+                let ss3 = u[i + 1] == Unit::Ch('O');
+                let (mut j, mut body) = (i + 2, String::new());
+                while let Some(Unit::Ch(c)) = u.get(j) {
+                    body.push(*c);
+                    j += 1;
+                    if c.is_ascii_alphabetic() || *c == '~' { break; }
+                }
+                let raw = || vec![format!("Esc{}{body}", if ss3 { 'O' } else { '[' })];
+                seq.push(csi(&body, ss3).unwrap_or_else(raw));
+                i = j;
+            }
+            Unit::Esc => match u.get(i + 1) {
+                Some(&Unit::Ch(c)) => {
+                    let k = if c == ' ' { "Space".to_string() } else { c.to_string() };
+                    seq.push(combo(&["alt"], &k));
+                    i += 2;
+                }
+                Some(&Unit::Ctrl(c)) => { seq.push(ctrl_combo(c, true)); i += 2; }
+                _ => { seq.push(vec!["Esc".into()]); i += 1; }
+            },
+            Unit::Meta(c) => { seq.push(combo(&["alt"], &c.to_string())); i += 1; }
+            Unit::Ctrl(c) => { seq.push(ctrl_combo(c, false)); i += 1; }
+            Unit::Ch(c) => { seq.push(vec![if c == ' ' { "Space".into() } else { key_name(&c.to_string(), false) }]); i += 1; }
+        }
+    }
+    seq
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -166,5 +304,67 @@ mod tests {
     #[test]
     fn seq_text_joins() {
         assert_eq!(seq_text(&vec![s(&["Ctrl", "A"]), s(&["%"])]), "Ctrl+A › %");
+    }
+
+    fn t(s: &str, style: Term) -> String { seq_text(&parse_term(s, style)) }
+
+    #[test]
+    fn term_zsh() {
+        assert_eq!(t("^X^E", Term::Zsh), "Ctrl+X › Ctrl+E");
+        assert_eq!(t("^[[A", Term::Zsh), "↑");
+        assert_eq!(t("^[[1;5C", Term::Zsh), "Ctrl+→");
+        assert_eq!(t("^[[1;3D", Term::Zsh), "Alt+←");
+        assert_eq!(t("^[b", Term::Zsh), "Alt+B");
+        assert_eq!(t("^?", Term::Zsh), "Bksp");
+        assert_eq!(t("^I", Term::Zsh), "Tab");
+        assert_eq!(t("^J", Term::Zsh), "Enter");
+        assert_eq!(t("^[", Term::Zsh), "Esc");
+        assert_eq!(t("^[^H", Term::Zsh), "Ctrl+Alt+H");
+        assert_eq!(t("^[[3~", Term::Zsh), "Del");
+        assert_eq!(t("^[[3;5~", Term::Zsh), "Ctrl+Del");
+        assert_eq!(t("^[OH", Term::Zsh), "Home");
+        assert_eq!(t("^[[Z", Term::Zsh), "⇧Tab");
+        assert_eq!(t("^[[15~", Term::Zsh), "F5");
+        assert_eq!(t("gg", Term::Zsh), "g › g");
+        assert_eq!(t("^[ ", Term::Zsh), "Alt+Space");
+    }
+
+    #[test]
+    fn term_readline() {
+        assert_eq!(t("\\C-x\\C-e", Term::Readline), "Ctrl+X › Ctrl+E");
+        assert_eq!(t("\\e[1;5C", Term::Readline), "Ctrl+→");
+        assert_eq!(t("\\M-b", Term::Readline), "Alt+B");
+        assert_eq!(t("\\eb", Term::Readline), "Alt+B");
+        assert_eq!(t("\\C-?", Term::Readline), "Bksp");
+        assert_eq!(t("\\177", Term::Readline), "Bksp");
+        assert_eq!(t("\\\\", Term::Readline), "\\");
+        assert_eq!(t("\\\"", Term::Readline), "\"");
+        assert_eq!(t("\\t", Term::Readline), "Tab");
+    }
+
+    #[test]
+    fn term_fish3() {
+        assert_eq!(t("\\cx", Term::Fish3), "Ctrl+X");
+        assert_eq!(t("\\e\\[A", Term::Fish3), "↑");
+        assert_eq!(t("\\x7f", Term::Fish3), "Bksp");
+        assert_eq!(t("\\e.", Term::Fish3), "Alt+.");
+        assert_eq!(t("\\r", Term::Fish3), "Enter");
+    }
+
+    #[test]
+    fn term_unknown_sequences_verbatim() {
+        assert_eq!(t("^[[200~", Term::Zsh), "Esc[200~");
+        assert_eq!(t("\\e[57399u", Term::Readline), "Esc[57399u");
+        assert_eq!(t("^[[", Term::Zsh), "Esc[");
+        assert_eq!(t("^", Term::Zsh), "^");
+        assert_eq!(t("\\", Term::Readline), "\\");
+        assert_eq!(t("", Term::Zsh), "");
+    }
+
+    #[test]
+    fn readline_key_names() {
+        assert_eq!(key_name("RUBOUT", false), "Bksp");
+        assert_eq!(key_name("RET", false), "Enter");
+        assert_eq!(key_name("SPC", false), "Space");
     }
 }

@@ -202,6 +202,8 @@ pub fn humanize(s: &str) -> String {
 pub trait Source: Sync {
     fn app(&self) -> &'static str;
     fn binary(&self) -> &'static str;
+    /// Whether to show this app; most sources: its binary is on PATH.
+    fn installed(&self, env: &Env) -> bool { env.which(self.binary()) }
     fn load(&self, env: &Env) -> Loaded;
 }
 
@@ -212,7 +214,7 @@ pub fn all() -> Vec<Box<dyn Source>> {
 
 /// Installed sources, loaded in parallel, in the order given.
 pub fn load_installed(sources: &[Box<dyn Source>], env: &Env) -> Vec<(&'static str, Loaded)> {
-    let installed: Vec<&Box<dyn Source>> = sources.iter().filter(|s| env.which(s.binary())).collect();
+    let installed: Vec<&Box<dyn Source>> = sources.iter().filter(|s| s.installed(env)).collect();
     let prev = std::panic::take_hook();
     std::panic::set_hook(Box::new(|_| {})); // a crashing source becomes a note, not stderr noise
     let out = std::thread::scope(|scope| {
@@ -341,5 +343,19 @@ mod tests {
         assert!(out[0].1.note.as_deref().unwrap().contains("crashed"));
         assert_eq!(out[0].1.sections[0].title, "BOOM");
         assert_eq!(out[1].1.sections[0].rows.len(), 1);
+    }
+
+    struct NoBinary;
+    impl Source for NoBinary {
+        fn app(&self) -> &'static str { "nobinary" }
+        fn binary(&self) -> &'static str { "definitely-not-installed-cst" }
+        fn installed(&self, _: &Env) -> bool { true }
+        fn load(&self, _: &Env) -> Loaded { layer(vec![Binding::new("", kp("a"), "A")], Ok(None), true).into_loaded("nobinary") }
+    }
+
+    #[test]
+    fn installed_override_is_used() {
+        let srcs: Vec<Box<dyn Source>> = vec![Box::new(NoBinary)];
+        assert_eq!(load_installed(&srcs, &Env::system()).len(), 1);
     }
 }
