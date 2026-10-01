@@ -11,6 +11,7 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 pub mod alacritty;
+pub mod awesome;
 mod kdl;
 pub mod kitty;
 pub mod tmux;
@@ -192,7 +193,7 @@ pub trait Source: Sync {
 
 /// Every source in display order.
 pub fn all() -> Vec<Box<dyn Source>> {
-    vec![Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij)]
+    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij)]
 }
 
 /// Installed sources, loaded in parallel, in the order given.
