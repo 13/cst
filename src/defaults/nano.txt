@@ -1,0 +1,39 @@
+# nano main-menu shortcuts (nano notation)
+File :: ^S :: Save
+File :: ^O :: Write out (save as)
+File :: ^R :: Insert file
+File :: ^X :: Exit
+Edit :: ^K :: Cut
+Edit :: ^U :: Paste
+Edit :: M-6 :: Copy
+Edit :: M-A :: Set mark
+Edit :: M-U :: Undo
+Edit :: M-E :: Redo
+Edit :: ^J :: Justify
+Edit :: M-} :: Indent
+Edit :: M-{ :: Unindent
+Edit :: M-3 :: Toggle comment
+Edit :: ^D :: Delete
+Edit :: M-T :: Cut to end of file
+Search :: ^W :: Search
+Search :: ^Q :: Search backward
+Search :: M-W :: Find next
+Search :: M-Q :: Find previous
+Search :: ^\ :: Replace
+Navigation :: ^/ :: Go to line
+Navigation :: ^A :: Start of line
+Navigation :: ^E :: End of line
+Navigation :: ^Y :: Page up
+Navigation :: ^V :: Page down
+Navigation :: M-\ :: First line
+Navigation :: M-/ :: Last line
+Navigation :: ^Left :: Previous word
+Navigation :: ^Right :: Next word
+Navigation :: M-] :: Matching bracket
+Other :: ^G :: Help
+Other :: ^C :: Show position
+Other :: ^T :: Execute command
+Other :: M-D :: Word count
+Other :: ^Z :: Suspend
+Other :: ^L :: Refresh
+Other :: M-N :: Toggle line numbers

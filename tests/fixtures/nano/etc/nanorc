@@ -1,0 +1,4 @@
+## system nanorc: only examples
+# bind ^S savefile main
+# unbind ^K main
+set tabsize 4

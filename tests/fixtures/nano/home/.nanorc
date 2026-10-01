@@ -1,0 +1,7 @@
+# my nanorc
+bind ^S savefile main
+bind ^Q exit all
+unbind ^J main
+bind M-1 "{cut}{paste}" main
+bind ^E end browser
+  bind   ^B   wherewas    all
