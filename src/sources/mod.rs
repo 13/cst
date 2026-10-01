@@ -115,6 +115,23 @@ impl Env {
         self.var("XDG_CACHE_HOME").map(PathBuf::from).unwrap_or_else(|| self.home.join(".cache")).join(rel)
     }
 
+    pub fn data(&self, rel: &str) -> PathBuf {
+        self.var("XDG_DATA_HOME").map(PathBuf::from).unwrap_or_else(|| self.home.join(".local/share")).join(rel)
+    }
+
+    /// System config dir (`/etc`); `CST_SYSCONFDIR` overrides it for tests.
+    pub fn etc(&self, rel: &str) -> PathBuf {
+        PathBuf::from(self.var("CST_SYSCONFDIR").unwrap_or("/etc")).join(rel)
+    }
+
+    /// First executable `bin` in `$PATH`, with symlinks resolved.
+    pub fn resolve_bin(&self, bin: &str) -> Option<PathBuf> {
+        use std::os::unix::fs::PermissionsExt;
+        self.var("PATH").unwrap_or("").split(':').map(|d| Path::new(d).join(bin))
+            .find(|p| std::fs::metadata(p).map(|m| m.is_file() && m.permissions().mode() & 0o111 != 0).unwrap_or(false))
+            .and_then(|p| std::fs::canonicalize(p).ok())
+    }
+
     pub fn read(&self, p: &Path) -> Option<String> {
         let meta = std::fs::metadata(p).ok()?;
         if !meta.is_file() || meta.len() > 1 << 20 { return None; }
@@ -397,5 +414,26 @@ mod tests {
         let pid = std::fs::read_to_string(&pidfile).unwrap().trim().to_string();
         std::thread::sleep(Duration::from_millis(100));
         assert!(!std::path::Path::new(&format!("/proc/{pid}")).exists(), "grandchild {pid} survived the timeout");
+    }
+
+    #[test]
+    fn env_dirs_and_resolve_bin() {
+        let dir = std::env::temp_dir().join("cst-resolve");
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let real = dir.join("vim");
+        std::fs::write(&real, "#!/bin/sh\n").unwrap();
+        use std::os::unix::fs::PermissionsExt;
+        std::fs::set_permissions(&real, std::fs::Permissions::from_mode(0o755)).unwrap();
+        std::os::unix::fs::symlink(&real, dir.join("vi")).unwrap();
+        let mut env = Env::test(Path::new("/home/x"), FakeRunner(HashMap::new()));
+        env.vars.insert("PATH".into(), dir.display().to_string());
+        assert_eq!(env.resolve_bin("vi").unwrap().file_name().unwrap(), "vim");
+        assert_eq!(env.resolve_bin("nope"), None);
+        assert_eq!(env.data("nvim"), PathBuf::from("/home/x/.local/share/nvim"));
+        assert_eq!(env.etc("nanorc"), PathBuf::from("/etc/nanorc"));
+        env.vars.insert("XDG_DATA_HOME".into(), "/d".into());
+        env.vars.insert("CST_SYSCONFDIR".into(), "/e".into());
+        assert_eq!((env.data("nvim"), env.etc("nanorc")), (PathBuf::from("/d/nvim"), PathBuf::from("/e/nanorc")));
     }
 }

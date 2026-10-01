@@ -256,6 +256,47 @@ pub fn parse_term(s: &str, style: Term) -> Seq {
     seq
 }
 
+/// Emacs key descriptions: space-separated steps, `C-`/`M-`/`S-` prefixes,
+/// `<f1>`-style names, `RET` `SPC` `TAB` `ESC` and `DEL` (= backspace).
+pub fn parse_emacs(s: &str) -> Seq {
+    s.split_whitespace().map(|step| {
+        let inner = step.strip_prefix('<').and_then(|x| x.strip_suffix('>')).filter(|x| !x.is_empty()).unwrap_or(step);
+        let mut c = parse_prefixed(inner, '-');
+        if step.rsplit('-').next().is_some_and(|k| k == "DEL")
+            && let Some(k) = c.last_mut() { *k = "Bksp".into(); }
+        c
+    }).collect()
+}
+
+/// nano: `^X` Ctrl, `M-X` Alt, `Sh-M-X` Alt+Shift, plain names (`F1`, `Ins`, `Bsp`).
+pub fn parse_nano(s: &str) -> Combo {
+    if let Some(k) = s.strip_prefix("Sh-M-").filter(|k| !k.is_empty()) { return combo(&["alt", "shift"], k); }
+    if let Some(k) = s.strip_prefix("M-").filter(|k| !k.is_empty()) { return combo(&["alt"], k); }
+    if let Some(k) = s.strip_prefix('^').filter(|k| !k.is_empty()) { return combo(&["ctrl"], k); }
+    combo(&[], if s.eq_ignore_ascii_case("bsp") { "Bksp" } else { s })
+}
+
+/// micro: `Ctrl-s`, `CtrlShift-Left`, `Alt-,`, `Ctrl--`: a modifier word
+/// (any of Ctrl/Alt/Shift run together) before the first `-` that follows it.
+pub fn parse_micro(s: &str) -> Combo {
+    if let Some(i) = s.find('-').filter(|&i| i > 0 && i + 1 < s.len()) {
+        let (prefix, key) = (&s[..i], &s[i + 1..]);
+        let mut rest = prefix;
+        let mut mods = Vec::new();
+        while !rest.is_empty() {
+            match ["Ctrl", "Alt", "Shift"].iter().find(|m| rest.starts_with(**m)) {
+                Some(m) => { mods.push(m.to_lowercase()); rest = &rest[m.len()..]; }
+                None => break,
+            }
+        }
+        if rest.is_empty() && !mods.is_empty() {
+            let mods: Vec<&str> = mods.iter().map(String::as_str).collect();
+            return combo(&mods, key);
+        }
+    }
+    combo(&[], s)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -382,5 +423,35 @@ mod tests {
         assert_eq!(key_name("RUBOUT", false), "Bksp");
         assert_eq!(key_name("RET", false), "Enter");
         assert_eq!(key_name("SPC", false), "Space");
+    }
+
+    #[test]
+    fn emacs_notation() {
+        assert_eq!(seq_text(&parse_emacs("C-x C-f")), "Ctrl+X › Ctrl+F");
+        assert_eq!(seq_text(&parse_emacs("M-x")), "Alt+X");
+        assert_eq!(seq_text(&parse_emacs("C-M-a")), "Ctrl+Alt+A");
+        assert_eq!(seq_text(&parse_emacs("<f1> k")), "F1 › k");
+        assert_eq!(seq_text(&parse_emacs("C-x 4 f")), "Ctrl+X › 4 › f");
+        assert_eq!(seq_text(&parse_emacs("RET")), "Enter");
+        assert_eq!(seq_text(&parse_emacs("M-DEL")), "Alt+Bksp");
+        assert_eq!(seq_text(&parse_emacs("C-/")), "Ctrl+/");
+        assert_eq!(seq_text(&parse_emacs("M->")), "Alt+>");
+        assert_eq!(seq_text(&parse_emacs("M-<")), "Alt+<");
+    }
+
+    #[test]
+    fn nano_notation() {
+        for (raw, want) in [("^S", "Ctrl+S"), ("M-U", "Alt+U"), ("M-u", "Alt+U"), ("Sh-M-C", "Alt+Shift+C"),
+            ("F6", "F6"), ("^Space", "Ctrl+Space"), ("Bsp", "Bksp"), ("^Left", "Ctrl+←"), ("Ins", "Ins"), ("M-\\", "Alt+\\"), ("^", "^")] {
+            assert_eq!(parse_nano(raw).join("+"), want, "{raw}");
+        }
+    }
+
+    #[test]
+    fn micro_notation() {
+        for (raw, want) in [("Ctrl-s", "Ctrl+S"), ("Alt-,", "Alt+,"), ("CtrlShift-Left", "Ctrl+Shift+←"),
+            ("AltShift-Up", "Alt+Shift+↑"), ("F1", "F1"), ("Home", "Home"), ("Ctrl--", "Ctrl+-"), ("CtrlAlt-x", "Ctrl+Alt+X")] {
+            assert_eq!(parse_micro(raw).join("+"), want, "{raw}");
+        }
     }
 }
