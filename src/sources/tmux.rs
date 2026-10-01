@@ -113,6 +113,8 @@ fn group_of(table: &str) -> &'static str {
 fn expand_prefix(mut l: Layered, st: &State) -> Layered {
     let prefixes: Vec<Seq> = std::iter::once(&st.prefix).chain(st.prefix2.as_ref())
         .map(|p| vec![parse_prefixed(p, '-')]).collect();
+    // fixed section order whatever order list-keys prints the tables in
+    l.bindings.sort_by_key(|b| match b.scope.as_str() { "prefix" => 0, "root" => 1, _ => 2 });
     l.bindings = l.bindings.into_iter().flat_map(|b| {
         if b.scope != "prefix" { return vec![b]; }
         prefixes.iter().map(|p| Binding { seq: p.iter().cloned().chain(b.seq.iter().cloned()).collect(), ..b.clone() }).collect()
@@ -187,11 +189,8 @@ fn logical_lines(text: &str) -> Vec<String> {
 }
 
 fn shown(table: &str, key: &str, st: &State) -> bool {
-    match table {
-        "prefix" => true,
-        "root" => !(key.contains("Mouse") || ["Wheel", "DoubleClick", "TripleClick", "SecondClick"].iter().any(|p| key.starts_with(p))),
-        t => st.copy.contains(&t),
-    }
+    let mouse = key.contains("Mouse") || ["Wheel", "DoubleClick", "TripleClick", "SecondClick"].iter().any(|p| key.starts_with(p));
+    !mouse && (matches!(table, "prefix" | "root") || st.copy.contains(&table))
 }
 
 fn parse_text(env: &Env, text: &str, dir: &Path, depth: u8, st: &mut State) {
@@ -325,7 +324,9 @@ mod tests {
         assert!(keys_of(&l, p, "Split right").is_empty());                        // no defaults merged
         assert_eq!(keys_of(&l, "TMUX · COPY MODE", "Begin selection"), vec!["v"]);
         assert!(keys_of(&l, "TMUX · COPY MODE", "Exit copy mode").is_empty());   // emacs table hidden in vi mode
-        assert!(!all_keys(&l).iter().any(|k| k.contains("Mouse")));
+        assert!(!all_keys(&l).iter().any(|k| k.contains("Mouse") || k.contains("Wheel")));
+        let titles: Vec<&str> = l.sections.iter().map(|s| s.title.as_str()).collect();
+        assert_eq!(titles, vec!["TMUX · PREFIX", "TMUX · NO PREFIX", "TMUX · COPY MODE"]);
     }
 
     #[test]
