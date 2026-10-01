@@ -57,7 +57,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cd /tmp/pkg
-          gh release upload "$GITHUB_REF_NAME" ./*.pkg.tar.zst PKGBUILD .SRCINFO --repo "$GITHUB_REPOSITORY"
+          # GitHub renames assets that start with a dot: ship .SRCINFO as cst-bin.SRCINFO
+          cp .SRCINFO cst-bin.SRCINFO
+          gh release upload "$GITHUB_REF_NAME" ./*.pkg.tar.zst PKGBUILD cst-bin.SRCINFO --repo "$GITHUB_REPOSITORY" --clobber
 
   aur:
     needs: pacman
@@ -76,8 +78,9 @@ jobs:
           ssh-keyscan -t ed25519,rsa aur.archlinux.org >> ~/.ssh/known_hosts 2>/dev/null
           export GIT_SSH_COMMAND="ssh -i ~/.ssh/aur -o IdentitiesOnly=yes"
           git clone -q ssh://aur@aur.archlinux.org/cst-bin.git aur
-          gh release download "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" -p PKGBUILD -p .SRCINFO -D aur --clobber
+          gh release download "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" -p PKGBUILD -p cst-bin.SRCINFO -D aur --clobber
           cd aur
+          mv cst-bin.SRCINFO .SRCINFO
           git config user.name "cst release bot"
           git config user.email "13@users.noreply.github.com"
           git add PKGBUILD .SRCINFO

@@ -8,6 +8,7 @@ url="https://github.com/13/cst"
 license=('MIT')
 provides=('cst')
 conflicts=('cst')
+options=('!debug' '!strip')   # the binary is already stripped by cargo
 source=("cst-x86_64-linux-$pkgver.tar.gz::$url/releases/download/v$pkgver/cst-x86_64-linux.tar.gz")
 sha256sums=('@SHA256@')
 

@@ -13,6 +13,8 @@ fail() { echo "release: $*" >&2; exit 1; }
 [ "$(git rev-parse --abbrev-ref HEAD)" = main ] || fail "not on main"
 [ -z "$(git status --porcelain)" ] || fail "working tree not clean"
 if git rev-parse -q --verify "refs/tags/v$ver" >/dev/null; then fail "tag v$ver already exists"; fi
+git fetch -q origin main || fail "cannot fetch origin"
+[ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ] || fail "main is not in sync with origin/main (pull or push first)"
 if [ "${CST_RELEASE_SKIP_TESTS:-0}" != 1 ]; then
   cargo test -q >/dev/null 2>&1 || fail "cargo test fails"
 fi
@@ -25,6 +27,6 @@ run sed -i "0,/^version = \".*\"/s//version = \"$ver\"/" Cargo.toml
 run cargo update -q --workspace --offline
 if [ "$dry" = 1 ] || ! git diff --quiet; then run git commit -qam "release v$ver"; fi   # same version: tag only
 run git tag -a "v$ver" -m "cst v$ver"
-run git push -q origin main "v$ver"
+run git push -q --atomic origin main "v$ver"
 [ "$dry" = 1 ] && echo "(dry run: nothing changed)"
 echo "pushed v$ver — follow the release at https://github.com/13/cst/actions"

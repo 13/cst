@@ -13,7 +13,7 @@ is a polished landing page with a real screenshot.
 Success: `scripts/release.sh 0.1.0` produces, with no manual step except the
 one-time AUR key setup, a GitHub release `v0.1.0` with
 `cst-x86_64-linux.tar.gz`, its `.sha256`, `cst-bin-0.1.0-1-x86_64.pkg.tar.zst`
-and the PKGBUILD/.SRCINFO, and (if `AUR_SSH_KEY` is set) AUR `cst-bin`
+and the PKGBUILD/`cst-bin.SRCINFO` (GitHub renames dot-files), and (if `AUR_SSH_KEY` is set) AUR `cst-bin`
 at 0.1.0; `curl -fsSL …/install.sh | bash` installs a working `cst`, and
 `… | bash -s -- --uninstall` removes it.
 
