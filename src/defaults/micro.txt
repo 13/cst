@@ -1,0 +1,32 @@
+# micro defaults (micro notation)
+File :: Ctrl-s :: Save
+File :: Ctrl-o :: Open file
+File :: Ctrl-q :: Quit
+Edit :: Ctrl-z :: Undo
+Edit :: Ctrl-y :: Redo
+Edit :: Ctrl-c :: Copy
+Edit :: Ctrl-x :: Cut
+Edit :: Ctrl-v :: Paste
+Edit :: Ctrl-k :: Cut line
+Edit :: Ctrl-d :: Duplicate line
+Edit :: Ctrl-a :: Select all
+Edit :: Alt-/ :: Comment
+Edit :: Alt-Up :: Move lines up
+Edit :: Alt-Down :: Move lines down
+Search :: Ctrl-f :: Find
+Search :: Ctrl-n :: Find next
+Search :: Ctrl-p :: Find previous
+Navigation :: Ctrl-l :: Jump to line
+Navigation :: Ctrl-Home :: Start of buffer
+Navigation :: Ctrl-End :: End of buffer
+Navigation :: Home :: Start of line
+Navigation :: End :: End of line
+Tabs & splits :: Ctrl-t :: New tab
+Tabs & splits :: Alt-, :: Previous tab
+Tabs & splits :: Alt-. :: Next tab
+Tabs & splits :: Ctrl-w :: Next split
+Other :: Ctrl-e :: Command prompt
+Other :: Ctrl-g :: Help
+Other :: Ctrl-b :: Shell mode
+Other :: Ctrl-u :: Toggle macro
+Other :: Ctrl-j :: Play macro

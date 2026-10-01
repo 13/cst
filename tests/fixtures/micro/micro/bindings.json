@@ -1,0 +1,9 @@
+{
+    "Ctrl-y": "Undo",
+    "Alt-/": "lua:comment.comment",
+    "CtrlShift-Up": "SelectUp",
+    "Ctrl-q": "None",
+    "Ctrl-r": "command:setlocal ruler off",
+    "buffer": { "Alt-s": "SaveAs" },
+    "terminal": { "Ctrl-q": "Unsplit" }
+}

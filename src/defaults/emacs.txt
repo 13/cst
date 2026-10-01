@@ -1,0 +1,47 @@
+# emacs defaults (emacs notation)
+Files :: C-x C-f :: Open file
+Files :: C-x C-s :: Save
+Files :: C-x C-w :: Save as
+Files :: C-x s :: Save all
+Files :: C-x C-c :: Quit
+Movement :: C-f :: Forward char
+Movement :: C-b :: Backward char
+Movement :: C-n :: Next line
+Movement :: C-p :: Previous line
+Movement :: M-f :: Forward word
+Movement :: M-b :: Backward word
+Movement :: C-a :: Start of line
+Movement :: C-e :: End of line
+Movement :: C-v :: Page down
+Movement :: M-v :: Page up
+Movement :: M-< :: Start of buffer
+Movement :: M-> :: End of buffer
+Movement :: M-g g :: Go to line
+Movement :: C-l :: Recenter
+Editing :: C-d :: Delete char
+Editing :: M-d :: Kill word
+Editing :: C-k :: Kill line
+Editing :: C-SPC :: Set mark
+Editing :: C-w :: Kill region (cut)
+Editing :: M-w :: Copy region
+Editing :: C-y :: Yank (paste)
+Editing :: M-y :: Cycle yanks
+Editing :: C-/ :: Undo
+Editing :: C-t :: Transpose chars
+Editing :: M-; :: Comment
+Search :: C-s :: Search forward
+Search :: C-r :: Search backward
+Search :: M-% :: Query replace
+Windows & buffers :: C-x b :: Switch buffer
+Windows & buffers :: C-x C-b :: List buffers
+Windows & buffers :: C-x k :: Kill buffer
+Windows & buffers :: C-x 2 :: Split below
+Windows & buffers :: C-x 3 :: Split right
+Windows & buffers :: C-x o :: Other window
+Windows & buffers :: C-x 1 :: Only this window
+Windows & buffers :: C-x 0 :: Close window
+Help :: C-g :: Cancel
+Help :: M-x :: Run command
+Help :: C-h k :: Describe key
+Help :: C-h f :: Describe function
+Help :: C-h t :: Tutorial

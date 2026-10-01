@@ -13,11 +13,13 @@ use std::time::{Duration, Instant};
 pub mod alacritty;
 pub mod awesome;
 pub mod bash;
+pub mod emacs;
 pub mod fish;
 mod kdl;
 pub mod fzf;
 pub mod kitty;
 pub mod lazygit;
+pub mod micro;
 pub mod nano;
 pub mod shell;
 pub mod nushell;
@@ -247,7 +249,7 @@ pub trait Source: Sync {
 
 /// Every source in display order.
 pub fn all() -> Vec<Box<dyn Source>> {
-    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij), Box::new(zsh::Zsh), Box::new(bash::Bash), Box::new(fish::Fish), Box::new(nushell::Nushell), Box::new(readline::Readline), Box::new(nano::Nano), Box::new(vi::Vi), Box::new(vim::Vim), Box::new(nvim::Nvim), Box::new(nvchad::NvChad), Box::new(yazi::Yazi), Box::new(lazygit::Lazygit), Box::new(fzf::Fzf)]
+    vec![Box::new(awesome::Awesome), Box::new(kitty::Kitty), Box::new(wezterm::Wezterm), Box::new(alacritty::Alacritty), Box::new(tmux::Tmux), Box::new(zellij::Zellij), Box::new(zsh::Zsh), Box::new(bash::Bash), Box::new(fish::Fish), Box::new(nushell::Nushell), Box::new(readline::Readline), Box::new(nano::Nano), Box::new(vi::Vi), Box::new(vim::Vim), Box::new(nvim::Nvim), Box::new(nvchad::NvChad), Box::new(micro::Micro), Box::new(emacs::Emacs), Box::new(yazi::Yazi), Box::new(lazygit::Lazygit), Box::new(fzf::Fzf)]
 }
 
 /// Installed sources, loaded in parallel, in the order given.
