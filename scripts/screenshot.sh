@@ -17,5 +17,5 @@ if [ -n "${CST_SHOT_KEYS:-}" ]; then
   tmux -L "$sock" send-keys ${CST_SHOT_KEYS}
   sleep 0.5
 fi
-tmux -L "$sock" capture-pane -e -p | python3 "$root/scripts/ansi2svg.py" --bg "#313244" > "$root/docs/screenshot.svg"
-echo "wrote docs/screenshot.svg"
+tmux -L "$sock" capture-pane -e -p | python3 "$root/scripts/ansi2svg.py" --bg "#313244" > "${CST_SHOT_OUT:-$root/docs/screenshot.svg}"
+echo "wrote ${CST_SHOT_OUT:-docs/screenshot.svg}"

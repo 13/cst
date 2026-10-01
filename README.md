@@ -5,7 +5,7 @@
 **Every keyboard shortcut you have, on one screen.**
 
 A fast terminal cheatsheet that reads the *live* keybindings of your window manager,
-terminals, multiplexers and tools — custom ones included — in the style of an
+terminals, multiplexers, shells and tools — custom ones included — in the style of an
 awesome WM popup.
 
 [![CI](https://github.com/13/cst/actions/workflows/ci.yml/badge.svg)](https://github.com/13/cst/actions/workflows/ci.yml)
@@ -14,6 +14,8 @@ awesome WM popup.
 [![License: MIT](https://img.shields.io/github/license/13/cst)](LICENSE)
 
 <img src="docs/screenshot.svg" alt="cst showing awesome, kitty, tmux and zellij shortcuts in columns" width="100%">
+<br>
+<img src="docs/picker.svg" alt="the cst app picker" width="100%">
 
 </div>
 
@@ -22,7 +24,7 @@ awesome WM popup.
 - **Your real bindings** — reads each app's config or asks the running app, then layers
   it over sensible defaults. Rebind something and `cst` shows the new key.
 - **Type to filter** — rows that don't match dim instead of disappearing, so nothing jumps.
-- **One app or all** — `cst tmux`, or Tab through apps inside the sheet.
+- **One app or all** — pick one from the start screen, `cst tmux`, or Tab through apps inside the sheet.
 - **Looks like your desktop** — colours come from your active awesome theme
   (falls back to Catppuccin); truecolor, 256 colours or `NO_COLOR`.
 - **Fast and small** — one static binary, no runtime dependencies, starts in well under 100 ms.
@@ -38,6 +40,11 @@ awesome WM popup.
 | alacritty | `alacritty.toml` (+ imports) over alacritty's defaults |
 | tmux | the running server (`list-keys`, `-N` notes), else `~/.tmux.conf` over tmux's defaults |
 | zellij | the `keybinds` block of `config.kdl` (honours `clear-defaults`) |
+| zsh | the live line editor (`bindkey`): insert and, in vi mode, normal keymap |
+| bash | the live readline bindings (`bind -p`), emacs or vi |
+| fish | the live `bind` table (fish 3 and 4 notations), per mode |
+| nushell | reedline defaults plus `$env.config.keybindings` |
+| readline | `~/.inputrc` (or `$INPUTRC`) over readline's defaults — shown when you have one |
 | nvim | mappings with a description (`nvim --headless`) over core motions |
 | yazi | `keymap.toml` over yazi's defaults |
 | lazygit | `keybinding:` in `config.yml` over lazygit's defaults |
@@ -86,10 +93,14 @@ cargo install --git https://github.com/13/cst
 ## Usage
 
 ```sh
-cst            # all installed apps
-cst tmux       # just one app
+cst            # pick an app (or All apps)
+cst tmux       # straight to one app
 cst --list     # detected apps and where their keys come from
 ```
+
+In the picker: type to filter, arrows or `Tab` to move, `Enter` to open, `Esc` to go back
+from a sheet or to quit.
+
 
 | Key | Action |
 |---|---|
