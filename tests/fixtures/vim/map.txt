@@ -1,0 +1,10 @@
+
+
+n  <Plug>(fzf-normal) * <Nop>
+n  <Space>e    * :NERDTreeToggle<CR>
+   <C-P>       * :Files<CR>
+n  gb          * <Cmd>bnext<CR>
+v  <           * <gv
+i  jk          * <Esc>
+n  <Plug>(foo) & <SNR>12_x
+No mapping found

@@ -1,0 +1,49 @@
+# vim notation (parse_vim)
+Motion :: h :: Left
+Motion :: j :: Down
+Motion :: k :: Up
+Motion :: l :: Right
+Motion :: w :: Next word
+Motion :: b :: Previous word
+Motion :: e :: End of word
+Motion :: 0 :: Start of line
+Motion :: ^ :: First non-blank
+Motion :: $ :: End of line
+Motion :: gg :: Top of file
+Motion :: G :: End of file
+Motion :: % :: Matching bracket
+Motion :: <C-d> :: Half page down
+Motion :: <C-u> :: Half page up
+Motion :: <C-o> :: Jump back
+Motion :: <C-i> :: Jump forward
+Motion :: zz :: Center cursor line
+Editing :: i :: Insert
+Editing :: a :: Append
+Editing :: o :: Open line below
+Editing :: O :: Open line above
+Editing :: x :: Delete char
+Editing :: dd :: Delete line
+Editing :: yy :: Yank line
+Editing :: p :: Paste after
+Editing :: P :: Paste before
+Editing :: u :: Undo
+Editing :: <C-r> :: Redo
+Editing :: . :: Repeat
+Editing :: ciw :: Change word
+Editing :: v :: Visual mode
+Editing :: V :: Visual line mode
+Editing :: <C-v> :: Visual block mode
+Search :: / :: Search forward
+Search :: ? :: Search backward
+Search :: n :: Next match
+Search :: N :: Previous match
+Search :: * :: Search word under cursor
+Windows :: <C-w>s :: Split
+Windows :: <C-w>v :: Vertical split
+Windows :: <C-w>w :: Next window
+Windows :: <C-w>q :: Close window
+Windows :: gt :: Next tab
+Windows :: gT :: Previous tab
+Files :: :w<CR> :: Save
+Files :: :q<CR> :: Quit
+Files :: ZZ :: Save and quit

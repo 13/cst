@@ -1,0 +1,40 @@
+# classic vi command reference
+Motion :: h :: Left
+Motion :: j :: Down
+Motion :: k :: Up
+Motion :: l :: Right
+Motion :: w :: Next word
+Motion :: b :: Previous word
+Motion :: 0 :: Start of line
+Motion :: $ :: End of line
+Motion :: 1G :: Top of file
+Motion :: G :: End of file
+Motion :: H :: Top of screen
+Motion :: L :: Bottom of screen
+Motion :: <C-f> :: Page down
+Motion :: <C-b> :: Page up
+Motion :: % :: Matching bracket
+Editing :: i :: Insert
+Editing :: a :: Append
+Editing :: A :: Append at end of line
+Editing :: o :: Open line below
+Editing :: O :: Open line above
+Editing :: x :: Delete char
+Editing :: dd :: Delete line
+Editing :: dw :: Delete word
+Editing :: cw :: Change word
+Editing :: r :: Replace char
+Editing :: J :: Join lines
+Editing :: yy :: Yank line
+Editing :: p :: Paste after
+Editing :: u :: Undo
+Editing :: . :: Repeat
+Search :: / :: Search forward
+Search :: ? :: Search backward
+Search :: n :: Next match
+Search :: f :: Find char on line
+Ex commands :: :w<CR> :: Save
+Ex commands :: :q<CR> :: Quit
+Ex commands :: :q!<CR> :: Quit without saving
+Ex commands :: ZZ :: Save and quit
+Ex commands :: :%s/a/b/g<CR> :: Replace all
