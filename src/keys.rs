@@ -276,25 +276,18 @@ pub fn parse_nano(s: &str) -> Combo {
     combo(&[], if s.eq_ignore_ascii_case("bsp") { "Bksp" } else { s })
 }
 
-/// micro: `Ctrl-s`, `CtrlShift-Left`, `Alt-,`, `Ctrl--`: a modifier word
-/// (any of Ctrl/Alt/Shift run together) before the first `-` that follows it.
+/// micro: `Ctrl-s`, `CtrlShift-Left`, `CtrlShiftUp`, `Ctrl-Shift-Up`, `AltUp`,
+/// `Alt-,`, `Ctrl--`: Ctrl/Alt/Shift prefixes, each optionally followed by `-`.
 pub fn parse_micro(s: &str) -> Combo {
-    if let Some(i) = s.find('-').filter(|&i| i > 0 && i + 1 < s.len()) {
-        let (prefix, key) = (&s[..i], &s[i + 1..]);
-        let mut rest = prefix;
-        let mut mods = Vec::new();
-        while !rest.is_empty() {
-            match ["Ctrl", "Alt", "Shift"].iter().find(|m| rest.starts_with(**m)) {
-                Some(m) => { mods.push(m.to_lowercase()); rest = &rest[m.len()..]; }
-                None => break,
-            }
-        }
-        if rest.is_empty() && !mods.is_empty() {
-            let mods: Vec<&str> = mods.iter().map(String::as_str).collect();
-            return combo(&mods, key);
-        }
+    let mut rest = s;
+    let mut mods = Vec::new();
+    while let Some(m) = ["Ctrl", "Alt", "Shift"].iter().find(|m| rest.starts_with(**m) && rest.len() > m.len()) {
+        mods.push(m.to_lowercase());
+        rest = &rest[m.len()..];
+        if rest.len() > 1 { rest = rest.strip_prefix('-').unwrap_or(rest); }
     }
-    combo(&[], s)
+    let mods: Vec<&str> = mods.iter().map(String::as_str).collect();
+    combo(&mods, rest)
 }
 
 #[cfg(test)]
@@ -450,7 +443,8 @@ mod tests {
     #[test]
     fn micro_notation() {
         for (raw, want) in [("Ctrl-s", "Ctrl+S"), ("Alt-,", "Alt+,"), ("CtrlShift-Left", "Ctrl+Shift+←"),
-            ("AltShift-Up", "Alt+Shift+↑"), ("F1", "F1"), ("Home", "Home"), ("Ctrl--", "Ctrl+-"), ("CtrlAlt-x", "Ctrl+Alt+X")] {
+            ("AltShift-Up", "Alt+Shift+↑"), ("F1", "F1"), ("Home", "Home"), ("Ctrl--", "Ctrl+-"), ("CtrlAlt-x", "Ctrl+Alt+X"),
+            ("CtrlShiftUp", "Ctrl+Shift+↑"), ("Ctrl-Shift-Up", "Ctrl+Shift+↑"), ("AltUp", "Alt+↑"), ("CtrlHome", "Ctrl+Home"), ("Shift", "Shift")] {
             assert_eq!(parse_micro(raw).join("+"), want, "{raw}");
         }
     }

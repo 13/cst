@@ -1,9 +1,11 @@
 {
+    // json5: comments are allowed
     "Ctrl-y": "Undo",
+    "AltUp": "MoveLinesUp",
     "Alt-/": "lua:comment.comment",
     "CtrlShift-Up": "SelectUp",
     "Ctrl-q": "None",
     "Ctrl-r": "command:setlocal ruler off",
     "buffer": { "Alt-s": "SaveAs" },
-    "terminal": { "Ctrl-q": "Unsplit" }
+    "terminal": { "Ctrl-q": "Unsplit" },
 }

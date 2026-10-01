@@ -98,5 +98,7 @@ mod tests {
         let l = Nano.load(&env);
         assert_eq!(l.origin, Origin::Defaults);
         assert_eq!(keys_of(&l, "Undo"), vec!["Alt+U"]);
+        assert_eq!(keys_of(&l, "Search"), vec!["Ctrl+F", "Ctrl+W"]);      // nano 8+: ^F primary, ^W alternate
+        assert!(keys_of(&l, "Suspend").is_empty());                        // ^Z is unbound by default
     }
 }

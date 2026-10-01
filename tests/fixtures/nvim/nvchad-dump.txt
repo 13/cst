@@ -121,3 +121,7 @@ v	gx	Opens filepath or URI under cursor with the system handler (file explorer, 
 v	in	Select child (inner) node
 v	<S-Tab>	vim.snippet.jump if active, otherwise <S-Tab>
 v	<C-S>	vim.lsp.buf.signature_help()
+t	<M-i>	terminal toggle floating term
+t	<M-h>	terminal toggleable horizontal term
+t	<M-v>	terminal toggleable vertical term
+t	<C-X>	terminal escape terminal mode

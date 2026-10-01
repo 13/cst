@@ -8,10 +8,24 @@ const DEFAULTS: &str = include_str!("../defaults/micro.txt");
 #[derive(Clone, Debug, PartialEq)]
 pub enum Json { Str(String), Obj(Vec<(String, Json)>), Other }
 
-struct P<'a> { s: &'a [u8], i: usize }
+struct P<'a> { s: &'a [u8], i: usize, depth: usize }
 
 impl P<'_> {
-    fn ws(&mut self) { while self.s.get(self.i).is_some_and(|c| c.is_ascii_whitespace()) { self.i += 1; } }
+    /// Whitespace and json5 comments (`//…`, `/*…*/`).
+    fn ws(&mut self) {
+        loop {
+            while self.s.get(self.i).is_some_and(|c| c.is_ascii_whitespace()) { self.i += 1; }
+            match (self.s.get(self.i), self.s.get(self.i + 1)) {
+                (Some(b'/'), Some(b'/')) => while self.s.get(self.i).is_some_and(|c| *c != b'\n') { self.i += 1; },
+                (Some(b'/'), Some(b'*')) => {
+                    self.i += 2;
+                    while self.i < self.s.len() && !(self.s[self.i] == b'*' && self.s.get(self.i + 1) == Some(&b'/')) { self.i += 1; }
+                    self.i = (self.i + 2).min(self.s.len());
+                }
+                _ => return,
+            }
+        }
+    }
     fn eat(&mut self, c: u8) -> Result<(), String> {
         self.ws();
         if self.s.get(self.i) == Some(&c) { self.i += 1; Ok(()) } else { Err(format!("expected '{}' at byte {}", c as char, self.i)) }
@@ -25,6 +39,13 @@ impl P<'_> {
                 Some(b'"') => { self.i += 1; break; }
                 Some(b'\\') => {
                     let e = *self.s.get(self.i + 1).ok_or("unterminated string")?;
+                    if e == b'u' {
+                        let hex = self.s.get(self.i + 2..self.i + 6).and_then(|h| std::str::from_utf8(h).ok()).ok_or("bad \\u escape")?;
+                        let c = u32::from_str_radix(hex, 16).ok().and_then(char::from_u32).unwrap_or('\u{fffd}');
+                        out.extend_from_slice(c.to_string().as_bytes());
+                        self.i += 6;
+                        continue;
+                    }
                     out.push(match e { b'n' => b'\n', b't' => b'\t', other => other });
                     self.i += 2;
                 }
@@ -35,10 +56,11 @@ impl P<'_> {
     }
     fn value(&mut self) -> Result<Json, String> {
         self.ws();
+        if self.depth > 64 { return Err("nested too deeply".into()); }
         match self.s.get(self.i) {
             Some(b'"') => Ok(Json::Str(self.string()?)),
-            Some(b'{') => Ok(Json::Obj(self.object()?)),
-            Some(b'[') => { self.array()?; Ok(Json::Other) }
+            Some(b'{') => { self.depth += 1; let o = self.object(); self.depth -= 1; Ok(Json::Obj(o?)) }
+            Some(b'[') => { self.depth += 1; let a = self.array(); self.depth -= 1; a?; Ok(Json::Other) }
             Some(c) if c.is_ascii_alphanumeric() || *c == b'-' => {
                 while self.s.get(self.i).is_some_and(|c| c.is_ascii_alphanumeric() || b"-+.".contains(c)) { self.i += 1; }
                 Ok(Json::Other)
@@ -54,6 +76,8 @@ impl P<'_> {
             self.value()?;
             self.ws();
             match self.s.get(self.i) { Some(b',') => self.i += 1, Some(b']') => { self.i += 1; return Ok(()); } _ => return Err("bad array".into()) }
+            self.ws();
+            if self.s.get(self.i) == Some(&b']') { self.i += 1; return Ok(()); }   // json5 trailing comma
         }
     }
     fn object(&mut self) -> Result<Vec<(String, Json)>, String> {
@@ -68,13 +92,15 @@ impl P<'_> {
             out.push((k, self.value()?));
             self.ws();
             match self.s.get(self.i) { Some(b',') => self.i += 1, Some(b'}') => { self.i += 1; return Ok(out); } _ => return Err(format!("expected ',' or '}}' at byte {}", self.i)) }
+            self.ws();
+            if self.s.get(self.i) == Some(&b'}') { self.i += 1; return Ok(out); }   // json5 trailing comma
         }
     }
 }
 
-/// A JSON object (strict: no trailing commas or comments).
+/// A JSON object, json5-tolerant like micro (comments, trailing commas).
 pub fn json_object(s: &str) -> Result<Vec<(String, Json)>, String> {
-    let mut p = P { s: s.as_bytes(), i: 0 };
+    let mut p = P { s: s.as_bytes(), i: 0, depth: 0 };
     let o = p.object()?;
     p.ws();
     if p.i != p.s.len() { return Err("trailing data".into()); }
@@ -133,13 +159,17 @@ mod tests {
 
     #[test]
     fn json_reader() {
-        let o = json_object(r#"{"a": "x\"y", "b": {"c": "d"}, "e": [1, {"f": 2}], "g": true}"#).unwrap();
-        assert_eq!(o[0], ("a".into(), Json::Str("x\"y".into())));
+        let o = json_object(r#"{"a": "x\"y\u00e9", "b": {"c": "d"}, "e": [1, {"f": 2}], "g": true}"#).unwrap();
+        assert_eq!(o[0], ("a".into(), Json::Str("x\"yé".into())));
         assert_eq!(o[1], ("b".into(), Json::Obj(vec![("c".into(), Json::Str("d".into()))])));
         assert_eq!((o[2].1.clone(), o[3].1.clone()), (Json::Other, Json::Other));
-        assert!(json_object(r#"{"a": "b",}"#).is_err());
-        assert!(json_object("{ // c\n }").is_err());
+        // micro reads bindings.json as json5: comments and trailing commas are fine
+        assert_eq!(json_object("{ // keys\n \"a\": \"b\", /* x */ }").unwrap(), vec![("a".into(), Json::Str("b".into()))]);
+        assert!(json_object(r#"{"a": [1, 2,],}"#).is_ok());
         assert!(json_object(r#"{"a": "#).is_err());
+        assert!(json_object(r#"{"a": }"#).is_err());
+        let deep = format!("{{\"a\": {}1{}}}", "[".repeat(10_000), "]".repeat(10_000));
+        assert!(json_object(&deep).is_err());                                 // depth-capped, no stack overflow
     }
 
     #[test]
@@ -154,13 +184,14 @@ mod tests {
         assert_eq!(keys_of(&l, "Command: setlocal ruler off"), vec!["Ctrl+R"]);
         assert_eq!(keys_of(&l, "Save as"), vec!["Alt+S"]);                  // from the buffer object
         assert!(keys_of(&l, "Unsplit").is_empty());                         // terminal mode ignored
+        assert_eq!(keys_of(&l, "Move lines up"), vec!["Alt+↑"]);           // "AltUp" replaced the default "Alt-Up"
     }
 
     #[test]
     fn micro_bad_json_notes() {
         let dir = std::env::temp_dir().join("cst-micro-bad");
         std::fs::create_dir_all(dir.join("micro")).unwrap();
-        std::fs::write(dir.join("micro/bindings.json"), "{\"Ctrl-y\": \"Undo\",}").unwrap();
+        std::fs::write(dir.join("micro/bindings.json"), "{\"Ctrl-y\": }").unwrap();
         let l = Micro.load(&env(&dir));
         assert_eq!(l.origin, Origin::Defaults);
         assert!(l.note.as_deref().unwrap().starts_with("config: bindings.json"));

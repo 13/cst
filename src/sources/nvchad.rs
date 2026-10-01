@@ -19,14 +19,15 @@ pub struct NvChad;
 
 fn mappings_file(env: &Env) -> PathBuf { env.data("nvim/lazy/NvChad/lua/nvchad/mappings.lua") }
 
-/// Lower-cased `desc = "…"` strings of NvChad's own mappings file.
+/// The `desc = "…"` strings of NvChad's own mappings file (compared exactly:
+/// nvim's built-ins like "Toggle comment" differ only in case).
 pub fn nvchad_descs(env: &Env) -> Option<HashSet<String>> {
     let text = env.read(&mappings_file(env))?;
     let mut out = HashSet::new();
     for part in text.split("desc =").skip(1) {
         let part = part.trim_start();
         let Some(q) = part.chars().next().filter(|c| *c == '"' || *c == '\'') else { continue };
-        if let Some(end) = part[1..].find(q) { out.insert(part[1..1 + end].to_lowercase()); }
+        if let Some(end) = part[1..].find(q) { out.insert(part[1..1 + end].to_string()); }
     }
     Some(out)
 }
@@ -57,7 +58,7 @@ impl Source for NvChad {
     fn load(&self, env: &Env) -> Loaded {
         let descs = nvchad_descs(env).unwrap_or_default();
         let live = dump(env).map(|out| Some(rows(&out)
-            .filter(|(_, _, desc)| descs.contains(&desc.to_lowercase()))
+            .filter(|(_, _, desc)| descs.contains(*desc))
             .map(|(mode, lhs, desc)| {
                 let (group, d) = split_desc(desc, mode);
                 Change::Bind(Binding { scope: mode.to_string(), group, seq: parse_vim(lhs), desc: d, id: String::new() })
@@ -78,7 +79,7 @@ mod tests {
 
     fn env(dump: Option<String>) -> Env {
         let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/nvchad");
-        let runs = dump.map(|d| HashMap::from([(format!("nvim --headless -c {NVIM_LUA}"), d)])).unwrap_or_default();
+        let runs = dump.map(|d| HashMap::from([(format!("nvim --headless -i NONE -c {NVIM_LUA}"), d)])).unwrap_or_default();
         let mut e = Env::test(&root, FakeRunner(runs));
         e.vars.insert("XDG_DATA_HOME".into(), root.join("data").display().to_string());
         e
@@ -127,6 +128,9 @@ mod tests {
         assert_eq!(keys_of(&l, "NVCHAD · INSERT", "Move beginning of line"), vec!["Ctrl+B"]);
         assert_eq!(keys_of(&l, "NVCHAD · TOGGLE", "Line number"), vec!["Space › n"]);
         assert!(keys_of(&l, "NVCHAD · OTHER", "CMD enter command mode").is_empty());   // user's own map stays in nvim
+        assert_eq!(keys_of(&l, "NVCHAD · TERMINAL", "Escape terminal mode"), vec!["Ctrl+X"]);   // t mode
+        assert!(!l.sections.iter().flat_map(|s| &s.rows).flat_map(|r| &r.alts).any(|a| seq_text(a) == "g › c"));
+        assert!(keys_of(&Nvim.load(&e), "NVIM · EDITING", "Toggle comment").contains(&"g › c".to_string()));  // nvim's own, case differs
         // …and nvim no longer lists NvChad's mappings
         let n = Nvim.load(&e);
         assert!(n.sections.iter().flat_map(|s| &s.rows).all(|r| r.desc != "Telescope find files"));

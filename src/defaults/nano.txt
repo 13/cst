@@ -1,4 +1,4 @@
-# nano main-menu shortcuts (nano notation)
+# nano 8/9 main-menu shortcuts (nano notation); alternates share a row
 File :: ^S :: Save
 File :: ^O :: Write out (save as)
 File :: ^R :: Insert file
@@ -15,9 +15,14 @@ Edit :: M-{ :: Unindent
 Edit :: M-3 :: Toggle comment
 Edit :: ^D :: Delete
 Edit :: M-T :: Cut to end of file
+Edit :: M-V :: Insert next key verbatim
+Search :: ^F :: Search
 Search :: ^W :: Search
+Search :: ^B :: Search backward
 Search :: ^Q :: Search backward
+Search :: M-F :: Find next
 Search :: M-W :: Find next
+Search :: M-B :: Find previous
 Search :: M-Q :: Find previous
 Search :: ^\ :: Replace
 Navigation :: ^/ :: Go to line
@@ -30,10 +35,12 @@ Navigation :: M-/ :: Last line
 Navigation :: ^Left :: Previous word
 Navigation :: ^Right :: Next word
 Navigation :: M-] :: Matching bracket
+Navigation :: M-. :: Next buffer
+Navigation :: M-, :: Previous buffer
 Other :: ^G :: Help
 Other :: ^C :: Show position
 Other :: ^T :: Execute command
 Other :: M-D :: Word count
-Other :: ^Z :: Suspend
 Other :: ^L :: Refresh
-Other :: M-N :: Toggle line numbers
+Other :: M-: :: Record macro
+Other :: M-; :: Run macro
