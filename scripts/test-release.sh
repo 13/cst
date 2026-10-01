@@ -7,7 +7,7 @@ work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 git init -q --bare "$work/remote.git"
 git -C "$work/remote.git" config receive.shallowUpdate true   # CI checks out a shallow clone
-git clone -q "$root" "$work/clone"
+git clone -q --no-tags "$root" "$work/clone"
 cd "$work/clone"
 git checkout -q -B main
 cp "$root/scripts/release.sh" scripts/release.sh
