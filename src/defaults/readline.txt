@@ -1,0 +1,31 @@
+# GNU readline emacs essentials (fallback for bash, base for ~/.inputrc)
+Emacs :: \C-a :: Start of line
+Emacs :: \C-e :: End of line
+Emacs :: \C-b :: Back one char
+Emacs :: \C-f :: Forward one char
+Emacs :: \eb :: Back one word
+Emacs :: \ef :: Forward one word
+Emacs :: \C-d :: Delete char
+Emacs :: \C-h :: Delete previous char
+Emacs :: \C-k :: Delete to end of line
+Emacs :: \C-u :: Delete to start of line
+Emacs :: \C-w :: Delete previous word
+Emacs :: \ed :: Delete next word
+Emacs :: \C-y :: Paste deleted text
+Emacs :: \ey :: Cycle pasted text
+Emacs :: \C-l :: Clear screen
+Emacs :: \C-r :: Search history backward
+Emacs :: \C-s :: Search history forward
+Emacs :: \C-p :: Previous command
+Emacs :: \C-n :: Next command
+Emacs :: \e. :: Insert last argument
+Emacs :: \C-t :: Swap chars
+Emacs :: \et :: Swap words
+Emacs :: \C-_ :: Undo
+Emacs :: \C-x\C-e :: Edit command in $EDITOR
+Emacs :: \C-g :: Cancel
+Emacs :: \C-v :: Insert next key literally
+Emacs :: \eu :: Uppercase word
+Emacs :: \el :: Lowercase word
+Emacs :: \ec :: Capitalize word
+Emacs :: \t :: Complete
