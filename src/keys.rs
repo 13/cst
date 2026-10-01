@@ -156,6 +156,7 @@ fn units(s: &str, style: Term) -> Vec<Unit> {
                 if let Some(n) = it.next() { out.push(Unit::Meta(n)) }
             }
             Some('c') if style == Term::Fish3 => if let Some(n) = it.next() { out.push(Unit::Ctrl(n.to_ascii_uppercase())) },
+            Some('b') if style == Term::Fish3 => out.push(Unit::Ctrl('?')),
             Some('e') | Some('E') => out.push(Unit::Esc),
             Some('t') => out.push(Unit::Ctrl('I')),
             Some('r') | Some('n') => out.push(Unit::Ctrl('M')),

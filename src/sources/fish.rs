@@ -5,6 +5,9 @@ use crate::keys::{combo, key_name, parse_prefixed, parse_term, Seq, Term};
 use crate::model::{Binding, Change};
 
 const DEFAULTS: &str = include_str!("../defaults/fish.txt");
+/// fish installs its key bindings only during interactive startup, so set
+/// them up explicitly (configured preset, then the user's), then list them.
+pub const FISH_SCRIPT: &str = "set -q fish_key_bindings; or set fish_key_bindings fish_default_key_bindings; eval $fish_key_bindings 2>/dev/null; functions -q fish_user_key_bindings; and fish_user_key_bindings 2>/dev/null; bind";
 
 pub struct Fish;
 
@@ -13,7 +16,7 @@ impl Source for Fish {
     fn binary(&self) -> &'static str { "fish" }
     fn load(&self, env: &Env) -> Loaded {
         let defaults = parse_defaults(DEFAULTS, &fish4_key, &|g| g.to_lowercase());
-        let live = match env.run("fish", &["-c", "bind"]) {
+        let live = match env.run("fish", &["-c", FISH_SCRIPT]) {
             None => Err("fish -c bind failed".to_string()),
             Some(out) => {
                 let changes: Vec<Change> = out.lines().filter_map(bind_line).collect();
@@ -50,13 +53,29 @@ fn terminfo(name: &str) -> Seq {
     }]
 }
 
+/// fish 4 `ctrl-x,ctrl-e`: a comma separates keys unless it is itself the key
+/// (`alt-,`, `ctrl-x,,`); `\X` escapes (`alt-\#`, `ctrl-\\`) are unescaped.
 fn fish4_key(key: &str) -> Seq {
-    if key.chars().count() > 1 && key.contains(',') {
-        return key.split(',').map(|k| parse_prefixed(k, '-')).collect();
+    let mut parts: Vec<String> = vec![String::new()];
+    let mut chars = key.chars();
+    while let Some(c) = chars.next() {
+        let cur = parts.last_mut().unwrap();
+        match c {
+            '\\' => if let Some(n) = chars.next() { cur.push(n) },
+            ',' if !cur.is_empty() && !cur.ends_with('-') => parts.push(String::new()),
+            c => cur.push(c),
+        }
     }
-    let one = parse_prefixed(key, '-');
-    let known = one.len() > 1 || key.chars().count() == 1 || key_name(key, false) != key;
-    if known { vec![one] } else { key.chars().map(|c| vec![key_name(&c.to_string(), false)]).collect() }
+    parts.iter().filter(|p| !p.is_empty()).flat_map(|k| {
+        let one = parse_prefixed(k, '-');
+        let known = one.len() > 1 || k.chars().count() == 1 || key_name(k, false) != *k;
+        if known { vec![one] } else { k.chars().map(|c| vec![key_name(&c.to_string(), false)]).collect() }
+    }).collect()
+}
+
+/// fish 3 escapes (`\cx`, `\e[A`, `\x7f`, `\b`) vs fish 4 names with `\X` escapes.
+fn is_fish3(key: &str) -> bool {
+    key.starts_with('\\') || ["\\c", "\\e", "\\x", "\\b"].iter().any(|p| key.contains(p))
 }
 
 fn bind_line(line: &str) -> Option<Change> {
@@ -76,7 +95,7 @@ fn bind_line(line: &str) -> Option<Change> {
     }
     let key = w.get(i)?;
     if key.is_empty() { return None; }
-    let seq = if ti { terminfo(key) } else if key.contains('\\') { parse_term(key, Term::Fish3) } else { fish4_key(key) };
+    let seq = if ti { terminfo(key) } else if is_fish3(key) { parse_term(key, Term::Fish3) } else { fish4_key(key) };
     let cmd: Vec<&str> = w[i + 1..].iter().flat_map(|c| c.split_whitespace()).collect();
     let func = match cmd.first() {
         Some(&"commandline") => cmd.iter().position(|c| *c == "-f").and_then(|p| cmd.get(p + 1)).copied().unwrap_or("commandline"),
@@ -95,7 +114,7 @@ mod tests {
     use std::collections::HashMap;
 
     fn load(name: Option<&str>) -> Loaded {
-        let runs = name.map(|n| HashMap::from([("fish -c bind".to_string(),
+        let runs = name.map(|n| HashMap::from([(format!("fish -c {FISH_SCRIPT}"),
             std::fs::read_to_string(format!("{}/tests/fixtures/fish/{n}", env!("CARGO_MANIFEST_DIR"))).unwrap())])).unwrap_or_default();
         Fish.load(&Env::test(std::path::Path::new("/"), FakeRunner(runs)))
     }
@@ -125,6 +144,21 @@ mod tests {
         assert_eq!(keys_of(&l, "FISH · INSERT", "History pager"), vec!["Ctrl+R"]);
         assert_eq!(keys_of(&l, "FISH · VISUAL", "Clipboard copy"), vec!["y"]);
         assert!(!l.sections.iter().flat_map(|s| &s.rows).any(|r| r.desc == "Self insert"));
+    }
+
+    fn key_text(line: &str) -> String {
+        match bind_line(line) { Some(Change::Bind(b)) => seq_text(&b.seq), other => panic!("{line}: {other:?}") }
+    }
+
+    #[test]
+    fn fish4_commas_and_escapes() {
+        assert_eq!(key_text("bind alt-, history-search-backward"), "Alt+,");
+        assert_eq!(key_text("bind ctrl-x,, history-search-backward"), "Ctrl+X › ,");
+        assert_eq!(key_text("bind , history-search-backward"), ",");
+        assert_eq!(key_text(r"bind alt-\# history-search-backward"), "Alt+#");
+        assert_eq!(key_text(r"bind ctrl-\\ history-search-backward"), "Ctrl+\\");
+        assert_eq!(key_text(r"bind \cx history-search-backward"), "Ctrl+X");      // fish 3 escapes
+        assert_eq!(key_text(r"bind \b history-search-backward"), "Bksp");
     }
 
     #[test]
