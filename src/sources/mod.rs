@@ -38,11 +38,21 @@ impl Default for SystemRunner {
     fn default() -> Self { SystemRunner { timeout: Duration::from_secs(1) } }
 }
 
+unsafe extern "C" {
+    fn setsid() -> i32;
+    fn kill(pid: i32, sig: i32) -> i32;
+}
+
 impl Runner for SystemRunner {
     fn run(&self, cmd: &str, args: &[&str]) -> Option<String> {
-        let mut child = Command::new(cmd).args(args)
-            .stdin(Stdio::null()).stdout(Stdio::piped()).stderr(Stdio::null())
-            .spawn().ok()?;
+        use std::os::unix::process::CommandExt;
+        let mut command = Command::new(cmd);
+        command.args(args).stdin(Stdio::null()).stdout(Stdio::piped()).stderr(Stdio::null());
+        // A new session without a controlling terminal: an interactive shell
+        // (zsh -i) can't take over our terminal, and a timeout can kill the
+        // whole group it started.
+        unsafe { command.pre_exec(|| { setsid(); Ok(()) }); }
+        let mut child = command.spawn().ok()?;
         let mut out = child.stdout.take()?;
         let (tx, rx) = std::sync::mpsc::channel();
         std::thread::spawn(move || {
@@ -60,6 +70,7 @@ impl Runner for SystemRunner {
                 }
                 Ok(None) if start.elapsed() < self.timeout => std::thread::sleep(Duration::from_millis(5)),
                 _ => {
+                    unsafe { kill(-(child.id() as i32), 9); } // the child's whole process group
                     let _ = child.kill();
                     let _ = child.wait();
                     return None;
@@ -363,5 +374,28 @@ mod tests {
     fn installed_override_is_used() {
         let srcs: Vec<Box<dyn Source>> = vec![Box::new(NoBinary)];
         assert_eq!(load_installed(&srcs, &Env::system()).len(), 1);
+    }
+
+    #[test]
+    fn children_get_their_own_session() {
+        // a child that grabs the terminal (zsh -i) must not be able to keep it
+        let r = SystemRunner::default();
+        let out = r.run("sh", &["-c", "echo $$; ps -o sid= -p $$"]).unwrap();
+        let v: Vec<&str> = out.split_whitespace().collect();
+        assert_eq!(v[0], v[1], "child is not a session leader: {out}");
+    }
+
+    #[test]
+    fn timeout_kills_the_whole_process_group() {
+        let dir = std::env::temp_dir().join("cst-pgroup");
+        std::fs::create_dir_all(&dir).unwrap();
+        let pidfile = dir.join("pid");
+        let _ = std::fs::remove_file(&pidfile);
+        let r = SystemRunner { timeout: Duration::from_millis(300) };
+        let script = format!("sleep 30 & echo $! > {}; wait", pidfile.display());
+        assert_eq!(r.run("sh", &["-c", &script]), None);
+        let pid = std::fs::read_to_string(&pidfile).unwrap().trim().to_string();
+        std::thread::sleep(Duration::from_millis(100));
+        assert!(!std::path::Path::new(&format!("/proc/{pid}")).exists(), "grandchild {pid} survived the timeout");
     }
 }
